@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>cloudscribe multi-tenant identity integration for IdentityServer4</Description>
+    <VersionPrefix>1.2.1</VersionPrefix>
+    <Authors>Joe Audette</Authors>
+    <TargetFrameworks>netstandard1.6</TargetFrameworks>
+    <AssemblyName>cloudscribe.Core.IdentityServerIntegration</AssemblyName>
+    <PackageId>cloudscribe.Core.IdentityServerIntegration</PackageId>
+    <PackageTags>cloudscribe;identity</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Core.Identity\cloudscribe.Core.Identity.csproj" />
+ 
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.*" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.*" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="1.1.*" />
+    <PackageReference Include="cloudscribe.IDS4Fork" Version="1.5.*" />
+    
+    
+  </ItemGroup>
+
+ 
+<!--
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
+  </ItemGroup>
+  -->
+
+</Project>
