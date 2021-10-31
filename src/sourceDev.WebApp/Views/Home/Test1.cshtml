@@ -1,0 +1,21 @@
+﻿@using cloudscribe.Core.Web.Design
+@inject CoreThemeHelper themeHelper
+@{
+    ViewData["Title"] = "Test1";
+
+   
+    var themeSettings = themeHelper.GetThemeSettings();
+
+    
+}
+
+<h2>Test1</h2>
+
+
+@if (themeSettings != null)
+{
+    @themeSettings.ThemeName
+    <hr />
+    @themeSettings.Icons.Email
+
+}
