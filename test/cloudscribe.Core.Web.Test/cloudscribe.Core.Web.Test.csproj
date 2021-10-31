@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <!--<RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\cloudscribe.Core.Models\cloudscribe.Core.Models.csproj" />
+    <ProjectReference Include="..\..\src\cloudscribe.Core.Web\cloudscribe.Core.Web.csproj" />
+    <ProjectReference Include="..\..\src\cloudscribe.Web.Common\cloudscribe.Web.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />-->
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  
+</Project>

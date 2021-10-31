@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <Description>Bootstrap 3 pre-compiled views for cloudscribe.Core.IdentityServerIntegration</Description>
+    <VersionPrefix>3.0.8</VersionPrefix>
+    <AssemblyVersion>3.0.8</AssemblyVersion>
+    <Authors>Joe Audette</Authors>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageTags>cloudscribe;IdentityServer4;Bootstrap3</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/cloudscribe/cloudscribe.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Core.IdentityServerIntegration\cloudscribe.Core.IdentityServerIntegration.csproj" />
+    <ProjectReference Include="..\cloudscribe.Core.Web\cloudscribe.Core.Web.csproj" />
+  </ItemGroup>
+
+</Project>
