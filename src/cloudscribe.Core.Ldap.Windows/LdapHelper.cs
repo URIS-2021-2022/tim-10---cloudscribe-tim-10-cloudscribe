@@ -62,7 +62,7 @@ namespace cloudscribe.Core.Ldap.Windows
                 //Bind to the native AdsObject to force authentication.
                 try
                 {
-                    
+                    object testobj = directoryEntry.NativeObject;
                     success = true;
                 }
                 catch (Exception ex)

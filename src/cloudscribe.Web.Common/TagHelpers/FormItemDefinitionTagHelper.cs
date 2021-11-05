@@ -35,7 +35,7 @@ namespace cloudscribe.Web.Common.TagHelpers
             if (FormItem == null) return;
 
             if (FormItem.Required 
-                || !string.IsNullOrEmpty(FormItem.RegexValidationExpression)
+                | !string.IsNullOrEmpty(FormItem.RegexValidationExpression)
                 | !string.IsNullOrWhiteSpace(FormItem.MaxLengthErrorMessage)
                 )
             {
