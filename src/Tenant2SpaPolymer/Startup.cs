@@ -79,9 +79,6 @@ namespace Tenant2SpaPolymer
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // this uses the policy called "default"
-            //app.UseCors("default");
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();

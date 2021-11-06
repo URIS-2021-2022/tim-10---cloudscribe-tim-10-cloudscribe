@@ -43,7 +43,6 @@ namespace cloudscribe.Web.Common.Razor
         {
             _viewEngine = viewEngine;
             _tempDataProvider = tempDataProvider;
-            _httpContextAccessor = httpContextAccessor;
             _actionContextAccesor = actionContextAccesor;
             _serviceProvider = serviceProvider;
             _viewRendererRouteProvider = viewRendererRouteProvider;
@@ -55,7 +54,6 @@ namespace cloudscribe.Web.Common.Razor
         private readonly IRazorViewEngine _viewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private IActionContextAccessor _actionContextAccesor;
         private readonly IViewRendererRouteProvider _viewRendererRouteProvider;
 
@@ -117,12 +115,6 @@ namespace cloudscribe.Web.Common.Razor
             {
                 return _actionContextAccesor.ActionContext;
             }
-
-            // this breaks redirects in controller after execution
-            //if (_httpContextAccessor.HttpContext != null)
-            //{
-            //    return new ActionContext(_httpContextAccessor.HttpContext, new RouteData(), new ActionDescriptor());
-            //}
 
             var httpContext = new DefaultHttpContext
             {

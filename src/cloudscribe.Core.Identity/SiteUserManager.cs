@@ -61,14 +61,11 @@ namespace cloudscribe.Core.Identity
                   logger)
         {
             _identityOptions             = optionsAccessor.Value;
-            _userStore                   = store;
             _commands                    = userCommands ?? throw new ArgumentNullException(nameof(userCommands));
             _queries                     = userQueries ?? throw new ArgumentNullException(nameof(userQueries));
 
             _siteSettings                = currentSite;
             _multiTenantOptions          = multiTenantOptionsAccessor.Value;
-            _contextAccessor             = contextAccessor;
-            _httpContext                 = contextAccessor?.HttpContext;
             _eventHandlers               = userEventHandlers;
             _passwordHasher              = passwordHasher;
             _emailConfirmedHandlers      = emailConfirmedHandlers;
@@ -79,12 +76,9 @@ namespace cloudscribe.Core.Identity
         }
         
         private IdentityOptions                        _identityOptions;
-        private IUserStore<TUser>                      _userStore;
         private IUserCommands                          _commands;
         private IUserQueries                           _queries;
         private MultiTenantOptions                     _multiTenantOptions;
-        private IHttpContextAccessor                   _contextAccessor;
-        private HttpContext                            _httpContext;
         private UserEvents                             _eventHandlers;
         private IPasswordHasher<TUser>                 _passwordHasher;
         private IEnumerable<IHandleUserEmailConfirmed> _emailConfirmedHandlers;

@@ -56,7 +56,7 @@ public string GetDisplayName(string displayName, SiteContext tenant)
 
                 @if (Model.ShowRemoveButton)
                 {
-                <form asp-controller="Manage" asp-action="RemoveLogin" method="post" role="form" class="form-inline">
+                <form asp-controller="Manage" asp-action="RemoveLogin" method="post" role="form" class="form-inline" aria-label="remove login">
                     @account.LoginProvider
                     <input name="LoginProvider" type="hidden" value="@account.LoginProvider" />
                     <input name="ProviderKey" type="hidden" value="@account.ProviderKey" />
@@ -78,7 +78,7 @@ public string GetDisplayName(string displayName, SiteContext tenant)
 {
     <h4>@sr["Add another service to log in."]</h4>
     <hr />
-    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form">
+    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form" aria-label="Add another service">
         <div id="socialLoginList">
             <p>
                 @foreach (Microsoft.AspNetCore.Authentication.AuthenticationScheme p in Model.OtherLogins)

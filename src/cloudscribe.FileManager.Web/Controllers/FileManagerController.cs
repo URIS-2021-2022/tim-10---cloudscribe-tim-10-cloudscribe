@@ -44,7 +44,6 @@ namespace cloudscribe.FileManager.Web.Controllers
             _authorizationService = authorizationService;
            // _allowedFilesRegexBuilder = allowedFilesRegexBuilder;
             _autoUploadOptions = autoUploadOptionsAccessor.Value;
-            _antiforgery = antiforgery;
             _resourceHelper = resourceHelper;
             _log = logger;
         }
@@ -54,7 +53,6 @@ namespace cloudscribe.FileManager.Web.Controllers
         private IAuthorizationService _authorizationService;
         //private IFileExtensionValidationRegexBuilder _allowedFilesRegexBuilder;
         private AutomaticUploadOptions _autoUploadOptions;
-        private readonly IAntiforgery _antiforgery;
         private IResourceHelper _resourceHelper;
         // Get the default form options so that we can use them to set the default limits for
         // request body data

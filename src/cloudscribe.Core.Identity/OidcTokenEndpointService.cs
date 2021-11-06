@@ -26,16 +26,12 @@ namespace cloudscribe.Core.Identity
             _oidcOptions = oidcOptions;
             _schemeProvider = schemeProvider;
             _httpClientFactory = httpClientFactory;
-            _httpContextAccessor = httpContextAccessor;
-            _log = logger;
         }
 
         private readonly OidcTokenManagementOptions _managementOptions;
         private readonly IOptionsMonitor<OpenIdConnectOptions> _oidcOptions;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger _log;
 
         public async Task<TokenResponse> RefreshTokenAsync(string refreshToken)
         {

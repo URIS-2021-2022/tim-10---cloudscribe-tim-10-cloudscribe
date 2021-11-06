@@ -81,7 +81,7 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
                 if(site == null)
                 {
                     site = await db.Sites.SingleOrDefaultAsync<SiteSettings>(
-                        s => s.Id != Guid.Empty && s.IsServerAdminSite == true);
+                        s => s.Id != Guid.Empty && s.IsServerAdminSite);
                 }
                 
 
@@ -115,7 +115,7 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
             if (count == 0)
             {
                 SiteSettings site = await db.Sites.FirstOrDefaultAsync<SiteSettings>(
-                    s => s.Id != Guid.Empty && s.IsServerAdminSite == true);
+                    s => s.Id != Guid.Empty && s.IsServerAdminSite);
                     
                 if (site != null)
                 {

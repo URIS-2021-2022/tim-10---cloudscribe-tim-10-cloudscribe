@@ -297,12 +297,11 @@
         },
         deleteFolderPrompt: function () {
             var currentPath = $("#folderToDelete").val();
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
+            if (currentPath !== fileManager.rootVirtualPath) {
+                var message = "Are you sure you want to permanently delete the folder " + currentPath + " and any files or folders below it?";
+                $("#deleteFolderModalBody").html(message);
+                $("#mdlDeleteFolder").modal('show');
             }
-            var message = "Are you sure you want to permanently delete the folder " + currentPath + " and any files or folders below it?";
-            $("#deleteFolderModalBody").html(message);
-            $("#mdlDeleteFolder").modal('show');
             return false;
         },
         deleteFolder: function () {
@@ -339,12 +338,12 @@
         },
         renameFolderPrompt: function () {
             var currentPath = $("#folderToRename").val();
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
+            if (currentPath !== fileManager.rootVirtualPath) {
+                var message = "Are you sure you want to rename the folder " + currentPath + "?";
+                $("#renameFolderModalBody").html(message);
+                $("#mdlRenameFolder").modal('show');
             }
-            var message = "Are you sure you want to rename the folder " + currentPath + "?";
-            $("#renameFolderModalBody").html(message);
-            $("#mdlRenameFolder").modal('show');
+            
 
             return false;
         },
@@ -711,7 +710,6 @@
                     $('#progress').hide();
                     //$('#fileList').html('');
                     $('#fileList').empty();
-                    fileListuploader = [];
                     $('#fileList').append($("<ul class='filelist file-errors'></ul>"));
                     var j = 0;
                     var errorsOccurred = false;

@@ -38,13 +38,11 @@ namespace cloudscribe.Core.Identity
             }
 
             _queries = siteQueries;
-            _options = optionsAccessor.Value;
             _customClaimProviders = customClaimProviders;
            // _oidcHybridFlowHelper = oidcHybridFlowHelper;
         }
         
         private readonly ISiteQueries _queries;
-        private IdentityOptions _options;
         private readonly IEnumerable<ICustomClaimProvider> _customClaimProviders;
         //private readonly IOidcHybridFlowHelper _oidcHybridFlowHelper;
 
