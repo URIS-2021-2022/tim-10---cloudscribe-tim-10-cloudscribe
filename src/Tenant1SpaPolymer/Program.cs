@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Tenant1SpaPolymer
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

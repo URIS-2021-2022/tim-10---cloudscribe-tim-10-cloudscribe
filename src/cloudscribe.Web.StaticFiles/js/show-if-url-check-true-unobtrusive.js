@@ -26,7 +26,7 @@
     };
 
     var elements = document.querySelectorAll('[data-show-if-url-check]');
-    for (i = 0; i < elements.length; ++i) {
+    for (let i = 0; i < elements.length; ++i) {
         var ele = elements[i];
         var urlToCheck = ele.dataset.urlCheckUrl;
         if (urlToCheck) {

@@ -37,10 +37,15 @@ namespace cloudscribe.Core.Identity
         {
             if (template.User == null) return;
             var requireConfirmedEmail = await RequireConfirmedEmail();
+            var isEmailConfirmed = template.User.EmailConfirmed;
+            var isAcccountApproved = template.User.AccountApproved;
+            var isPhoneNumberConfirmed = template.User.PhoneNumberConfirmed;
+            var isLockedOut = template.User.IsLockedOut;
+            var phoneNumber = string.IsNullOrEmpty(template.User.PhoneNumber);
 
             if (requireConfirmedEmail)
             {
-                if (!template.User.EmailConfirmed)
+                if (!isEmailConfirmed)
                 {
                     var reason = $"login not allowed for {template.User.Email} because email is not confirmed";
                     template.RejectReasons.Add(reason);
@@ -52,7 +57,7 @@ namespace cloudscribe.Core.Identity
 
             if (_userManager.Site.RequireApprovalBeforeLogin)
             {
-                if (!template.User.AccountApproved)
+                if (!isAcccountApproved)
                 {
                     var reason = $"login not allowed for {template.User.Email} because account not approved yet";
                     template.RejectReasons.Add(reason);
@@ -63,7 +68,7 @@ namespace cloudscribe.Core.Identity
 
             if (_userManager.Site.RequireConfirmedPhone && _userManager.Site.SmsIsConfigured())
             {
-                if (string.IsNullOrEmpty(template.User.PhoneNumber))
+                if (phoneNumber)
                 {
                     // we can't add a reason here that would block login
                     // we need to enforce user to add phone number via middleware redirect
@@ -73,7 +78,7 @@ namespace cloudscribe.Core.Identity
                 }
                 else
                 {
-                    if (!template.User.PhoneNumberConfirmed)
+                    if (!isPhoneNumberConfirmed)
                     {
                         var reason = $"login not allowed for {template.User.Email} because phone not added or verified yet";
                         template.RejectReasons.Add(reason);
@@ -94,7 +99,7 @@ namespace cloudscribe.Core.Identity
 
             }
 
-            if (template.User.IsLockedOut)
+            if (isLockedOut)
             {
                 var reason = $"login not allowed for {template.User.Email} because account is locked out";
                 template.RejectReasons.Add(reason);

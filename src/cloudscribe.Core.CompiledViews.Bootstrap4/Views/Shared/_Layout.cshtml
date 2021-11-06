@@ -41,7 +41,7 @@
                 <span class="skiplink-text">Skip to main content</span>
             </div>
         </a>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white ">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white " aria-label="Navigation">
             <a href="~/@(Tenant?.SiteFolderName ?? "")" class="navbar-brand">@(Tenant?.SiteName ?? "Sample")</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,21 +63,21 @@
             </main>
             @if (sideNavVisible)
             {
-                <nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass">
+                <nav id="sidenavmenu" class=" col col-3 order-1 @sideNavToggleClass" aria-label="Side navigation">
                     @RenderSection("SideNav", required: false)
                 </nav>
 
             }
             @if (asideSecondaryVisible)
             {
-                <aside id="asideSecondary" class="col col-1 order-2">
+                <aside id="asideSecondary" class="col col-1 order-2" aria-label="Aside secondary">
                     @RenderSection("AsideSecondary", required: false)
                 </aside>
 
             }
             @if (asidePrimaryVisible)
             {
-                <aside id="asidePrimary" class="col-12 col-md-3 col-sm-12  col-sm-12 order-4">
+                <aside id="asidePrimary" class="col-12 col-md-3 col-sm-12  col-sm-12 order-4" aria-label="Aside primary">
                     @RenderSection("AsidePrimary", required: false)
                 </aside>
 

@@ -19,11 +19,9 @@ namespace cloudscribe.Web.Common.TagHelpers
             )
         {
             _contentProviders = contentProviders;
-            _htmlHelper = htmlHelper;
         }
 
         private IEnumerable<ICompositeContentProvider> _contentProviders;
-        private readonly IHtmlHelper _htmlHelper;
         
         [ViewContext]
         public ViewContext ViewContext { get; set; }

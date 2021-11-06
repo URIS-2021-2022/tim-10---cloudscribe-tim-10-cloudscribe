@@ -15,19 +15,16 @@ namespace cloudscribe.Core.Identity
     public class SiteIdentityOptionsResolver : IOptions<IdentityOptions>
     {
         private IHttpContextAccessor _httpContextAccessor;
-        private MultiTenantOptions _multiTenantOptions;
         private TokenOptions _tokenOptions;
         private IIdentityOptionsFactory _optionsFactory;
 
         public SiteIdentityOptionsResolver(
             IHttpContextAccessor httpContextAccessor,
-            IOptions<MultiTenantOptions> multiTenantOptionsAccessor,
             IOptions<TokenOptions> tokenOptionsAccessor,
             IIdentityOptionsFactory identityOptionsFactory
             )
         {
             _httpContextAccessor = httpContextAccessor;
-            _multiTenantOptions = multiTenantOptionsAccessor.Value;
             _tokenOptions = tokenOptionsAccessor.Value;
             _optionsFactory = identityOptionsFactory;
         }

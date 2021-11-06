@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.EFCore.Common
 {
-    public class UserCommands : IUserCommands, IUserCommandsSingleton
+    public class UserCommands : IUserCommandsSingleton
     {
         public UserCommands(ICoreDbContextFactory coreDbContextFactory)
         {

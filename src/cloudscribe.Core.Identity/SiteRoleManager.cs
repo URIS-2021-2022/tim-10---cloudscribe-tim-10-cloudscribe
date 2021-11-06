@@ -51,14 +51,10 @@ namespace cloudscribe.Core.Identity
             _siteSettings = currentSite ?? throw new ArgumentNullException(nameof(currentSite));
             _log = logger;
             _multiTenantOptions = multiTenantOptionsAccessor.Value;
-            _context = contextAccessor?.HttpContext;
             _userAddedToRoleHandlers = userAddedToRoleHandlers;
             _userRemovedFromRoleHandlers = userRemovedFromRoleHandlers;
 
         }
-
-        private readonly HttpContext _context;
-        //private CancellationToken CancellationToken => _context?.RequestAborted ?? CancellationToken.None;
 
         private MultiTenantOptions _multiTenantOptions;
         private IUserCommands _commands;

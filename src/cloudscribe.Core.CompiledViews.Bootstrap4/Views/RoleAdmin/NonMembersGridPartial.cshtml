@@ -1,6 +1,7 @@
 ﻿@model cloudscribe.Core.Web.ViewModels.RoleAdmin.RoleMemberListViewModel
 @inject IStringLocalizer<CloudscribeCore> sr
-    <form role="form" method="get" class="form-inline" asp-controller="RoleAdmin" asp-action="RoleNonMembers" asp-antiforgery="false"
+    <form role="form" method="get" class="form-inline" asp-controller="RoleAdmin" asp-action="RoleNonMembers" asp-antiforgery="false" aria-label="Roles"
+
         data-ajax="true" 
         data-ajax-method="GET" 
         data-ajax-mode="replace" 
@@ -46,7 +47,7 @@
                         >
                     @sr["Add"]
                 </button>
-                <form id="@("frmAdd" + item.Id)" role="form" asp-controller="RoleAdmin" asp-action="AddUser">
+                <form id="@("frmAdd" + item.Id)" role="form" asp-controller="RoleAdmin" asp-action="AddUser" aria-label="Add user to role">
                     <input name="siteId" type="hidden" value="@Model.Role.SiteId" />
                     <input name="RoleId" type="hidden" value="@Model.Role.Id" />
                     <input name="UserId" type="hidden" value="@item.Id" />

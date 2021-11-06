@@ -19,14 +19,11 @@ namespace cloudscribe.Core.Models.Identity
 
     public class AlwaysValidLdapSslCertificateValidator : ILdapSslCertificateValidator
     {
-        public AlwaysValidLdapSslCertificateValidator(ILogger<AlwaysValidLdapSslCertificateValidator> logger)
+        public AlwaysValidLdapSslCertificateValidator()
         {
-
-            _log = logger;
 
         }
 
-        private readonly ILogger _log;
 
         public bool ValidateCertificate(
            object sender,

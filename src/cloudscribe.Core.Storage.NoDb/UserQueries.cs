@@ -239,7 +239,7 @@ namespace cloudscribe.Core.Storage.NoDb
                 (
                     x.SiteId == siteId
                     //&& x.IsDeleted == false
-                    && x.AccountApproved == true
+                    && x.AccountApproved
                     && (
                     userNameBeginsWith == string.Empty
                     || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -284,7 +284,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   (
                       x.SiteId == siteId
                      // && x.IsDeleted == false
-                      && x.AccountApproved == true
+                      && x.AccountApproved
                       && (
                       userNameBeginsWith == string.Empty
                       || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -328,7 +328,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   (
                       x.SiteId == siteId
                       //&& x.IsDeleted == false
-                      && x.AccountApproved == true
+                      && x.AccountApproved
                       && (
                       userNameBeginsWith == string.Empty
                       || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -362,7 +362,6 @@ namespace cloudscribe.Core.Storage.NoDb
 
                     break;
 
-                case 0:
                 default:
                     //query = query.OrderBy(sl => sl.DisplayName).AsQueryable();
 
@@ -373,7 +372,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   (
                       x.SiteId == siteId
                      // && x.IsDeleted == false
-                      && x.AccountApproved == true
+                      && x.AccountApproved
                       && (
                       userNameBeginsWith == string.Empty
                       || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -540,7 +539,6 @@ namespace cloudscribe.Core.Storage.NoDb
                 case 1:
                     query = query.OrderByDescending(sl => sl.CreatedUtc).AsQueryable();
                     break;
-                case 0:
                 default:
                     query = query.OrderBy(sl => sl.DisplayName).AsQueryable();
                     break;
@@ -574,7 +572,7 @@ namespace cloudscribe.Core.Storage.NoDb
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
             
             return allUsers.Where(
-                x => x.SiteId == siteId && x.IsLockedOut == true
+                x => x.SiteId == siteId && x.IsLockedOut
                 )
                 .ToList().Count;
         }
@@ -602,7 +600,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   where
                   (
                       x.SiteId == siteId
-                      && x.IsLockedOut == true
+                      && x.IsLockedOut
                   )
                   orderby x.DisplayName
                   select new UserInfo
@@ -745,7 +743,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
             return allUsers.Where(
                 x => x.SiteId == siteId
-                && x.EmailConfirmed == false
+                && !x.EmailConfirmed
                 )
                 .ToList().Count;
         }
@@ -773,7 +771,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   where
                   (
                       x.SiteId == siteId
-                      && x.EmailConfirmed == false
+                      && !x.EmailConfirmed
                   )
                   orderby x.DisplayName
                   select new UserInfo
@@ -829,7 +827,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
             return allUsers.Where(
                 x => x.SiteId == siteId
-                && x.PhoneNumberConfirmed == false
+                && !x.PhoneNumberConfirmed
                 )
                 .ToList().Count;
         }
@@ -857,7 +855,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   where
                   (
                       x.SiteId == siteId
-                      && x.PhoneNumberConfirmed == false
+                      && !x.PhoneNumberConfirmed 
                   )
                   orderby x.DisplayName
                   select new UserInfo
@@ -912,7 +910,7 @@ namespace cloudscribe.Core.Storage.NoDb
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
 
             return allUsers.Where(
-                x => x.SiteId == siteId && x.AccountApproved == false
+                x => x.SiteId == siteId && !x.AccountApproved
                 )
                 .ToList().Count;
 
@@ -940,7 +938,7 @@ namespace cloudscribe.Core.Storage.NoDb
                   where
                   (
                       x.SiteId == siteId
-                      && x.AccountApproved == false
+                      && !x.AccountApproved
                   )
                   orderby x.DisplayName
                   select new UserInfo
