@@ -18,7 +18,7 @@ namespace cloudscribe.Core.Identity
            // log = logger;
         }
 
-        //private ILogger log;
+        
 
         public bool HasVerifiedEmail(ExternalLoginInfo externalLoginInfo)
         {
