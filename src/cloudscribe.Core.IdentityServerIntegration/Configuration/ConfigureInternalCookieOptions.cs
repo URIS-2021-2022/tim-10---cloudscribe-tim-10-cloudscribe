@@ -16,9 +16,12 @@ namespace cloudscribe.Core.IdentityServerIntegration.Configuration
             _idsrv = idsrv;
         }
 
+        
         public void Configure(CookieAuthenticationOptions options)
         {
+            //This method comes with IConfigureNamedOptions interface.
         }
+        
 
         public void Configure(string name, CookieAuthenticationOptions options)
         {

@@ -10,7 +10,7 @@
             var query = "?" + inp.name + "=" + testval;
             if (inp.dataset.additionalInputIds) {
                 var ids = inp.dataset.additionalInputIds.split(',');
-                for (i = 0; i < ids.length; i++) {
+                for (let i = 0; i < ids.length; i++) {
                     var ele = document.getElementById(ids[i]);
                     if (ele) {
                         query += "&" + ele.name + "=" + ele.value;
