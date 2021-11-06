@@ -16,7 +16,7 @@ namespace cloudscribe.Core.Identity
         public string EmailConfirmationToken { get; set; } = string.Empty;
         public bool NeedsPhoneConfirmation { get; set; }
         public ExternalLoginInfo ExternalLoginInfo { get; set; } = null;
-        public List<string> RejectReasons { get; set; } = new List<string>();
+        public List<string> RejectReasons { get; set; };
         public SiteUser User { get; set; } = null;
         public bool IsNewUserRegistration { get; set; }
         public SignInResult SignInResult { get; set; } = SignInResult.Failed;
