@@ -308,31 +308,31 @@
             $("#mdlDeleteFolder").modal('hide');
             var currentPath = $("#folderToDelete").val();
             if (currentPath === fileManager.rootVirtualPath) {
-                return false;
+                var formData = $('#frmDeleteFolder').serializeArray();
+                //alert(JSON.stringify(formData));
+                $.ajax({
+                    method: "POST",
+                    url: fileManager.deleteFolderApiUrl,
+                    headers: fileManager.headers,
+                    data: formData
+                }).done(function (data) {
+                    if (data.succeeded) {
+                        fileManager.removeNode(currentPath);
+                        fileManager.clearCurrentDirectory();
+
+                    }
+                    else {
+                        fileManager.notify(data.message, 'alert-danger');
+
+                    }
+
+                })
+                    .fail(function () {
+                        fileManager.notify('An error occured', 'alert-danger');
+                    });
             }
             
-            var formData = $('#frmDeleteFolder').serializeArray();
-            //alert(JSON.stringify(formData));
-            $.ajax({
-                method: "POST",
-                url: fileManager.deleteFolderApiUrl,
-                headers: fileManager.headers,
-                data: formData
-            }).done(function (data) {
-                if (data.succeeded) {
-                    fileManager.removeNode(currentPath);
-                    fileManager.clearCurrentDirectory();
-                        
-                }
-                else {
-                    fileManager.notify(data.message, 'alert-danger');
-
-                }
-
-            })
-            .fail(function () {
-                fileManager.notify('An error occured', 'alert-danger');
-            });
+            
           
             return false; //cancel form submit
         },

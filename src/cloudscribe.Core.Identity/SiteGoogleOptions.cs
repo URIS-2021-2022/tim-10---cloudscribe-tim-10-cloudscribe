@@ -39,7 +39,7 @@ namespace cloudscribe.Core.Identity
         
         private MultiTenantOptions _multiTenantOptions;
         private IHttpContextAccessor _httpContextAccessor;
-        private ILogger _log;
+        private readonly ILogger _log;
         
 
         public override GoogleOptions Get(string name)

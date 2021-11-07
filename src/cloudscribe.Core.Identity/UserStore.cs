@@ -214,7 +214,7 @@ namespace cloudscribe.Core.Identity
         }
 
 
-        public async Task<TUser> FindByNameAsync(string normailzedUserName, CancellationToken cancellationToken)
+        public async Task<TUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -224,12 +224,12 @@ namespace cloudscribe.Core.Identity
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
             
             var allowEmailFallback = SiteSettings.UseEmailForLogin;
-            var siteUser = await _queries.FetchByLoginName(siteGuid, normailzedUserName, allowEmailFallback, cancellationToken);
+            var siteUser = await _queries.FetchByLoginName(siteGuid, normalizedUserName, allowEmailFallback, cancellationToken);
 
             // jk second chance - this may be a visitor from another tenant
             if(siteUser==null && _multiTenantOptions.RootUserCanSignInToTenants)
             {
-                siteUser = await _queries.FetchByLoginName(_multiTenantOptions.RootSiteId, normailzedUserName, allowEmailFallback, cancellationToken);
+                siteUser = await _queries.FetchByLoginName(_multiTenantOptions.RootSiteId, normalizedUserName, allowEmailFallback, cancellationToken);
             }
 
             return (TUser)siteUser;

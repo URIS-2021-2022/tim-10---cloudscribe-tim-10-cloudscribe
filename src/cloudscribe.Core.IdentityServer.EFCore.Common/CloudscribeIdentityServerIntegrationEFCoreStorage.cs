@@ -21,9 +21,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
            
                 var grantContext = scopedService.GetRequiredService<IPersistedGrantDbContext>();
+                var configContext = scopedService.GetRequiredService<IConfigurationDbContext>();
                 try
                 {
                     await grantContext.Database.MigrateAsync();
+                    await configContext.Database.MigrateAsync();
                 }
                 catch(System.NotImplementedException)
                 {
@@ -31,51 +33,44 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 
 
-                var configContext = scopedService.GetRequiredService<IConfigurationDbContext>();
-                try
-                {
-                    await configContext.Database.MigrateAsync();
-                }
-                catch (System.NotImplementedException)
-                {
-                    configContext.Database.Migrate();
-                }
+                
+               
                 
 
-                if(!string.IsNullOrEmpty(siteId))
+                if(!string.IsNullOrEmpty(siteId) && (initialClients != null) && (!configContext.Clients.Any(x => x.SiteId == siteId)) && (initialApiResources != null) && 
+                (!configContext.ApiResources.Any(x => x.SiteId == siteId)) && (initialIdentityResources != null) && (!configContext.IdentityResources.Any(x => x.SiteId == siteId)))
+
                 {
-                    if ((initialClients != null) && (!configContext.Clients.Any(x => x.SiteId == siteId)))
-                    {
+                    
                         foreach (var client in initialClients)
                         {
                             var c = client.ToEntity();
                             c.SiteId = siteId;
                             configContext.Clients.Add(c);
                         }
-                        await configContext.SaveChangesAsync();
-                    }
+                        
+                    
 
-                    if ((initialApiResources != null) && (!configContext.ApiResources.Any(x => x.SiteId == siteId)))
-                    {
+                    
                         foreach (var scope in initialApiResources)
                         {
                             var s = scope.ToEntity();
                             s.SiteId = siteId;
                             configContext.ApiResources.Add(s);
                         }
-                        await configContext.SaveChangesAsync();
-                    }
+                        
+                    
 
-                    if ((initialIdentityResources != null) && (!configContext.IdentityResources.Any(x => x.SiteId == siteId)))
-                    {
+                    
                         foreach (var scope in initialIdentityResources)
                         {
                             var s = scope.ToEntity();
                             s.SiteId = siteId;
                             configContext.IdentityResources.Add(s);
                         }
+
                         await configContext.SaveChangesAsync();
-                    }
+                    
                 }
 
 

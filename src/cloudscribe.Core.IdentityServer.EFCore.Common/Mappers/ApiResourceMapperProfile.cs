@@ -48,7 +48,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.Mappers
         }
 
         //public ApiResourceMapperProfile()
-        //{
+        
         //    // entity to model
         //    CreateMap<ApiResource, IdentityServer4.Models.ApiResource>(MemberList.Destination)
         //        .ForMember(x => x.ApiSecrets, opt => opt.MapFrom(src => src.Secrets.Select(x => x)))
