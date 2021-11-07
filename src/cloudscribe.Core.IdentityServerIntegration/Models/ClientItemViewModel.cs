@@ -17,7 +17,7 @@ namespace cloudscribe.Core.IdentityServerIntegration.Models
         public ClientItemViewModel(string siteId, Client client)
         {
             if (string.IsNullOrEmpty(siteId)) throw new ArgumentException("SiteId must be provided");
-            if (client == null) throw new ArgumentNullException("siteId","client must be provided");
+            if (client == null) throw new ArgumentNullException("client must be provided");
 
             SiteId = siteId;
             ClientId = client.ClientId;

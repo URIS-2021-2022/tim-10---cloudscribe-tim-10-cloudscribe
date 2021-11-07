@@ -37,8 +37,15 @@ namespace cloudscribe.Core.Models
         /// the siteId of the site whose users can access other tenants when RootUserCanSignInToTenants is true
         /// </summary>
         private Guid rootSiteId = Guid.Empty;
-        public Guid RootSiteId { get; set { rootSiteId = value} };
-     
+        public Guid RootSiteId
+        {
+            get
+            {
+                return rootSiteId;
+            }
+            set { rootSiteId = value; }
+        }
+
 
         private bool useRelatedSitesMode = false;
         /// <summary>

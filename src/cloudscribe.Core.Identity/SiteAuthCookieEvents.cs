@@ -107,10 +107,7 @@ namespace cloudscribe.Core.Identity
                 var commands = context.HttpContext.RequestServices.GetRequiredService<IUserCommands>();
                 await commands.DeleteTokensByProvider(siteId, userId, "OpenIdConnect");
             }
-            catch (Exception e){
-                Console.WriteLine("Signig Out failed!");
-                Console.WriteLine(e.Message);
-            }
+            catch { }
             
 
             await base.SigningOut(context);

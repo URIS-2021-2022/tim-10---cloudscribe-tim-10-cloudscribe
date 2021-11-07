@@ -20,7 +20,7 @@ namespace cloudscribe.Core.IdentityServerIntegration
         }
 
         private IStorageInfo _dbPlatform;
-        private string name =  this.name;
+        private string name = "DataStorageVersionInfo";
 
         public string Name
         {
