@@ -20,6 +20,7 @@ namespace cloudscribe.Core.Identity
 {
     public sealed class UserStore<TUser> :
         //UserStoreBase<TUser, TKey, TUserClaim, TUserLogin, TUserToken>,
+        IUserStore<TUser>,
         IUserSecurityStampStore<TUser>,
         IUserPasswordStore<TUser>,
         IUserEmailStore<TUser>,
@@ -361,7 +362,7 @@ namespace cloudscribe.Core.Identity
         /// <param name="user">The user whose security stamp should be set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the security stamp for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken)
+        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -500,7 +501,7 @@ namespace cloudscribe.Core.Identity
 
         }
 
-        public async Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+        public async Task<TUser> FindByEmailAsync(string email, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -509,12 +510,12 @@ namespace cloudscribe.Core.Identity
             Guid siteGuid = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
-            ISiteUser siteUser = await _queries.Fetch(siteGuid, normalizedEmail, cancellationToken);
+            ISiteUser siteUser = await _queries.Fetch(siteGuid, email, cancellationToken);
 
             // jk second chance - this may be a visitor from another tenant
             if (siteUser == null && _multiTenantOptions.RootUserCanSignInToTenants)
             {
-                siteUser = await _queries.Fetch(_multiTenantOptions.RootSiteId, normalizedEmail, cancellationToken);
+                siteUser = await _queries.Fetch(_multiTenantOptions.RootSiteId, email, cancellationToken);
             }
 
             return (TUser)siteUser;
@@ -655,7 +656,7 @@ namespace cloudscribe.Core.Identity
             DateTimeOffset? d;
             if (user.LockoutEndDateUtc != null)
             {
-                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return Task.Delay(0); }
+                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return null; }
 
                 d = new DateTimeOffset(user.LockoutEndDateUtc.Value);
                 return Task.FromResult(d);
@@ -939,7 +940,7 @@ namespace cloudscribe.Core.Identity
             var siteGuid = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
-            var userClaims = new List<await _queries.GetClaimsByUser(siteGuid, user.Id, cancellationToken)>
+            var userClaims = await _queries.GetClaimsByUser(siteGuid, user.Id, cancellationToken);
             foreach (UserClaim uc in userClaims)
             {
                 Claim c = new Claim(uc.ClaimType, uc.ClaimValue);
