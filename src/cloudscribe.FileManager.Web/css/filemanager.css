@@ -181,7 +181,6 @@ label.btn {
 }
 
 .fileupload-dropzone {
-    border-radius: 0;
     -webkit-box-shadow: none;
     min-height: 40px;
     padding: 19px;
