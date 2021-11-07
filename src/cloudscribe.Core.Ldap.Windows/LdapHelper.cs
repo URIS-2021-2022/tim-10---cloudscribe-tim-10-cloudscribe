@@ -83,7 +83,7 @@ namespace cloudscribe.Core.Ldap.Windows
             return Task.FromResult(user);
         }
 
-        private LdapUser GetLdapUser(DirectoryEntry directoryEntry, ILdapSettings ldapSettings, string userName)
+        private LdapUser GetLdapUser(DirectoryEntry directoryEntry, string userName)
         {
      
             DirectorySearcher ds = new DirectorySearcher(directoryEntry);

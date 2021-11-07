@@ -13,13 +13,14 @@
     <div class="col-md-10 col-md-push-2">
         <h2>@ViewData["Title"]</h2>
         <table class="table table-striped">
+                 <caption>Country list</caption>
             <tr>
                 <th>
                     <a class="btn btn-xs btn-default" asp-action="CountryEdit" asp-controller="CoreData"
                        asp-route-countryid="@Guid.Empty"
                        asp-route-pagenumber="@Model.Countries.PageNumber">@sr["New Country"]</a>
                 </th>
-                <th>
+                <th id= "Name">
                     @sr["Name"]
                 </th>
                 <th>
