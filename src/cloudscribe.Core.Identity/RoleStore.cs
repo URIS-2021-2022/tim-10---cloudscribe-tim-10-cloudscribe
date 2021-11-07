@@ -33,7 +33,7 @@ namespace cloudscribe.Core.Identity
             
         }
 
-        private readonly MultiTenantOptions _multiTenantOptions;
+        private MultiTenantOptions _multiTenantOptions;
         private ILogger _log;
         private IUserCommands _commands;
         private IUserQueries _queries;
@@ -46,11 +46,12 @@ namespace cloudscribe.Core.Identity
 
         private Guid GetSiteId()
         {
-            if(_multiTenantOptions.UseRelatedSitesMode && _multiTenantOptions.RelatedSiteId != Guid.Empty)
+            if(_multiTenantOptions.UseRelatedSitesMode)
             {
-               
+                if(_multiTenantOptions.RelatedSiteId != Guid.Empty)
+                {
                     return _multiTenantOptions.RelatedSiteId;
-                
+                }
             }
 
             return Site.Id;
