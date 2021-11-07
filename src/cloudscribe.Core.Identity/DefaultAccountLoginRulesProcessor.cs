@@ -43,16 +43,15 @@ namespace cloudscribe.Core.Identity
             var isLockedOut = template.User.IsLockedOut;
             var phoneNumber = string.IsNullOrEmpty(template.User.PhoneNumber);
 
-            if (requireConfirmedEmail)
+            if (requireConfirmedEmail && !isEmailConfirmed)
             {
-                if (!isEmailConfirmed)
-                {
+                
                     var reason = $"login not allowed for {template.User.Email} because email is not confirmed";
                     template.RejectReasons.Add(reason);
                     template.NeedsEmailConfirmation = true;
                     template.EmailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(template.User);
                     template.SignInResult = SignInResult.NotAllowed;
-                }
+                
             }
 
             if (_userManager.Site.RequireApprovalBeforeLogin)

@@ -74,7 +74,7 @@ namespace Tenant1SpaPolymer
             loggerFactory.AddDebug();
 
             // this uses the policy called "default"
-            //app.UseCors("default");
+           
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
