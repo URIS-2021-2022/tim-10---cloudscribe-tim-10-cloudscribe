@@ -85,7 +85,7 @@
         <label>@sr["Site Logo"]</label>
         <div class="d-flex align-items-stretch mb-2">
             <div class="cs-crop-container" style="@themeSettings.GetNavbarStyle()">
-                <img id="dz1Image" style="max-width:350px;" src="@GetImageUrl(Model.LogoUrl)" />
+                <img id="dz1Image" style="max-width:350px;" src="@GetImageUrl(Model.LogoUrl)" alt="dzImage"/>
             </div>
             <div class="d-flex flex-column">
                 <div id="dz1" class="cloudscribe-dropzone-standalone" style="cursor:pointer;"
@@ -251,7 +251,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <iframe id="frFileDialog" frameborder="0" style="overflow:hidden;height:100%;width:100%;min-height: 650px;"></iframe>
+            <iframe id="frFileDialog"  style="overflow:hidden;height:100%;width:100%;min-height: 650px;"></iframe>
         </div>
     </div>
 </div>
