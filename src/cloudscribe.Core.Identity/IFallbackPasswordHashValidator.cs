@@ -13,7 +13,7 @@ namespace cloudscribe.Core.Identity
 
     }
 
-    public class DefaultFallbackPasswordHashValidator<TUser> : IFallbackPasswordHashValidator<TUser> where TUser : class
+    public class DefaultFallbackPasswordHashValidator< in TUser> : IFallbackPasswordHashValidator<TUser> where TUser : class
     {
         public PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword)
         {

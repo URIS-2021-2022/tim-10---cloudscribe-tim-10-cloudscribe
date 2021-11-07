@@ -45,7 +45,7 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
                     db.Countries.Add(c);
                 }
 
-                rowsAffected = await db.SaveChangesAsync();
+                rowsAffected += await db.SaveChangesAsync();
             }
             
             count = await db.States.CountAsync<GeoZone>();
