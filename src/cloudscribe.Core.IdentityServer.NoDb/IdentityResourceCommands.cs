@@ -24,9 +24,9 @@ namespace cloudscribe.Core.IdentityServer.NoDb
 
         private IBasicCommands<IdentityResource> _commands;
 
-        public async Task CreateIdentityResource(string siteId, IdentityResource resource, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task CreateIdentityResource(string siteId, IdentityResource identityResource, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await _commands.CreateAsync(siteId, resource.Name, resource, cancellationToken).ConfigureAwait(false);
+            await _commands.CreateAsync(siteId, identityResource.Name, identityResource, cancellationToken).ConfigureAwait(false);
         }
 
         public async Task UpdateIdentityResource(string siteId, IdentityResource resource, CancellationToken cancellationToken = default(CancellationToken))

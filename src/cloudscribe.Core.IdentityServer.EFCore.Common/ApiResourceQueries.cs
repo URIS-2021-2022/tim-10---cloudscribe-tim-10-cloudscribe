@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.IdentityServer.EFCore
 {
-    public class ApiResourceQueries : IApiResourceQueries, IApiResourceQueriesSingleton
+    public class ApiResourceQueries : IApiResourceQueriesSingleton
     {
         public ApiResourceQueries(
             IConfigurationDbContextFactory contextFactory
