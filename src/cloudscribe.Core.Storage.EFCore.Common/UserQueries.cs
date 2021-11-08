@@ -193,7 +193,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                 (
                     x.SiteId == siteId
                     //&& x.IsDeleted == false
-                    && x.AccountApproved == true
+                    && x.AccountApproved
                     && (
                     userNameBeginsWith == string.Empty
                     || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -236,7 +236,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                       (
                           x.SiteId == siteId
                           // && x.IsDeleted == false
-                          && x.AccountApproved == true
+                          && x.AccountApproved
                           && (
                           userNameBeginsWith == string.Empty
                           || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -281,7 +281,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                       (
                           x.SiteId == siteId
                           //&& x.IsDeleted == false
-                          && x.AccountApproved == true
+                          && x.AccountApproved
                           && (
                           userNameBeginsWith == string.Empty
                           || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -316,7 +316,6 @@ namespace cloudscribe.Core.Storage.EFCore.Common
 
                         break;
 
-                    case 0:
                     default:
                         //query = query.OrderBy(sl => sl.DisplayName).AsQueryable();
 
@@ -327,7 +326,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                       (
                           x.SiteId == siteId
                           //&& x.IsDeleted == false
-                          && x.AccountApproved == true
+                          && x.AccountApproved
                           && (
                           userNameBeginsWith == string.Empty
                           || x.DisplayName.ToUpper().StartsWith(userNameBeginsWith)
@@ -460,7 +459,6 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                         query = query.OrderByDescending(sl => sl.CreatedUtc).AsQueryable();
                         break;
 
-                    case 0:
                     default:
                         query = query.OrderBy(sl => sl.DisplayName).AsQueryable();
                         break;
@@ -490,7 +488,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var dbContext = _contextFactory.CreateContext())
             {
                 return await dbContext.Users.CountAsync<SiteUser>(
-               x => x.SiteId == siteId && x.IsLockedOut == true,
+               x => x.SiteId == siteId && x.IsLockedOut,
                cancellationToken)
                .ConfigureAwait(false);
             }
@@ -514,7 +512,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                   where
                   (
                       x.SiteId == siteId
-                      && x.IsLockedOut == true
+                      && x.IsLockedOut
                   )
                   orderby x.DisplayName
                   select x;
@@ -655,7 +653,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             {
                 return await dbContext.Users.CountAsync<SiteUser>(
                 x => x.SiteId == siteId
-                && x.EmailConfirmed == false
+                && !x.EmailConfirmed
                 ,
                 cancellationToken)
                 .ConfigureAwait(false);
@@ -680,7 +678,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                   where
                   (
                       x.SiteId == siteId
-                      && x.EmailConfirmed == false
+                      && !x.EmailConfirmed
                   )
                   orderby x.DisplayName
                   select x;
@@ -737,7 +735,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             {
                 return await dbContext.Users.CountAsync<SiteUser>(
                 x => x.SiteId == siteId
-                && x.PhoneNumberConfirmed == false
+                && !x.PhoneNumberConfirmed
                 ,
                 cancellationToken)
                 .ConfigureAwait(false);
@@ -762,7 +760,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                   where
                   (
                       x.SiteId == siteId
-                      && x.PhoneNumberConfirmed == false
+                      && !x.PhoneNumberConfirmed
                   )
                   orderby x.DisplayName
                   select x;
@@ -818,7 +816,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var dbContext = _contextFactory.CreateContext())
             {
                 return await dbContext.Users.CountAsync<SiteUser>(
-                x => x.SiteId == siteId && x.AccountApproved == false,
+                x => x.SiteId == siteId && !x.AccountApproved,
                 cancellationToken)
                 .ConfigureAwait(false);
             }
@@ -840,7 +838,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                   where
                   (
                       x.SiteId == siteId
-                      && x.AccountApproved == false
+                      && !x.AccountApproved
                   )
                   orderby x.DisplayName
                   select x;

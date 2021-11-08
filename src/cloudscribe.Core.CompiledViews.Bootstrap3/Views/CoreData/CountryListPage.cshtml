@@ -15,18 +15,18 @@
         <table class="table table-striped">
             <caption>Description</caption>
             <tr>
-                <th>
+                <th id="newCountry">
                     <a class="btn btn-xs btn-default" asp-action="CountryEdit" asp-controller="CoreData"
                        asp-route-countryid="@Guid.Empty"
                        asp-route-pagenumber="@Model.Countries.PageNumber">@sr["New Country"]</a>
                 </th>
-                <th>
+                <th id="name">
                     @sr["Name"]
                 </th>
-                <th>
+                <th id="isoCode2">
                     @sr["ISOCode2"]
                 </th>
-                <th>
+                <th id="isoCode3">
                     @sr["ISOCode3"]
                 </th>
             </tr>
