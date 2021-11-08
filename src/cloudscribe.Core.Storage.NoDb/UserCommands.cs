@@ -145,7 +145,10 @@ namespace cloudscribe.Core.Storage.NoDb
             {
                 await DeleteUserRoles(siteId, userId);
             }
-            catch { }
+            catch(Exception e) 
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
             try

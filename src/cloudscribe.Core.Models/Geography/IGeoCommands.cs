@@ -18,8 +18,8 @@ namespace cloudscribe.Core.Models.Geography
         Task DeleteGeoZonesByCountry(Guid countryId, CancellationToken cancellationToken = default(CancellationToken));
 
         Task Add(IGeoCountry geoCountry, CancellationToken cancellationToken = default(CancellationToken));
-        Task Update(IGeoCountry geoCountry, CancellationToken cancellationToken = default(CancellationToken));
         Task Add(IGeoZone geoZone, CancellationToken cancellationToken = default(CancellationToken));
+        Task Update(IGeoCountry geoCountry, CancellationToken cancellationToken = default(CancellationToken));
         Task Update(IGeoZone geoZone, CancellationToken cancellationToken = default(CancellationToken));
 
     }

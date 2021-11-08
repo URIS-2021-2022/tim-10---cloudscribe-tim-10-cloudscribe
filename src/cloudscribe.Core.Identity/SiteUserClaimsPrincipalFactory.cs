@@ -55,8 +55,9 @@ namespace cloudscribe.Core.Identity
 
             // base class takes care of all the default stuff like roles name id etc
             var principal = await base.CreateAsync(user);
-            
-            if (principal.Identity is ClaimsIdentity)
+            var principalIdentity = principal.Identity as ClaimsIdentity;
+
+            if (principalIdentity != null)
             {
                 var identity = (ClaimsIdentity)principal.Identity;
 

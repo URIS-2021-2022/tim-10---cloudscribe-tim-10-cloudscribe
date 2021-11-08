@@ -1279,7 +1279,7 @@ namespace cloudscribe.Core.Storage.NoDb
                         select x
                         ;
 
-            return query.ToList().Count();
+            return query.ToList().Count;
 
         }
 
