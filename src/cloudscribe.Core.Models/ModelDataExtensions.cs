@@ -415,7 +415,7 @@ namespace cloudscribe.Core.Models.DataExtensions
                     {
                         s.KeyValue = keyValue;
                         s.IsDirty = true;
-                    };
+                    }
                     break;
                 }
             }

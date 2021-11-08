@@ -202,7 +202,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
         private bool disposedValue = false; // To detect redundant calls
 
-        void Dispose(bool disposing)
+        void Dispose(bool disposing):IDisposable
         {
             if (!disposedValue)
             {

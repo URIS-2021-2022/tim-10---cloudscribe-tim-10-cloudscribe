@@ -1436,7 +1436,7 @@ namespace cloudscribe.Core.Identity
             return (IList<TUser>)users; 
         }
 
-        public async Task RemoveFromRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public async Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();

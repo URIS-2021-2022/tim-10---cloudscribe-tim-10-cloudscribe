@@ -56,7 +56,6 @@ namespace cloudscribe.Core.Storage.NoDb
         private IBasicQueries<UserToken> tokenQueries;
         private IBasicQueries<UserLocation> locationQueries;
         private IStoragePathResolver<UserLogin> loginPathResolver;
-        private IStoragePathResolver<UserToken> tokenPathResolver;
         private MultiTenantOptions multiTenantOptions;
 
         //protected string projectId;

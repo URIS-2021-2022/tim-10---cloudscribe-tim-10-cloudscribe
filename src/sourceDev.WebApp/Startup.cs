@@ -51,7 +51,6 @@ namespace sourceDev.WebApp
         private readonly IConfiguration _configuration;
         private readonly bool _sslIsAvailable;
         private readonly bool _disableIdentityServer;
-        private bool _didSetupIdServer = false;
        //private readonly ILogger _log;
 
         

@@ -29,7 +29,7 @@ namespace cloudscribe.Core.IdentityServer.NoDb
             await _commands.CreateAsync(siteId, resource.Name, resource, cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task UpdateApiResource(string siteId, ApiResource resource, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task UpdateApiResource(string siteId, ApiResource apiResource, CancellationToken cancellationToken = default(CancellationToken))
         {
             await _commands.UpdateAsync(siteId, resource.Name, resource, cancellationToken).ConfigureAwait(false);
         }

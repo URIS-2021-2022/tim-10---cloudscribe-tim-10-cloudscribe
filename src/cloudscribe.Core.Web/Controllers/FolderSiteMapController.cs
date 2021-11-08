@@ -21,7 +21,7 @@ namespace cloudscribe.Core.Web.Controllers
             _nodeProviders = nodeProviders;
         }
 
-        private ILogger _log;
+
         private IEnumerable<ISiteMapNodeService> _nodeProviders;
 
         [HttpGet]
