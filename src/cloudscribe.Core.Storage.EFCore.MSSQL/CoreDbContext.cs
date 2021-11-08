@@ -129,7 +129,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.DefaultEmailFromAlias)
                 .HasMaxLength(100);
-                ;
+                
 
                 entity.Property(p => p.RecaptchaPrivateKey)
                 .HasMaxLength(255);

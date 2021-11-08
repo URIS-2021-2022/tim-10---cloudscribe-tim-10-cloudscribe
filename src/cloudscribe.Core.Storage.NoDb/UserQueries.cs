@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class UserQueries : IUserQueries, IUserQueriesSingleton
+    public class UserQueries : IUserQueries, IUserQueriesSingleton, IDisposable
     {
         public UserQueries(
             //IProjectResolver projectResolver,

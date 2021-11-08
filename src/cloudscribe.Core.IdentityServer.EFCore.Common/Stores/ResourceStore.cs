@@ -20,7 +20,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.Stores
     public class ResourceStore : IResourceStore
     {
         private readonly IConfigurationDbContext _context;
-        private IHttpContextAccessor _contextAccessor;
+        private readonly IHttpContextAccessor _contextAccessor;
         private readonly ILogger<ResourceStore> _logger;
 
         public ResourceStore(
@@ -79,10 +79,10 @@ namespace cloudscribe.Core.IdentityServer.EFCore.Stores
             //    from api in _context.ApiResources
             //    let scopes = api.Scopes.Select(x => x.Name)
             //    where api.SiteId == _siteId && scopes.Intersect(names).Any()
-            //    select api;
+            
             var query =
                 from api in _context.ApiResources
-                where api.SiteId == _siteId && api.Scopes.Where(x => names.Contains(x.Name)).Any()
+                where api.SiteId == _siteId && api.Scopes.Any(x => names.Contains(x.Name))
                 select api;
 
             var apis = query
