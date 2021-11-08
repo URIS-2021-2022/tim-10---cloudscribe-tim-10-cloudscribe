@@ -43,7 +43,6 @@ namespace cloudscribe.Core.Storage.NoDb
             this.loginPathResolver = loginPathResolver;
             this.loginQueries = loginQueries;
             this.tokenQueries = tokenQueries;
-            this.tokenPathResolver = tokenPathResolver;
             this.multiTenantOptions = multiTenantOptionsAccessor.Value;
         }
 

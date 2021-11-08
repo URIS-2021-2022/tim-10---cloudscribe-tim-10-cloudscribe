@@ -1449,7 +1449,7 @@ namespace cloudscribe.Core.Identity
             var siteId = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteId = _multiTenantOptions.RelatedSiteId; }
 
-            var siteRole = await _queries.FetchRole(siteId, role, cancellationToken);
+            var siteRole = await _queries.FetchRole(siteId, roleName, cancellationToken);
             
             if (siteRole != null)
             {  

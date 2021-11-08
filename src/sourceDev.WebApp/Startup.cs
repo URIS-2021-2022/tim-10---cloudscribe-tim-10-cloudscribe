@@ -36,24 +36,27 @@ namespace sourceDev.WebApp
         public Startup(
             IConfiguration configuration,
             IWebHostEnvironment env//,
-            //ILogger<Startup> logger
+                                   //ILogger<Startup> logger
             )
         {
             _configuration = configuration;
             _environment = env;
-           // _log = logger;
-            _sslIsAvailable =  _configuration.GetValue<bool>("AppSettings:UseSsl");
+            // _log = logger;
+            _sslIsAvailable = _configuration.GetValue<bool>("AppSettings:UseSsl");
             _disableIdentityServer = _configuration.GetValue<bool>("AppSettings:DisableIdentityServer");
-            
+
         }
 
         private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
         private readonly bool _sslIsAvailable;
         private readonly bool _disableIdentityServer;
-       //private readonly ILogger _log;
+        private bool _didSetupIdServer = false;
+        //private readonly ILogger _log;
 
         
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             //// **** VERY IMPORTANT *****
@@ -225,6 +228,11 @@ namespace sourceDev.WebApp
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
+            if (_didSetupIdServer)
+            {
+                Console.Write("The server is not configured!");
+            }
+           
             var useMiniProfiler = _configuration.GetValue<bool>("DevOptions:EnableMiniProfiler");
             if(useMiniProfiler)
             {
