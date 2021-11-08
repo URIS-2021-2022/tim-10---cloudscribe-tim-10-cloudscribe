@@ -97,7 +97,7 @@
 
             var sizeTest;
             if (Number.isInteger(node.size)) {
-                var sizeInBytes = new Number(node.size);
+                var sizeInBytes = Number(node.size);
                 if (sizeInBytes > 1000000) {
                     var sizeMb = sizeInBytes / 1000000;
                     sizeTest = sizeMb + " MB";
@@ -449,44 +449,41 @@
         renameFile: function () {
             $("#mdlRenameFile").modal('hide');
             var currentPath = $("#fileToRename").val();
-            if (currentPath === '') {
-                return false;
-            }
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
-            }
+            if (currentPath !== '' && currentPath !== fileManager.rootVirtualPath) {
+                var formData = $('#frmRenameFile').serializeArray();
+                //alert(JSON.stringify(formData));
+                $.ajax({
+                    method: "POST",
+                    url: fileManager.renameFileApiUrl,
+                    headers: fileManager.headers,
+                    data: formData
+                }).done(function (data) {
+                    if (data.succeeded) {
+                        var tree = $('#tree').treeview(true);
+                        var matchingNodes = tree.findNodes(currentPath, 'id');
+                        if (matchingNodes) {
+                            var parents = tree.getParents(matchingNodes);
+                            if (parents && parents.length > 0) {
+                                fileManager.reloadSubTree(parents[0].id);
+                            }
 
-            var formData = $('#frmRenameFile').serializeArray();
-            //alert(JSON.stringify(formData));
-            $.ajax({
-                method: "POST",
-                url: fileManager.renameFileApiUrl,
-                headers: fileManager.headers,
-                data: formData
-            }).done(function (data) {
-                if (data.succeeded) {
-                    var tree = $('#tree').treeview(true);
-                    var matchingNodes = tree.findNodes(currentPath, 'id');
-                    if (matchingNodes) {
-                        var parents = tree.getParents(matchingNodes);
-                        if (parents && parents.length > 0) {
-                            fileManager.reloadSubTree(parents[0].id);
                         }
+
+                        fileManager.clearCurrentFile();
+
+                    }
+                    else {
+                        fileManager.notify(data.message, 'alert-danger');
 
                     }
 
-                    fileManager.clearCurrentFile();
-
-                }
-                else {
-                    fileManager.notify(data.message, 'alert-danger');
-
-                }
-
-            })
-            .fail(function () {
-                fileManager.notify('An error occured', 'alert-danger');
-            });
+                })
+                    .fail(function () {
+                        fileManager.notify('An error occured', 'alert-danger');
+                    });
+            }
+            
+            
        
             return false; //cancel form submit
         },

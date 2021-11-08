@@ -84,7 +84,9 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                             dbContext.Users.Update(siteUser);
                         }
                         catch (Exception)
-                        { }
+                        {
+                            throw new Exception("Error");
+                        }
                     }
                 }
 
@@ -945,8 +947,19 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (userLocation == null) { throw new ArgumentException("userLocation can't be null"); }
+            if (userLocation == null) { throw new ArgumentException("userLocation can't be null"); } else
+            {
+                UpdateUserLocationInternal(userLocation, cancellationToken);
+            }
 
+            
+
+        }
+
+        public async Task UpdateUserLocationInternal(
+            IUserLocation userLocation,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
             var ul = UserLocation.FromIUserLocation(userLocation);
 
             using (var dbContext = _contextFactory.CreateContext())
@@ -960,7 +973,6 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                 int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
-
         }
 
         public async Task DeleteUserLocation(
