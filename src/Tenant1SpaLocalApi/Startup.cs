@@ -29,7 +29,6 @@ namespace Tenant1SpaPolymer
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             
-            //loggerFactory.AddDebug();
 
             // this sample is calling the api/identity in the main sourceDev.WebApp project
             // see wwwroot/index.html for client configuration
