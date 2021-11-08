@@ -54,15 +54,12 @@ namespace cloudscribe.Core.Identity
                 
             }
 
-            if (_userManager.Site.RequireApprovalBeforeLogin)
+            if (_userManager.Site.RequireApprovalBeforeLogin && !isAcccountApproved)
             {
-                if (!isAcccountApproved)
-                {
-                    var reason = $"login not allowed for {template.User.Email} because account not approved yet";
-                    template.RejectReasons.Add(reason);
-                    template.NeedsAccountApproval = true;
-                    template.SignInResult = SignInResult.NotAllowed;
-                }
+                var reason = $"login not allowed for {template.User.Email} because account not approved yet";
+                template.RejectReasons.Add(reason);
+                template.NeedsAccountApproval = true;
+                template.SignInResult = SignInResult.NotAllowed;
             }
 
             if (_userManager.Site.RequireConfirmedPhone && _userManager.Site.SmsIsConfigured())

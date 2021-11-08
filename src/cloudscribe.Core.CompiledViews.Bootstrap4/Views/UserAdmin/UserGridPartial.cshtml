@@ -61,7 +61,7 @@
                 <span>@tzHelper.ConvertToLocalTime(item.CreatedUtc, Model.TimeZoneId).ToString("g")</span>                
             </td>
             <td class="usergrid-column3">
-                <span><img gravatar-email="@item.Email" gravatar-enabled="@themeSettings.AllowGravatar" override-url="@item.AvatarUrl" disabled-default-url="@themeSettings.DefaultAvatarUrl" gravatar-size="30" /></span>
+                <span><img gravatar-email="@item.Email" gravatar-enabled="@themeSettings.AllowGravatar" alt="email avatar" override-url="@item.AvatarUrl" disabled-default-url="@themeSettings.DefaultAvatarUrl" gravatar-size="30" /></span>
             </td>
             <td class="text-break usergrid-column4">
                 <span>@Html.DisplayFor(modelItem => item.Email) /

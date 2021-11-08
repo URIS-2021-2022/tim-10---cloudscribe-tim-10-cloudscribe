@@ -27,14 +27,12 @@ namespace cloudscribe.Core.Identity
         {
             _commands = userCommands ?? throw new ArgumentNullException(nameof(userCommands));
             _queries = userQueries ?? throw new ArgumentNullException(nameof(userQueries));
-            _log = logger ?? throw new ArgumentNullException(nameof(logger));
             _siteSettings = currentSite ?? throw new ArgumentNullException(nameof(currentSite));
             _multiTenantOptions = multiTenantOptionsAccessor.Value;
             
         }
 
         private readonly MultiTenantOptions _multiTenantOptions;
-        private ILogger _log;
         private IUserCommands _commands;
         private IUserQueries _queries;
         private ISiteContext _siteSettings = null;
