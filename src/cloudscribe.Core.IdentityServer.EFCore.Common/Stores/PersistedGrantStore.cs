@@ -33,7 +33,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.Stores
             _logger = logger;
         }
 
-        public async Task StoreAsync(PersistedGrant token)
+        public async Task StoreAsync(PersistedGrant grant)
         {
             var site = _contextAccessor.HttpContext.GetTenant<SiteContext>();
             if (site == null)
@@ -43,17 +43,17 @@ namespace cloudscribe.Core.IdentityServer.EFCore.Stores
             }
             var _siteId = site.Id.ToString();
 
-            var existing = await _context.PersistedGrants.SingleOrDefaultAsync(x => x.SiteId == _siteId && x.Key == token.Key)
+            var existing = await _context.PersistedGrants.SingleOrDefaultAsync(x => x.SiteId == _siteId && x.Key == grant.Key)
                 .ConfigureAwait(false);
             if (existing == null)
             {
-                var persistedGrant = token.ToEntity();
+                var persistedGrant = grant.ToEntity();
                 persistedGrant.SiteId = _siteId;
                 _context.PersistedGrants.Add(persistedGrant);
             }
             else
             {
-                token.UpdateEntity(existing);
+                grant.UpdateEntity(existing);
             }
 
             try

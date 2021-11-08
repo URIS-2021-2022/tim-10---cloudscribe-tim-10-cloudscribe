@@ -23,7 +23,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //overriden method
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class GeoCommands : IGeoCommands, IGeoCommandsSingleton
+    public class GeoCommands : IGeoCommands, IGeoCommandsSingleton, IDisposable
     {
         public GeoCommands(
             //IProjectResolver projectResolver,

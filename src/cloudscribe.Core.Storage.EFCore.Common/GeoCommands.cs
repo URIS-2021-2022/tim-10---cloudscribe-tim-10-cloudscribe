@@ -44,6 +44,26 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             
         }
 
+        public async Task Add(
+            IGeoZone geoZone,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (geoZone == null) throw new ArgumentException("geoZone must not be null");
+            if (geoZone.Id == Guid.Empty) throw new ArgumentException("geoZone must have a non-empty id");
+
+            var state = GeoZone.FromIGeoZone(geoZone); // convert from IGeoZone
+
+            using (var dbContext = _contextFactory.CreateContext())
+            {
+                dbContext.States.Add(state);
+
+                int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken)
+                    .ConfigureAwait(false);
+            }
+
+        }
+
         public async Task Update(
             IGeoCountry geoCountry, 
             CancellationToken cancellationToken = default(CancellationToken))
@@ -69,15 +89,15 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         }
 
         public async Task DeleteCountry(
-            Guid countryId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (countryId == Guid.Empty) throw new ArgumentException("id must be a non-empty guid");
+            if (id == Guid.Empty) throw new ArgumentException("id must be a non-empty guid");
 
             using (var dbContext = _contextFactory.CreateContext())
             {
-                var itemToRemove = await dbContext.Countries.SingleOrDefaultAsync(x => x.Id == countryId, cancellationToken);
+                var itemToRemove = await dbContext.Countries.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
                 if (itemToRemove == null) throw new InvalidOperationException("geoCountry not found");
 
                 dbContext.Countries.Remove(itemToRemove);
@@ -87,25 +107,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
 
         }
 
-        public async Task Add(
-            IGeoZone geoZone,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (geoZone == null) throw new ArgumentException("geoZone must not be null");
-            if (geoZone.Id == Guid.Empty) throw new ArgumentException("geoZone must have a non-empty id");
-
-            var state = GeoZone.FromIGeoZone(geoZone); // convert from IGeoZone
-
-            using (var dbContext = _contextFactory.CreateContext())
-            {
-                dbContext.States.Add(state);
-
-                int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            
-        }
+        
 
         public async Task Update(
             IGeoZone geoZone,

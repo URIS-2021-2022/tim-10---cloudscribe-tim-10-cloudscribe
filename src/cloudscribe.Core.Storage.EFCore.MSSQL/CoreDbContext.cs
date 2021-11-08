@@ -85,7 +85,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.LdapDomain)
                 .HasMaxLength(255);
-                ;
+                
 
                 entity.Property(p => p.LdapRootDN)
                 .HasMaxLength(255);
