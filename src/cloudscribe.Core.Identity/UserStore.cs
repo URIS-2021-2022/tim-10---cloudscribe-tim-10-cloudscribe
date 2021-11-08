@@ -20,7 +20,6 @@ namespace cloudscribe.Core.Identity
 {
     public sealed class UserStore<TUser> :
         //UserStoreBase<TUser, TKey, TUserClaim, TUserLogin, TUserToken>,
-        IUserStore<TUser>,
         IUserSecurityStampStore<TUser>,
         IUserPasswordStore<TUser>,
         IUserEmailStore<TUser>,
@@ -259,7 +258,7 @@ namespace cloudscribe.Core.Identity
             return Task.FromResult(0);
         }
 
-        public Task SetNormalizedUserNameAsync(TUser user, string normalizedUserName, CancellationToken cancellationToken)
+        public Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -275,7 +274,7 @@ namespace cloudscribe.Core.Identity
                 user.SiteId = SiteSettings.Id;
             }
             
-            user.NormalizedUserName = normalizedUserName;
+            user.NormalizedUserName = normalizedName;
             //cancellationToken.ThrowIfCancellationRequested();
             //bool result = await repo.Save(user);
 
@@ -362,7 +361,7 @@ namespace cloudscribe.Core.Identity
         /// <param name="user">The user whose security stamp should be set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the security stamp for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();

@@ -7,7 +7,7 @@ namespace cloudscribe.Core.Identity
     /// if you can validate the old hash is correct then return PasswordVerificationResult.SuccessRehashNeeded
     /// </summary>
     /// <typeparam name="TUser"></typeparam>
-    public interface IFallbackPasswordHashValidator<TUser> where TUser : class
+    public interface IFallbackPasswordHashValidator< in TUser> where TUser : class
     {
         PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword);
 

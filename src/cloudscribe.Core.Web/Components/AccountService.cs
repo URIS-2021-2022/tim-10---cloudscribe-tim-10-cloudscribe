@@ -583,7 +583,7 @@ namespace cloudscribe.Core.Web.Components
             if(template.RejectReasons.Count == 0 
                 && user != null 
                 && template.SignInResult == SignInResult.Failed // failed is initial state, could have been changed to lockedout
-                && result.Errors.Count<IdentityError>() == 0
+                && result.Errors.Any()
                 ) 
             {
                 await SignInManager.SignInAsync(user, isPersistent: false);
@@ -670,7 +670,6 @@ namespace cloudscribe.Core.Web.Components
         public virtual async Task<bool?> IsEmailConfirmedAsync(string userId)
         {
             IUserContext userContext = null;
-            IdentityResult result = IdentityResult.Failed(null);
 
             var user = await UserManager.FindByIdAsync(userId);
             if(user != null)
