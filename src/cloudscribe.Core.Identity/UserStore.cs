@@ -655,7 +655,7 @@ namespace cloudscribe.Core.Identity
             DateTimeOffset? d;
             if (user.LockoutEndDateUtc != null)
             {
-                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return null; }
+                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return Task.FromResult<System.DateTimeOffset?>(null); }
 
                 d = new DateTimeOffset(user.LockoutEndDateUtc.Value);
                 return Task.FromResult(d);

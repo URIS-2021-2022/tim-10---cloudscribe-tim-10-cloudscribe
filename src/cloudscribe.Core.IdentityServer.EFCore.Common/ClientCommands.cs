@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.IdentityServer.EFCore
 {
-    public class ClientCommands : IClientCommands, IClientCommandsSingleton
+    public class ClientCommands : IClientCommandsSingleton
     {
         public ClientCommands(
             IConfigurationDbContextFactory contextFactory
