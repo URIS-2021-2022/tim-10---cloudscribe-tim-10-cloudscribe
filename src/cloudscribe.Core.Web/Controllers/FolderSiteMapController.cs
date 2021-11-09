@@ -12,6 +12,7 @@ namespace cloudscribe.Core.Web.Controllers
     /// </summary>
     public class FolderSiteMapController : SiteMapController
     {
+        private readonly ILogger _log;
         public FolderSiteMapController(
             ILogger<SiteMapController> logger,
             IEnumerable<ISiteMapNodeService> nodeProviders = null
@@ -21,7 +22,6 @@ namespace cloudscribe.Core.Web.Controllers
             _nodeProviders = nodeProviders;
         }
 
-        private ILogger<SiteMapController> _log;
         private IEnumerable<ISiteMapNodeService> _nodeProviders;
 
         

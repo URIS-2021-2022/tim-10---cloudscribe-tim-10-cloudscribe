@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class SiteCommands : ISiteCommands, ISiteCommandsSingleton, IDisposable
+    public sealed class SiteCommands : ISiteCommands, ISiteCommandsSingleton, IDisposable
     {
         public SiteCommands(
             //IProjectResolver projectResolver,

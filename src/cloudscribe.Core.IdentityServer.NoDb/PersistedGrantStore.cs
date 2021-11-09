@@ -64,7 +64,7 @@ namespace cloudscribe.Core.IdentityServer.NoDb
             }
         }
 
-        public async Task StoreAsync(PersistedGrant token)
+        public async Task StoreAsync(PersistedGrant grant)
         {
             try
             {
@@ -74,9 +74,9 @@ namespace cloudscribe.Core.IdentityServer.NoDb
                     _logger.LogError("sitecontext was null");
                     return;
                 }
-                var grant = new GrantItem(token);
-                await RemoveAsync(grant.Key).ConfigureAwait(false);
-                await _commands.CreateAsync(site.Id.ToString(), grant.Id, grant).ConfigureAwait(false);
+                var granted = new GrantItem(grant);
+                await RemoveAsync(granted.Key).ConfigureAwait(false);
+                await _commands.CreateAsync(site.Id.ToString(), granted.Id, granted).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

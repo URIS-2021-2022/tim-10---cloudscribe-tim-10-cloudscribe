@@ -35,7 +35,7 @@ namespace cloudscribe.Core.Identity
         //            Name = optionsName
 
         //        });
-        //}
+       
 
         //public static IApplicationBuilder UseMultiTenantCookieAuthentication(
         //    this IApplicationBuilder app,
