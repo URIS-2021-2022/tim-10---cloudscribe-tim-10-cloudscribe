@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var storage = config["DevOptions:DbPlatform"];
             var efProvider = config["DevOptions:EFProvider"];
-            var useMiniProfiler = config.GetValue<bool>("DevOptions:EnableMiniProfiler");
+            
 
             switch (storage)
             {
@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     
                     break;
 
-                case "ef":
+                
                 default:
 
                     //if (useMiniProfiler)

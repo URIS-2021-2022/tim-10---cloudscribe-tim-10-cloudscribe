@@ -405,44 +405,38 @@
         deleteFile: function () {
             $("#mdlDeleteFile").modal('hide');
             var currentPath = $("#fileToDelete").val();
-            if (currentPath === '') {
-                return false;
+            if (currentPath !== '' && currentPath !== fileManager.rootVirtualPath) {
+                var formData = $('#frmDeleteFile').serializeArray();
+                //alert(JSON.stringify(formData));
+                $.ajax({
+                    method: "POST",
+                    url: fileManager.deleteFileApiUrl,
+                    headers: fileManager.headers,
+                    data: formData
+                }).done(function (data) {
+                    if (data.succeeded) {
+                        fileManager.removeNode(currentPath);
+                        fileManager.clearCurrentFile();
+                    }
+                    else {
+                        fileManager.notify(data.message, 'alert-danger');
+                    }
+                })
+                    .fail(function () {
+                        fileManager.notify('An error occured', 'alert-danger');
+                    });
             }
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
-            }
-            
-            var formData = $('#frmDeleteFile').serializeArray();
-            //alert(JSON.stringify(formData));
-            $.ajax({
-                method: "POST",
-                url: fileManager.deleteFileApiUrl,
-                headers: fileManager.headers,
-                data: formData
-            }).done(function (data) {
-                if (data.succeeded) {
-                    fileManager.removeNode(currentPath);
-                    fileManager.clearCurrentFile();
-                }
-                else {
-                    fileManager.notify(data.message, 'alert-danger');
-                }
-            })
-            .fail(function () {
-                fileManager.notify('An error occured', 'alert-danger');
-            });
-            
+  
             return false; //cancel form submit
         },
         renameFilePrompt: function () {
             var currentPath = $("#fileToRename").val();
-            if (currentPath === '') {
-                return false;
+            if (currentPath !== '') {
+                var message = "Are you sure you want to rename the file " + currentPath + "?";
+                $("#renameFileModalBody").html(message);
+                $("#mdlRenameFile").modal('show');
             }
-            var message = "Are you sure you want to rename the file " + currentPath + "?";
-            $("#renameFileModalBody").html(message);
-            $("#mdlRenameFile").modal('show');
-
+            
             return false;
 
         },

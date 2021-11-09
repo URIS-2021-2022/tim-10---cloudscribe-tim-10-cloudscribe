@@ -273,7 +273,8 @@ jQuery.extend( {
 		throw new Error( msg );
 	},
 
-	noop: function() {},
+	noop: function () { //Intentional empty function 
+	},
 
 	isFunction: function( obj ) {
 		return jQuery.type( obj ) === "function";

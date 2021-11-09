@@ -314,7 +314,8 @@
                                     }
                                 },
 
-                                onOk: function() {
+                                onOk: function () {
+                                    //This is intentional empty function
                                 },
                                 contents: [
                                     {

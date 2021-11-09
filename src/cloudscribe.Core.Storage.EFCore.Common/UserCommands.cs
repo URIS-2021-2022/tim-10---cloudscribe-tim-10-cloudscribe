@@ -45,10 +45,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             {
                 dbContext.Users.Add(siteUser);
 
-                int rowsAffected =
-                    await dbContext.SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false)
-                    ;
+                
             }
             
         }

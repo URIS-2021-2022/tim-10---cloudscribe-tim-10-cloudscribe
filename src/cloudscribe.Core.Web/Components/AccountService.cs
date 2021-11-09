@@ -90,7 +90,7 @@ namespace cloudscribe.Core.Web.Components
                     Email = email,
                     FirstName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.GivenName),
                     LastName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Surname),
-                    AccountApproved = UserManager.Site.RequireApprovalBeforeLogin ? false : true,
+                    AccountApproved = UserManager.Site.RequireApprovalBeforeLogin || false ,
                     EmailConfirmed = SocialAuthEmailVerificationPolicy.HasVerifiedEmail(externalLoginInfo),
                     AgreementAcceptedUtc = termsAcceptedDate,
                     LastLoginUtc = DateTime.UtcNow
