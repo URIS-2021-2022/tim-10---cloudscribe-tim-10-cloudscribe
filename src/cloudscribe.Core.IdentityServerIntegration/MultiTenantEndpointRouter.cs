@@ -92,7 +92,7 @@ namespace cloudscribe.Core.IdentityServerIntegration
                 var site = context.GetTenant<SiteContext>();
                 if(site != null && (!string.IsNullOrEmpty(site.SiteFolderName)))
                 {
-                    var folderPath = "/" + site.SiteFolderName + path;
+                    var folderPath = "" + site.SiteFolderName + path;
                     if (context.Request.Path.StartsWithSegments(folderPath))
                     {
                         var idBasePath = context.GetIdentityServerBasePath().EnsureTrailingSlash();

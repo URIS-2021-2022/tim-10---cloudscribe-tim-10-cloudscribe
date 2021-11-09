@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.EFCore.Common
 {
-    public class GeoQueries : IGeoQueries, IGeoQueriesSingleton
+    public class GeoQueries : IGeoQueriesSingleton
     {
         public GeoQueries(ICoreDbContextFactory coreDbContextFactory)
         {
