@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class UserCommands : IUserCommands, IUserCommandsSingleton
+    public class UserCommands : IUserCommands, IUserCommandsSingleton, IDisposable
     {
         public UserCommands(
             //IProjectResolver projectResolver,

@@ -15,7 +15,8 @@
         <table class="table table-striped">
             <caption>State List</caption>
             <tr>
-                <th>
+                <th id="btn1">
+
                     <a class="btn btn-xs btn-default" asp-action="StateEdit" asp-controller="CoreData"
                        asp-route-countryId="@Model.Country.Id"
                        asp-route-crp="@Model.CountryListReturnPageNumber"
@@ -24,7 +25,7 @@
                 <th id="Name">
                     @sr["Name"]
                 </th>
-                <th>
+                <th id="code1">
                     @sr["Code"]
                 </th>
             </tr>
