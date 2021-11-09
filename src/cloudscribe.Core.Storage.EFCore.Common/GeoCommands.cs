@@ -135,15 +135,15 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         }
 
         public async Task DeleteGeoZone(
-            Guid stateId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (stateId == Guid.Empty) throw new ArgumentException("id must be a non-empty guid");
+            if (id == Guid.Empty) throw new ArgumentException("id must be a non-empty guid");
 
             using (var dbContext = _contextFactory.CreateContext())
             {
-                var itemToRemove = await dbContext.States.SingleOrDefaultAsync(x => x.Id == stateId, cancellationToken);
+                var itemToRemove = await dbContext.States.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
                 if (itemToRemove == null) throw new InvalidOperationException("geoZone not found");
 
                 dbContext.States.Remove(itemToRemove);

@@ -114,7 +114,7 @@
 			},
 
 			// Insertions are not supported in source editable.
-			insertHtml: function() {},
+			
 			insertElement: function() {},
 			insertText: function() {},
 
