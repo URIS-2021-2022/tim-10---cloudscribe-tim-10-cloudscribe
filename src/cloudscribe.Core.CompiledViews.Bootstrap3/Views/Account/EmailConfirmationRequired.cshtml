@@ -20,7 +20,7 @@
         </div>
     </form>
 }
-    <form asp-controller="Account" asp-action="ConfirmEmail" method="get" class="form-inline" role="form">
+    <form aria-label="Mail confirmation" asp-controller="Account" asp-action="ConfirmEmail" method="get" class="form-inline" role="form">
         <input name="userId" value="@Model.UserId" type="hidden" />
         <input name="returnUrl" value="@Model.ReturnUrl" type="hidden" />
         <div class="form-group">
