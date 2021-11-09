@@ -26,7 +26,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         private readonly ICoreDbContextFactory _contextFactory;
 
         public async Task<IGeoCountry> FetchCountry(
-            Guid countryId, 
+            Guid id, 
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -34,7 +34,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var dbContext = _contextFactory.CreateContext())
             {
                 var item = await dbContext.Countries.SingleOrDefaultAsync(
-                    x => x.Id == countryId,
+                    x => x.Id == id,
                     cancellationToken)
                     .ConfigureAwait(false);
 
@@ -124,7 +124,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         }
 
         public async Task<IGeoZone> FetchGeoZone(
-            Guid stateId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -132,7 +132,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var dbContext = _contextFactory.CreateContext())
             {
                 var item = await dbContext.States.SingleOrDefaultAsync(
-                    x => x.Id == stateId,
+                    x => x.Id == id,
                     cancellationToken)
                     .ConfigureAwait(false);
 
