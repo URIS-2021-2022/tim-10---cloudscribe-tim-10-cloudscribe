@@ -17,13 +17,14 @@ namespace cloudscribe.Core.Web.Controllers
             IEnumerable<ISiteMapNodeService> nodeProviders = null
             ) : base(logger, nodeProviders)
         {
-            _log = logger;
+             _log = logger;
             _nodeProviders = nodeProviders;
         }
 
-        private ILogger _log;
+        private ILogger<SiteMapController> _log;
         private IEnumerable<ISiteMapNodeService> _nodeProviders;
 
+        
         [HttpGet]
         [ResponseCache(CacheProfileName = "SiteMapCacheProfile")]
         //[Route("{folder:sitefolder}/api/sitemap")]

@@ -240,7 +240,7 @@ namespace cloudscribe.Core.Identity
                 Email = email,
                 FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
                 LastName = info.Principal.FindFirstValue(ClaimTypes.Surname),
-                AccountApproved = Site.RequireApprovalBeforeLogin ? false : true
+                AccountApproved = Site.RequireApprovalBeforeLogin 
             };
             //https://github.com/joeaudette/cloudscribe/issues/346
             user.DisplayName = _displayNameResolver.ResolveDisplayName(user);

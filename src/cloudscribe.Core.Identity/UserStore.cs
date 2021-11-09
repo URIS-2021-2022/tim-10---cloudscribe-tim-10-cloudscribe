@@ -1435,7 +1435,7 @@ namespace cloudscribe.Core.Identity
             return (IList<TUser>)users; 
         }
 
-        public async Task RemoveFromRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public async Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1448,7 +1448,7 @@ namespace cloudscribe.Core.Identity
             var siteId = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteId = _multiTenantOptions.RelatedSiteId; }
 
-            var siteRole = await _queries.FetchRole(siteId, role, cancellationToken);
+            var siteRole = await _queries.FetchRole(siteId, roleName, cancellationToken);
             
             if (siteRole != null)
             {  
