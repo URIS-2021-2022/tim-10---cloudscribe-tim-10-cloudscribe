@@ -458,15 +458,12 @@
                     headers: fileManager.headers,
                     data: formData
                 }).done(function (data) {
-                    if (data.succeeded) {
+                    if (data.succeeded && matchingNodes) {
                         var tree = $('#tree').treeview(true);
                         var matchingNodes = tree.findNodes(currentPath, 'id');
-                        if (matchingNodes) {
-                            var parents = tree.getParents(matchingNodes);
-                            if (parents && parents.length > 0) {
-                                fileManager.reloadSubTree(parents[0].id);
-                            }
-
+                        var parents = tree.getParents(matchingNodes);
+                        if (parents && parents.length > 0) {
+                            fileManager.reloadSubTree(parents[0].id);
                         }
 
                         fileManager.clearCurrentFile();
