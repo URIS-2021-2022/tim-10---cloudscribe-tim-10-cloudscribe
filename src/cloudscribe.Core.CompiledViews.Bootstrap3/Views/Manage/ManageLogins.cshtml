@@ -56,11 +56,11 @@
             @foreach (var account in Model.CurrentLogins)
             {
                 <tr>
-                    <td>@account.LoginProvider</td>
+                    <th scope="col">@account.LoginProvider</th>
                     <td>
                         @if (Model.ShowRemoveButton)
                         {
-                            <form asp-controller="Manage" asp-action="RemoveLogin" method="post" class="form-horizontal" role="form">
+                            <form aria-label="Login providers" asp-controller="Manage" asp-action="RemoveLogin" method="post" class="form-horizontal" role="form">
                                 <div>
                                     <input namer="LoginProvider" type="hidden" value="@account.LoginProvider" />
                                     <input name="ProviderKey" type="hidden" value="@account.ProviderKey" />
