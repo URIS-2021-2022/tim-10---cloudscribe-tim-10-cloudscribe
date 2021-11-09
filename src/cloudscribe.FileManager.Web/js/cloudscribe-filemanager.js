@@ -350,11 +350,11 @@
         renameFolder: function () {
             $("#mdlRenameFolder").modal('hide');
             var currentPath = $("#folderToRename").val();
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
+            if (currentPath !== fileManager.rootVirtualPath) {
+                var formData = $('#frmRenameFolder').serializeArray();
             }
-           
-            var formData = $('#frmRenameFolder').serializeArray();
+            
+            
             //alert(JSON.stringify(formData));
             $.ajax({
                 method: "POST",
@@ -402,6 +402,7 @@
             $("#mdlDeleteFile").modal('show');
             return false;
         },
+
         deleteFile: function () {
             $("#mdlDeleteFile").modal('hide');
             var currentPath = $("#fileToDelete").val();

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.EFCore.Common
 {
-    public class SiteCommands : ISiteCommands, ISiteCommandsSingleton
+    public class SiteCommands : ISiteCommandsSingleton
     {
         public SiteCommands(ICoreDbContextFactory coreDbContextFactory)
         {
