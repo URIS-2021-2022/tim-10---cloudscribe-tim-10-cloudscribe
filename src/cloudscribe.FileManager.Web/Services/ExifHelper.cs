@@ -222,7 +222,7 @@ namespace cloudscribe.FileManager.Web.Services
             {
                 return default(double);
             }
-            var result = (double)Math.Abs(point.Degrees) + (double)point.Minutes / (double)60 + (double)point.Seconds / (double)3600;
+            var result = Math.Abs(point.Degrees) + point.Minutes / 60 + point.Seconds / 3600;
             if (point.Degrees < 0) return result * (double)-1;
             return result;
         }

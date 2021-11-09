@@ -38,8 +38,6 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             {
                 dbContext.Countries.Add(country);
 
-                int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false);
             }
             
         }

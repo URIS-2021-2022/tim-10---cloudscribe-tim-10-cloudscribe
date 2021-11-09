@@ -97,7 +97,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.LdapUserDNKey)
                 .HasMaxLength(10);
-                ;
+                
                 
                 entity.Property(p => p.UseEmailForLogin)
                 .IsRequired()

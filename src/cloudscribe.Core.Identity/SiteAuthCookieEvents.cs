@@ -86,7 +86,7 @@ namespace cloudscribe.Core.Identity
             {
                 
                 await SecurityStampValidator.ValidatePrincipalAsync(context);
-                return;
+ 
             }
             else
             {

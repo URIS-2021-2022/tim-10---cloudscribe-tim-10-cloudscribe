@@ -18,7 +18,6 @@ namespace cloudscribe.Core.Storage.NoDb
     {
         public GeoCommands(
             //IProjectResolver projectResolver,
-            IBasicQueries<GeoCountry> countryQueries,
             IBasicCommands<GeoCountry> countryCommands,
             IBasicQueries<GeoZone> stateQueries,
             IBasicCommands<GeoZone> stateCommands
@@ -26,7 +25,6 @@ namespace cloudscribe.Core.Storage.NoDb
             )
         {
             //this.projectResolver = new DefaultProjectResolver();
-            this.countryQueries = countryQueries;
             this.countryCommands = countryCommands;
             this.stateQueries = stateQueries;
             this.stateCommands = stateCommands;
@@ -34,7 +32,6 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         //private IProjectResolver projectResolver;
-        private IBasicQueries<GeoCountry> countryQueries;
         private IBasicCommands<GeoCountry> countryCommands;
         private IBasicQueries<GeoZone> stateQueries;
         private IBasicCommands<GeoZone> stateCommands;
