@@ -85,7 +85,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                         }
                         catch (Exception)
                         {
-                            throw new Exception("Error");
+                            throw new ArgumentNullException("Error");
                         }
                     }
                 }
