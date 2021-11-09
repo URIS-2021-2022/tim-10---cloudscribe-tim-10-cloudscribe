@@ -27,12 +27,9 @@
                        asp-controller="SiteAdmin"
                        asp-route-slp="@Model.Sites.PageNumber">@sr["New Site"]</a>
                 </th>
-                <th>
-                    @sr["Site Name"]
-                </th>
-                <th>
-                    @FolderHostLabel
-                </th>
+                <td></td>
+                <th scope="col">Site Name</th>
+              <th scope="col">FolderHostLabel</th>
             </tr>
             @foreach (var item in Model.Sites.Data)
             {
