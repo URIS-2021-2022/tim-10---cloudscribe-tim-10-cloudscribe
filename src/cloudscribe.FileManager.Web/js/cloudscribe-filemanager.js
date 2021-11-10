@@ -400,7 +400,7 @@
             var message = "Are you sure you want to permanently delete the file " + currentPath + "?";
             $("#deleteFileModalBody").html(message);
             $("#mdlDeleteFile").modal('show');
-            return false;
+            return true;
         },
 
         deleteFile: function () {
