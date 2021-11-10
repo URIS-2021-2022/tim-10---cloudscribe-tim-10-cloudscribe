@@ -2,14 +2,12 @@
 $(function () {
     function IsAllowedFile(file) {
         switch (file.type) {
-            case "image/jpeg":
-            case "image/jpg":
-            case "image/gif":
-            case "image/png":
-            case "image/svg+xml":
+            case "image/jpeg": return true;
+            case "image/jpg": return true;
+            case "image/gif": return true;
+            case "image/png": return true;
+            case "image/svg+xml": return true;
                 return true;
-                break;
-        }
         return false;
     }
     var $elems = $('textarea[data-markdown-unobtrusive]');
