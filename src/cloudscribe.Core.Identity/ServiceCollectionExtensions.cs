@@ -8,7 +8,7 @@
 using cloudscribe.Core.Identity;
 using cloudscribe.Core.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-//using Microsoft.AspNetCore.Antiforgery.Internal;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<IdentityOptions> setupAction = null
             )
         {
-            //services.AddScoped<IAuthenticationHandlerProvider, SiteAuthenticationHandlerProvider>();
+            
 
             // Services used by identity
             // this will change in 2.0 AddCookieAuthentication => AddCookie
@@ -53,7 +53,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //});
 
             services.AddSingleton<IOptionsMonitor<CookieAuthenticationOptions>, SiteCookieAuthenticationOptions>();
-            //services.AddSingleton<IOptionsSnapshot<CookieAuthenticationOptions>, SiteCookieAuthenticationOptionsPreview>();
+            
 
             services.AddSingleton<IOptionsMonitor<FacebookOptions>, SiteFacebookOptions>();
             services.AddSingleton<IOptionsMonitor<GoogleOptions>, SiteGoogleOptions>();
@@ -73,7 +73,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 o.LoginPath = new PathString("/Account/Login");
                 //o.Events = new CookieAuthenticationEvents
-                //{
+                
                 //    OnValidatePrincipal = SiteAuthCookieValidator.ValidatePrincipalAsync
                 //};
                 

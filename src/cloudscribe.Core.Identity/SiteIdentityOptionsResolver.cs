@@ -14,7 +14,7 @@ namespace cloudscribe.Core.Identity
 {
     public class SiteIdentityOptionsResolver : IOptions<IdentityOptions>
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private  readonly IHttpContextAccessor _httpContextAccessor;
         private TokenOptions _tokenOptions;
         private IIdentityOptionsFactory _optionsFactory;
 
