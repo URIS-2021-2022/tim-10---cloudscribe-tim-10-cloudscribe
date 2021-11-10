@@ -19,10 +19,10 @@ namespace cloudscribe.Core.Web.Controllers
             ) : base(logger, nodeProviders)
         {
              _log = logger;
-            _nodeProviders = nodeProviders;
+            
         }
 
-        private IEnumerable<ISiteMapNodeService> _nodeProviders;
+       
 
         
         [HttpGet]

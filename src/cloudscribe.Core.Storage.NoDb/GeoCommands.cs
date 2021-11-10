@@ -95,20 +95,20 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task DeleteCountry(
-            Guid countryId,
+            Guid Id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (countryId == Guid.Empty) throw new ArgumentException("countryid must be a non-empty id");
+            if (Id == Guid.Empty) throw new ArgumentException("countryid must be a non-empty id");
 
             //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             await countryCommands.DeleteAsync(
                 projectId,
-                countryId.ToString(),
+                Id.ToString(),
                 cancellationToken).ConfigureAwait(false);
         }
 
