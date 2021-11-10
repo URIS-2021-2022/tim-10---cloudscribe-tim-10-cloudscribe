@@ -37,7 +37,7 @@ namespace cloudscribe.Core.Web.Components
         public async Task<bool> HandleEmailChangeWithoutUserConfirmation(ChangeUserEmailViewModel model, 
                                                                          SiteUser user, 
                                                                          string token, 
-                                                                         string siteUrl)
+                                                                         string callbackUrl)
         {
             // do it
             var result = await UserManager.ChangeEmailAsync(user, model.NewEmail, token);
@@ -54,7 +54,7 @@ namespace cloudscribe.Core.Web.Components
                         model.NewEmail,
                         model.CurrentEmail,
                         StringLocalizer["Email address successfully changed"],
-                        siteUrl
+                        callbackUrl
                         );
 
                     model.SuccessNotification += " " + StringLocalizer["Notification emails will be sent to old and new addresses."];
@@ -67,7 +67,7 @@ namespace cloudscribe.Core.Web.Components
             {
                 model.SuccessNotification = StringLocalizer["Error - email could not be changed. Contact the site administrator for support."];
                 var resultError = $"Error occurred changing email address for user ID '{user.Id}'";
-                if (result?.Errors != null && result.Errors.Count() > 0)
+                if (result?.Errors != null && result.Errors.Any() )
                     resultError += result.Errors.First().Description;
                 Log.LogError(resultError);
             }
@@ -137,7 +137,7 @@ namespace cloudscribe.Core.Web.Components
             {
                 model.SuccessNotification = StringLocalizer["Error - email could not be changed. Contact the site administrator for support."];
                 var resultError = $"Error occurred changing email address for user ID '{user.Id}'";
-                if (result?.Errors != null && result.Errors.Count() > 0)
+                if (result?.Errors != null && result.Errors.Any())
                     resultError += result.Errors.First().Description;
                 Log.LogError(resultError);
             }

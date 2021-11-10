@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class GeoQueries : IGeoQueries, IGeoQueriesSingleton
+    public class GeoQueries : IGeoQueriesSingleton
     {
         public GeoQueries(
             IBasicQueries<GeoCountry> countryQueries,
@@ -28,21 +28,20 @@ namespace cloudscribe.Core.Storage.NoDb
            
         }
 
-        private IBasicQueries<GeoCountry> countryQueries;
-        private IBasicQueries<GeoZone> stateQueries;
+        private readonly IBasicQueries<GeoCountry> countryQueries;
+        private readonly IBasicQueries<GeoZone> stateQueries;
         
         public async Task<IGeoCountry> FetchCountry(
-            Guid countryId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             return await countryQueries.FetchAsync(
                 projectId,
-                countryId.ToString(),
+                id.ToString(),
                 cancellationToken).ConfigureAwait(false);
             
         }
@@ -51,12 +50,11 @@ namespace cloudscribe.Core.Storage.NoDb
             string isoCode2,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            //await EnsureProjectId().ConfigureAwait(false);
+            cancellationToken.ThrowIfCancellationRequested(); 
             var projectId = "default";
 
             var all = await countryQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var countries = all.ToList().AsQueryable();
+            var countries = all.AsQueryable();
 
             return countries.Where(
                 x => x.ISOCode2 == isoCode2
@@ -67,7 +65,6 @@ namespace cloudscribe.Core.Storage.NoDb
         public async Task<int> GetCountryCount(CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await countryQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
@@ -77,7 +74,6 @@ namespace cloudscribe.Core.Storage.NoDb
         public async Task<List<IGeoCountry>> GetAllCountries(CancellationToken cancellationToken = default(CancellationToken))
         { 
             cancellationToken.ThrowIfCancellationRequested();
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await countryQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
@@ -98,11 +94,10 @@ namespace cloudscribe.Core.Storage.NoDb
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await countryQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var countries = all.ToList().AsQueryable();
+            var countries = all.AsQueryable();
 
             int offset = (pageSize * pageNumber) - pageSize;
 
@@ -124,16 +119,15 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task<IGeoZone> FetchGeoZone(
-            Guid stateId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             return await stateQueries.FetchAsync(
                 projectId,
-                stateId.ToString(),
+                id.ToString(),
                 cancellationToken).ConfigureAwait(false);
 
         }
@@ -143,7 +137,6 @@ namespace cloudscribe.Core.Storage.NoDb
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await stateQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
@@ -160,11 +153,10 @@ namespace cloudscribe.Core.Storage.NoDb
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await stateQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var states = all.ToList().AsQueryable();
+            var states = all.AsQueryable();
 
             var query = states
                         .Where(x => x.CountryId == countryId)
@@ -182,11 +174,10 @@ namespace cloudscribe.Core.Storage.NoDb
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await countryQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var countries = all.ToList().AsQueryable();
+            var countries = all.AsQueryable();
 
             // approximation of a LIKE operator query
             //http://stackoverflow.com/questions/17097764/linq-to-entities-using-the-sql-like-operator
@@ -209,11 +200,10 @@ namespace cloudscribe.Core.Storage.NoDb
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await stateQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var states = all.ToList().AsQueryable();
+            var states = all.AsQueryable();
             
             var listQuery = states
                             .Where(x =>
@@ -236,11 +226,10 @@ namespace cloudscribe.Core.Storage.NoDb
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             var all = await stateQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var states = all.ToList().AsQueryable();
+            var states = all.AsQueryable();
 
             int offset = (pageSize * pageNumber) - pageSize;
 

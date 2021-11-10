@@ -1059,7 +1059,7 @@ namespace cloudscribe.Core.Identity
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
             var userLogins = await _queries.GetLoginsByUser(siteGuid, user.Id, cancellationToken);
-            foreach (UserLogin ul in userLogins)
+            foreach (UserLogin ul in userLogins.OfType<UserLogin>())
             {
                 var l = new UserLoginInfo(ul.LoginProvider, ul.ProviderKey, ul.ProviderDisplayName);
                 logins.Add(l);
@@ -1394,7 +1394,7 @@ namespace cloudscribe.Core.Identity
             return roles;
         }
 
-        public async Task<bool> IsInRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public  Task<bool> IsInRoleAsync(TUser user, string role, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1406,6 +1406,11 @@ namespace cloudscribe.Core.Identity
                 throw new ArgumentNullException("user");
             }
 
+            return IsInRoleInternalAsync(user, role, cancellationToken);
+        }
+
+        public async Task<bool> IsInRoleInternalAsync(TUser user, string role, CancellationToken cancellationToken)
+        {
             var result = false;
             var roles = await _queries.GetUserRoles(SiteSettings.Id, user.Id, cancellationToken);
 

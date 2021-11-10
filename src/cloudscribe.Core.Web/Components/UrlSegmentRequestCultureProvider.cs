@@ -31,22 +31,22 @@ namespace cloudscribe.Core.Web.Localization
 
             if (!string.IsNullOrWhiteSpace(segments.FirstSegment))
             {
-                var matchingUICulture = _supportedUICultures.Where(x => 
-                x.Name.Equals(segments.FirstSegment, StringComparison.InvariantCultureIgnoreCase) 
+                var matchingUICulture = _supportedUICultures.FirstOrDefault(x =>
+                x.Name.Equals(segments.FirstSegment, StringComparison.InvariantCultureIgnoreCase)
                 || x.TwoLetterISOLanguageName.Equals(segments.FirstSegment, StringComparison.InvariantCultureIgnoreCase)
                 || x.Name.Equals(segments.SecondSegment, StringComparison.InvariantCultureIgnoreCase)
                 || x.TwoLetterISOLanguageName.Equals(segments.SecondSegment, StringComparison.InvariantCultureIgnoreCase)
-                ).FirstOrDefault();
+                );
 
                 CultureInfo mainCulture = null;
                 if (_supportedCultures != null)
                 {
-                    mainCulture = _supportedCultures.Where(x => 
-                    x.Name.Equals(segments.FirstSegment,StringComparison.InvariantCultureIgnoreCase)
+                    mainCulture = _supportedCultures.FirstOrDefault(x =>
+                    x.Name.Equals(segments.FirstSegment, StringComparison.InvariantCultureIgnoreCase)
                     || x.TwoLetterISOLanguageName.Equals(segments.FirstSegment, StringComparison.InvariantCultureIgnoreCase)
                     || x.Name.Equals(segments.SecondSegment, StringComparison.InvariantCultureIgnoreCase)
                     || x.TwoLetterISOLanguageName.Equals(segments.SecondSegment, StringComparison.InvariantCultureIgnoreCase)
-                    ).FirstOrDefault();
+                    );
                 }
                 if (matchingUICulture != null)
                 {
@@ -86,15 +86,6 @@ namespace cloudscribe.Core.Web.Localization
 
         }
 
-        private string GetStartingSegment(string requestPath)
-        {
-            if (string.IsNullOrEmpty(requestPath)) return requestPath;
-            if (!requestPath.Contains("/")) return requestPath;
-
-            var segments = SplitOnCharAndTrim(requestPath, '/');
-            return segments.FirstOrDefault();
-        }
-
         private List<string> SplitOnCharAndTrim(string s, char c)
         {
             List<string> list = new List<string>();
@@ -110,7 +101,7 @@ namespace cloudscribe.Core.Web.Localization
             return list;
         }
 
-        private class UrlSegments
+        private sealed class UrlSegments
         {
             public string FirstSegment { get; set; }
             public string SecondSegment { get; set; }
