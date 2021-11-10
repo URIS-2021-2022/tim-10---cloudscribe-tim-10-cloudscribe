@@ -641,19 +641,19 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task<int> CountFutureLockoutEndDate(
-            Guid siteId,
+            Guid siteGuid,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
             //await EnsureProjectId().ConfigureAwait(false);
-            var projectId = siteId.ToString();
+            var projectId = siteGuid.ToString();
 
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
 
             return allUsers.Where(
-                x => x.SiteId == siteId
+                x => x.SiteId == siteGuid
                 && x.LockoutEndDateUtc.HasValue
                 && x.LockoutEndDateUtc.Value > DateTime.UtcNow
                 )

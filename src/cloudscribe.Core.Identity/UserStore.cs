@@ -940,7 +940,7 @@ namespace cloudscribe.Core.Identity
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
             var userClaims = await _queries.GetClaimsByUser(siteGuid, user.Id, cancellationToken);
-            foreach (UserClaim uc in userClaims)
+            foreach (IUserClaim uc in userClaims)
             {
                 Claim c = new Claim(uc.ClaimType, uc.ClaimValue);
                 claims.Add(c);

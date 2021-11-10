@@ -215,7 +215,7 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task<int> CountOtherSites(
-            Guid currentSiteId,
+            Guid currentSiteGuid,
             CancellationToken cancellationToken = default(CancellationToken))
         {
 
@@ -226,7 +226,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
             var allSites = await queries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
 
-            return allSites.Where(x => x.Id != currentSiteId).ToList().Count;
+            return allSites.Where(x => x.Id != currentSiteGuid).ToList().Count;
         }
 
         public async Task<PagedResult<ISiteInfo>> GetPageOtherSites(
