@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace cloudscribe.Email
@@ -47,10 +48,11 @@ namespace cloudscribe.Email
             }
 
             // last ditch return the first one in the list configured or not
-            foreach (var sender in _allSenders)
+
+            var newSender = _allSenders.FirstOrDefault();
+            if(newSender != null)
             {
-                //var configured = await sender.IsConfigured(lookupKey);
-                return sender;
+                return newSender;
             }
 
 
