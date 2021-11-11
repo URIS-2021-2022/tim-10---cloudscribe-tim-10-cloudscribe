@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.IdentityServerIntegration
 {
-    public class SecurityStampValidatorCallback
+    public static class SecurityStampValidatorCallback
     {
         /// <summary>
         /// Maintains the claims captured at login time that are not being created by ASP.NET Identity.

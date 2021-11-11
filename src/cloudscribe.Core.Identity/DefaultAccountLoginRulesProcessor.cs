@@ -84,14 +84,12 @@ namespace cloudscribe.Core.Identity
 
             }
 
-            if (!string.IsNullOrWhiteSpace(_userManager.Site.RegistrationAgreement))
+            if (!string.IsNullOrWhiteSpace(_userManager.Site.RegistrationAgreement) && (template.User.AgreementAcceptedUtc == null || template.User.AgreementAcceptedUtc < _userManager.Site.TermsUpdatedUtc))
             {
                 // need to not block login otherwise how can we make the user agree agree to terms on account
                 // enforced with middleware
-                if (template.User.AgreementAcceptedUtc == null || template.User.AgreementAcceptedUtc < _userManager.Site.TermsUpdatedUtc)
-                {
+
                     template.MustAcceptTerms = true;
-                }
 
             }
 
