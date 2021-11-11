@@ -388,23 +388,6 @@ namespace cloudscribe.Core.Models.DataExtensions
             
         }
 
-
-        private static void SetExpandoProperty(List<ExpandoSetting> exapandoProperties, string keyName, string keyValue)
-        {  
-            foreach (ExpandoSetting s in exapandoProperties)
-            {
-                if (s.KeyName.Trim().Equals(keyName, StringComparison.CurrentCulture))
-                {
-                    if (s.KeyValue != keyValue)
-                    {
-                        s.KeyValue = keyValue;
-                        s.IsDirty = true;
-                    }
-                    break;
-                }
-            }
-        }
-
         
 
         

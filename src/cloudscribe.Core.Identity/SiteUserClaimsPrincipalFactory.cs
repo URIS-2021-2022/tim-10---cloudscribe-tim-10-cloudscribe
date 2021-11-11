@@ -113,13 +113,10 @@ namespace cloudscribe.Core.Identity
                     }
                 }                
 
-                if (principal.IsInRole("Administrators"))
+                if ((principal.IsInRole("Administrators")) && (site != null && site.IsServerAdminSite))
                 {
-                    if (site != null && site.IsServerAdminSite)
-                    {
                         Claim serverAdminRoleClaim = new Claim(Options.ClaimsIdentity.RoleClaimType, "ServerAdmins");
-                        identity.AddClaim(serverAdminRoleClaim);
-                    }
+                        identity.AddClaim(serverAdminRoleClaim);                    
                 }
 
                 //var jwt = await _oidcHybridFlowHelper.GetCurrentJwt(principal);
