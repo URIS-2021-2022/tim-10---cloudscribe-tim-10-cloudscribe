@@ -1776,10 +1776,14 @@ Expr = Sizzle.selectors = {
 					return true;
 				}
 
+				const equals = operator === "=" ? result === check
+				const notEquals = operator === "!=" ? result !== check
+
+
 				result += "";
 
-				return operator === "=" ? result === check :
-					operator === "!=" ? result !== check :
+				return equals :
+					notEquals :
 					operator === "^=" ? check && result.indexOf( check ) === 0 :
 					operator === "*=" ? check && result.indexOf( check ) > -1 :
 					operator === "$=" ? check && result.slice( -check.length ) === check :

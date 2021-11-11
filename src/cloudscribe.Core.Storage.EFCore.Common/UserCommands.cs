@@ -82,7 +82,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                         }
                         catch (Exception)
                         {
-                            throw new ArgumentNullException("Error");
+                            throw new ArgumentException("There is something wrong with "+siteUser);
                         }
                     }
                 }

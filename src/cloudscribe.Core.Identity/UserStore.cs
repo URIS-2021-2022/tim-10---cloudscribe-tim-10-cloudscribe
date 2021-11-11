@@ -1351,7 +1351,7 @@ namespace cloudscribe.Core.Identity
 
         #region IUserRoleStore
 
-        public async Task AddToRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public async Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1365,7 +1365,7 @@ namespace cloudscribe.Core.Identity
             var siteGuid = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
-            var siteRole = await _queries.FetchRole(siteGuid, role, cancellationToken);
+            var siteRole = await _queries.FetchRole(siteGuid, roleName, cancellationToken);
             if (siteRole != null)
             {
                 await _commands.AddUserToRole(siteRole.SiteId, siteRole.Id, user.Id, cancellationToken);

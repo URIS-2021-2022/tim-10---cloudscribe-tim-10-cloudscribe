@@ -40,7 +40,7 @@
         selectedFileList: [],
         setCropImageFromServer: function () {
             var url = fileManager.selectedFileInput.val();
-            //console.log(url);
+            
             $("#image").attr("src", url);
             $("#cropCurrentDirLabel").html(url.substring(0, url.lastIndexOf("/")));
             $("#cropCurrentDir").val(url.substring(0, url.lastIndexOf("/")));

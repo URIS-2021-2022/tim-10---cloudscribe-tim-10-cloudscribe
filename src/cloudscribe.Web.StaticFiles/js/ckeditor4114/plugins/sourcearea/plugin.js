@@ -115,8 +115,7 @@
 
 			// Insertions are not supported in source editable.
 			
-			insertElement: function() {},
-			insertText: function() {},
+			
 
 			// Read-only support for textarea.
 			setReadOnly: function( isReadOnly ) {
