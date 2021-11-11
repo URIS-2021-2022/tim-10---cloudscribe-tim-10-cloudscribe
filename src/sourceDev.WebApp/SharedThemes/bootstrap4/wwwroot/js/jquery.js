@@ -1468,14 +1468,22 @@ setDocument = Sizzle.setDocument = function( node ) {
 			bp = [ b ];
 
 		// Parentless nodes are either documents or disconnected
-		if ( !aup || !bup ) {
-			return a === document ? -1 :
-				b === document ? 1 :
-				aup ? -1 :
-				bup ? 1 :
-				sortInput ?
-				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
+		if (!aup || !bup) {
+
+			if (a === document) {
+				return -1;
+			} else if (b === document) {
+				retrun 1;
+			} else if (aup) {
+				return -1;
+			} else if (bup) {
+				return 1;
+			} else if (sortInput) {
+				return (indexOf(sortInput, a) - indexOf(sortInput, b)) :
 				0;
+            }
+			
+
 
 		// If the nodes are siblings, we can do a quick check
 		} else if ( aup === bup ) {

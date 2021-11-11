@@ -41,7 +41,6 @@
                             catch (err) {
                                 //console.log(err);
                             }
-                            finally { }
                         }
                         else {
                             //console.log('Error: ' + xhr.statusText);

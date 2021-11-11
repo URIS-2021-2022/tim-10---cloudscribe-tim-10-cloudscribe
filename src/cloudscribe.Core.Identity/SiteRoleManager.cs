@@ -57,7 +57,7 @@ namespace cloudscribe.Core.Identity
         }
 
         private readonly MultiTenantOptions _multiTenantOptions;
-        private IUserCommands _commands;
+        private readonly IUserCommands _commands;
         private IUserQueries _queries;
         private ILogger _log;
         private readonly IEnumerable<IHandleUserAddedToRole> _userAddedToRoleHandlers;

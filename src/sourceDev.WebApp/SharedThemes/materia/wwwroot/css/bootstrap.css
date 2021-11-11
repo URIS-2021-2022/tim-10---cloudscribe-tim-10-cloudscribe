@@ -4683,7 +4683,7 @@ input[type="button"].btn-block {
 }
 
 .card-header:first-child {
-  border-radius: calc(0.25rem - 0) calc(0.25rem - 0) 0 0;
+  border-radius: calc(0.25rem - 0rem) calc(0.25rem - 0rem) 0 0;
 }
 
 .card-header + .list-group .list-group-item:first-child {

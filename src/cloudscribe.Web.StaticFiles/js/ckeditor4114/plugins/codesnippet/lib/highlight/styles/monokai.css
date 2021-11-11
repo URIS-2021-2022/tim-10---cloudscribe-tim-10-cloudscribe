@@ -3,8 +3,10 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 */
 
 .hljs {
-  display: block; padding: 0.5em;
-  background: #272822;
+	display: block;
+	padding: 0.5em;
+	background: #272822;
+	color: #DDD;
 }
 
 .hljs-tag,
@@ -20,10 +22,6 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .nginx .hljs-title,
 .tex .hljs-special {
   color: #F92672;
-}
-
-.hljs {
-  color: #DDD;
 }
 
 .hljs .hljs-constant,

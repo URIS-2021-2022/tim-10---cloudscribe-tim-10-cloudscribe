@@ -701,10 +701,8 @@
                     $('#fileList').empty();
                     $('#fileList').append($("<ul class='filelist file-errors'></ul>"));
                     var j = 0;
-                    var errorsOccurred = false;
                     while (j < data.length) {
                         if (data[j].errorMessage) {
-                            errorsOccurred = true;
                             addErrorToList(j, data[j]);
                         }
                         j++;

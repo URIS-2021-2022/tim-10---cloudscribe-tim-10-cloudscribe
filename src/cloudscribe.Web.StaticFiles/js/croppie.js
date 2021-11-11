@@ -1541,8 +1541,7 @@
         enableExif: false,
         enforceBoundary: true,
         enableOrientation: false,
-        enableKeyMovement: true,
-        update: function () { }
+        enableKeyMovement: true
     };
 
     Croppie.globals = {

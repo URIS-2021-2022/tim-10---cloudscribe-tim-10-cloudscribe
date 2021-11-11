@@ -42,7 +42,6 @@
                                     var that = this;
                                     btnSave.classList.remove("collapse");
                                     btnSave.onclick = function () {
-                                        //console.log('save button clicked');
                                         if (that.cropper) {
                                             var cropInfo = that.cropper.get();
                                             //console.log(cropInfo);
@@ -392,11 +391,12 @@
 
                 };
 
-                for (var i = 0; i < dropElements.length; i++) {
-                    var item = dropElements[i];
+                var i = 0;
+                for (var item in dropElements) {
+                    item = dropElements[i];
                     cloudscribeDropAndCrop.buildImageEditor(item);
+                    i++;
                 }
-
 
                 var btnClear = document.getElementById("dz1-clear-image");
                 if (btnClear) {
