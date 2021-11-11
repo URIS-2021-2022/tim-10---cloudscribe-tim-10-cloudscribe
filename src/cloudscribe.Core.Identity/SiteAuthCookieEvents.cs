@@ -59,12 +59,10 @@ namespace cloudscribe.Core.Identity
             }
             else {
                 var tenant = context.HttpContext.GetTenant<SiteContext>();
-                if (tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName))
+                if (tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName) && context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
                 {
-                    if (context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
-                    {             
+
                         isApiCall = true;
-                    }
                 }
             }            
 

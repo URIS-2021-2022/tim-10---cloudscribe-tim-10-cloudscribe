@@ -25,7 +25,7 @@ namespace cloudscribe.Core.Identity
         {
             if (principal == null || tokens == null || tokens.Count == 0) return;
 
-            var userIdClaim = principal.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub").FirstOrDefault();
+            var userIdClaim = principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub");
             if (userIdClaim == null) return;
             
             var options = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(20));

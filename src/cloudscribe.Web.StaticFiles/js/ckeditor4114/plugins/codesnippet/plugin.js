@@ -358,8 +358,9 @@
 
 				var childrenArray = getNonEmptyChildren( el ),
 					code;
+				code = childrenArray[0]
 
-				if ( childrenArray.length != 1 || ( code = childrenArray[ 0 ] ).name != 'code' )
+				if ( childrenArray.length != 1 || code.name != 'code' )
 					return;
 
 				// Upcast <code> with text only: https://dev.ckeditor.com/ticket/11926#comment:4
