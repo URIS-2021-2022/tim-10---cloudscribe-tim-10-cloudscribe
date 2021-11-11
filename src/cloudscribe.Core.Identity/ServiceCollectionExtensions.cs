@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // this will change in 2.0 AddCookieAuthentication => AddCookie
             //https://github.com/aspnet/Identity/blob/dev/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs
             //services.AddAuthenticationCore(options =>
-            //{
+ 
             //    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
             //    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
             //    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
