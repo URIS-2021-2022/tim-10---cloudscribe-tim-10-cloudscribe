@@ -24,12 +24,11 @@
     <div>
         <table class="table table-striped">
             <tr>
-                <th>
-                    <a id="parentModalLink" class="btn btn-xs btn-default" asp-action="RoleNonMembers" asp-controller="RoleAdmin"
+                <th
+                     id="parentModalLink" class="btn btn-xs btn-default" asp-action="RoleNonMembers" asp-controller="RoleAdmin"
                        asp-route-siteId="@Model.Role.SiteId"
                        asp-route-roleId="@Model.Role.Id"
-                       bs-modal-link="true" bs-modal-id='@Model.Role.Id.ToString()'>@sr["Add User"]</a>
-                </th>
+                       bs-modal-link="true" bs-modal-id='@Model.Role.Id.ToString()'>Add User</th>
 
                 <td></td>
                 <th scope="col">Email</th>

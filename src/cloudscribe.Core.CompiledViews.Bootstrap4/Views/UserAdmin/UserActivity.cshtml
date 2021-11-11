@@ -21,7 +21,8 @@
 
 <h2>@ViewData["Title"]</h2>
 <a asp-controller="UserAdmin" asp-action="UserEdit" asp-route-siteid="@Model.SiteId" asp-route-userid="@Model.UserId" title="Manage">
-    <img gravatar-email="@Model.Email" gravatar-size="60" gravatar-enabled="@themeSettings.AllowGravatar" override-url="@Model.AvatarUrl" disabled-default-url="@themeSettings.DefaultAvatarUrl" />
+    <img gravatar-email="@Model.Email" gravatar-size="60" gravatar-enabled="@themeSettings.AllowGravatar" override-url="@Model.AvatarUrl" disabled-default-url="@themeSettings.DefaultAvatarUrl"
+         alt="Email"/>
 </a>
 <table class="mt-2 table table-striped">
     <tr>
