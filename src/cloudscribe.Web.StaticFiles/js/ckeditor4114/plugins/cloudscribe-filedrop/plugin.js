@@ -18,9 +18,6 @@ CKEDITOR.plugins.add( 'cloudscribe-filedrop',
 		var isLocked = false;
 		var linkToOrig = editor.config.linkWebSizeToOriginal;
 		
-		function onDragStart(event) {                 
-                //console.log("onDragStart");
-        };
 			
 		function onDragOver(event) { 
 				event.preventDefault();

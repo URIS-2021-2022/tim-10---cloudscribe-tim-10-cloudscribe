@@ -964,7 +964,6 @@
                     var currentWidth = parseInt(cropManager.dataWidth.val());
                     if (currentWidth > maxWidth) {
                         cropManager.outputWidth.val(maxWidth);
-                        var currentHeight = parseInt(cropManager.dataHeight.val());
                         var aspect = cropManager.getCropAspectRatio();
                         var newHeight = parseInt(maxWidth / aspect);
                         cropManager.outputHeight.val(newHeight);

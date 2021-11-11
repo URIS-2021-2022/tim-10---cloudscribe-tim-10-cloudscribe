@@ -6,7 +6,8 @@ namespace cloudscribe.Email
     {
         public static byte[] ToByteArray(this Stream input)
         {
-            if (input is MemoryStream)
+            var memoryInput=input as MemoryStream;
+            if(memoryInput != null)
             {
                 return ((MemoryStream)input).ToArray();
             }

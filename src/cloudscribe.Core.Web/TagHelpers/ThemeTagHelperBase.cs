@@ -27,7 +27,7 @@ namespace cloudscribe.Core.Web.TagHelpers
         // http://stackoverflow.com/questions/42775181/asp-net-cores-asp-append-version-attribute-not-working-for-static-files-outside
         protected const string AppendVersionAttributeName = "asp-append-version";
 
-        public ThemeTagHelperBase(
+        protected ThemeTagHelperBase(
             IOptions<MultiTenantOptions> multiTenantOptionsAccessor,
             IWebHostEnvironment hostingEnvironment,
             IMemoryCache cache,
