@@ -52,7 +52,7 @@ namespace cloudscribe.Core.Identity
         {
             if (user == null) return null;
             if (!user.Identity.IsAuthenticated) return null;
-            var userIdClaim = user.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub").FirstOrDefault();
+            var userIdClaim = user.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub");
             if (userIdClaim == null) return null;
 
             var cacheKey = "oidc-tokens-" + userIdClaim.Value;
@@ -64,7 +64,7 @@ namespace cloudscribe.Core.Identity
                 return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             }
 
-            var siteIdClaim = user.Claims.Where(x => x.Type == "SiteGuid").FirstOrDefault();
+            var siteIdClaim = user.Claims.FirstOrDefault(x => x.Type == "SiteGuid");
 
             if (siteIdClaim == null) return null;
 
@@ -99,7 +99,7 @@ namespace cloudscribe.Core.Identity
         private async Task ClearCache(ClaimsPrincipal user)
         {
             if (user == null) return;
-            var userIdClaim = user.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub").FirstOrDefault();
+            var userIdClaim = user.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier || x.Type == "sub");
             if (userIdClaim == null) return;
 
             var cacheKey = "oidc-tokens-" + userIdClaim.Value;

@@ -29,15 +29,11 @@ namespace cloudscribe.Core.Identity
                     }
 
                     var tenant = context.HttpContext.GetTenant<SiteContext>();
-                    if(tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName))
+                    if(tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName) && context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
                     {
-                        if (context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
-                        {
                             context.Response.StatusCode = (int)statusCode;
                             return Task.CompletedTask;
-                        }
                     }
-
 
                     return existingRedirector(context);
                 };

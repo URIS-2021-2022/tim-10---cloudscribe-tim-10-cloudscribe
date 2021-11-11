@@ -15,7 +15,7 @@ namespace cloudscribe.Core.Models.Identity
     {
         public string ResolveDisplayName(SiteUser user)
         {
-            if(user == null) { throw new ArgumentNullException("user must be provided"); }
+            if(user == null) { throw new ArgumentNullException(user.DisplayName,"user must be provided"); }
 
             if(!string.IsNullOrWhiteSpace(user.DisplayName))
             {

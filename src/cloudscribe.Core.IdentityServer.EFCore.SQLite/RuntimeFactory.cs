@@ -10,7 +10,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.SQLite
             _options = options;
         }
 
-        private DbContextOptions<ConfigurationDbContext> _options;
+        private readonly DbContextOptions<ConfigurationDbContext> _options;
 
         public IConfigurationDbContext CreateContext()
         {
@@ -25,7 +25,7 @@ namespace cloudscribe.Core.IdentityServer.EFCore.SQLite
             _options = options;
         }
 
-        private DbContextOptions<PersistedGrantDbContext> _options;
+        private readonly DbContextOptions<PersistedGrantDbContext> _options;
 
         public IPersistedGrantDbContext CreateContext()
         {

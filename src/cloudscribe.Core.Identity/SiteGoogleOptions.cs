@@ -37,8 +37,8 @@ namespace cloudscribe.Core.Identity
         private readonly IOptionsMonitorCache<GoogleOptions> _cache;
         private readonly IOptionsFactory<GoogleOptions> _factory;
         
-        private MultiTenantOptions _multiTenantOptions;
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly MultiTenantOptions _multiTenantOptions;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _log;
         
 

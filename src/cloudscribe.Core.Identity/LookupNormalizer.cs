@@ -51,7 +51,7 @@ namespace cloudscribe.Core.Identity
             {
                 return null;
             }
-            //return key.Normalize().ToLowerInvariant();
+
             return key.ToLowerInvariant();
         }
 

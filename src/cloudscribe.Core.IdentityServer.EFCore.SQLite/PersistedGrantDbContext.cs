@@ -27,7 +27,6 @@ namespace cloudscribe.Core.IdentityServer.EFCore.SQLite
                 entity.Property(x => x.SubjectId).HasMaxLength(200);
                 entity.Property(x => x.ClientId).HasMaxLength(200).IsRequired();
                 entity.Property(x => x.CreationTime).IsRequired();
-                //entity.Property(x => x.Expiration).IsRequired();
                 entity.Property(x => x.Data).IsRequired();
 
                 entity.HasIndex(x => x.SubjectId);
