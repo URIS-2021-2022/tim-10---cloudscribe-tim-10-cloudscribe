@@ -55,9 +55,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var dbContext = _contextFactory.CreateContext())
             {
                 dbContext.States.Add(state);
-
-                int rowsAffected = await dbContext.SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false);
+               
             }
 
         }

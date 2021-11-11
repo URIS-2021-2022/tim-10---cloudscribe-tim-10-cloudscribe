@@ -101,7 +101,6 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-  text-decoration: underline;
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
   cursor: help;
@@ -2059,8 +2058,8 @@ select.form-control:focus::-ms-value {
 }
 
 .col-form-label-lg {
-  padding-top: calc(2rem + 0);
-  padding-bottom: calc(2rem + 0);
+  padding-top: calc(2rem + 0rem);
+  padding-bottom: calc(2rem + 0rem);
   font-size: 1.09375rem;
   line-height: 1.5;
 }

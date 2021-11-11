@@ -561,14 +561,14 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         }
 
         public async Task<int> CountFutureLockoutEndDate(
-            Guid siteId,
+            Guid siteGuid,
             CancellationToken cancellationToken = default(CancellationToken))
         {
 
             using (var dbContext = _contextFactory.CreateContext())
             {
                 return await dbContext.Users.CountAsync<SiteUser>(
-                x => x.SiteId == siteId
+                x => x.SiteId == siteGuid
                 && x.LockoutEndDateUtc.HasValue
                 && x.LockoutEndDateUtc.Value > DateTime.UtcNow
                 ,

@@ -226,7 +226,7 @@ namespace cloudscribe.Web.Common.Components
         /// </summary>
         /// <param name="pattern">This parameter is ignored</param>
         /// <returns>A <see cref="NullChangeToken" /></returns>
-        public IChangeToken Watch(string pattern)
+        public IChangeToken Watch(string filter)
         {
             return NullChangeToken.Singleton;
         }

@@ -18,17 +18,14 @@ namespace cloudscribe.Core.Web.Components
     {
         public SiteTimeZoneIdResolver(
             IHttpContextAccessor contextAccessor,
-            ITenantResolver<SiteContext> siteResolver,
             SiteUserManager<SiteUser> userManager
             )
         {
             _contextAccessor = contextAccessor;
-            _siteResolver = siteResolver;
             _userManager = userManager;
         }
 
         private IHttpContextAccessor _contextAccessor;
-        private ITenantResolver<SiteContext> _siteResolver;
         private SiteUserManager<SiteUser> _userManager;
 
         public async Task<string> GetUserTimeZoneId(CancellationToken cancellationToken = default(CancellationToken))

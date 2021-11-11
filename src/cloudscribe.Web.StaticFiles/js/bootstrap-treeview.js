@@ -1129,7 +1129,7 @@
 		// Node level style overrides
 		$.each(this._orderedNodes, $.proxy(function (index, node) {
 			if (node.color || node.backColor) {
-				var innerStyle = '';
+				innerStyle = '';
 				if (node.color) {
 					innerStyle += 'color:' + node.color + ';';
 				}

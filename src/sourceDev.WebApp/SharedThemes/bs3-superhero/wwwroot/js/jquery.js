@@ -2024,7 +2024,7 @@ Expr = Sizzle.selectors = {
 
 		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
-			for ( ; --i >= 0; ) {
+			while (--i >= 0) {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
