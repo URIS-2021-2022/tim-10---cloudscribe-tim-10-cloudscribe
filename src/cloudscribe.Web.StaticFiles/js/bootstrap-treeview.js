@@ -365,7 +365,6 @@
 				this._orderedNodes = this._sortNodes();
 				this._inheritCheckboxChanges();
 				this._triggerEvent('initialized', this._orderedNodes, _default.options);
-				return;
 			}, this));
 	};
 
