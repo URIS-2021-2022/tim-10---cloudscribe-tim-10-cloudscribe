@@ -2,6 +2,9 @@
 {
     public class MediaLoggingEvents
     {
+        protected MediaLoggingEvents()
+        {
+        }
         /// <summary>
         /// ie file drop in ckeditor
         /// </summary>

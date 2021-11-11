@@ -308,26 +308,7 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
             return await Index();  // Route back to Index Page, taking toast alerts along
         }
 
-        private async Task<IActionResult> RouteToIndexPage(SiteUser user)
-        {
-            var model = new AccountIndexViewModel
-            {
-                HasPassword       = (!string.IsNullOrWhiteSpace(user.PasswordHash)),
-                PhoneNumber       = !string.IsNullOrWhiteSpace(user.PhoneNumber) ? user.PhoneNumber : null,
-                TwoFactor         = user.TwoFactorEnabled,
-                Logins            = await UserManager.GetLoginsAsync(user),
-                BrowserRemembered = await SignInManager.IsTwoFactorClientRememberedAsync(user),
-                TimeZone          = user.TimeZoneId,
-                Email             = user.Email
-            };
-
-            if (string.IsNullOrEmpty(model.TimeZone))
-            {
-                model.TimeZone = await TimeZoneIdResolver.GetSiteTimeZoneId();
-            }
-
-            return View("Index", model);
-        }
+       
 
 
         [Authorize]
