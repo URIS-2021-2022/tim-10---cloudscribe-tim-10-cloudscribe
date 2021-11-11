@@ -63,7 +63,7 @@ namespace cloudscribe.Web.Common.DataAnnotations
                 // get the value of the dependent property
                 var dependentValue = field.GetValue(validationContext.ObjectInstance, null);
                 // trim spaces of dependent value
-                if (dependentValue != null && dependentValue is string)
+                if (dependentValue is string)
                 {
                     dependentValue = (dependentValue as string).Trim();
 

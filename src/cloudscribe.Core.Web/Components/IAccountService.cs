@@ -30,7 +30,7 @@ namespace cloudscribe.Core.Web.Components
         Task<bool> LoginNameIsAvailable(Guid userId, string loginName);
         Task<ResetPasswordResult> ResetPassword(string email, string password, string resetCode);
         Task SignOutAsync();
-        Task<UserLoginResult> Try2FaLogin(LoginWith2faViewModel model, bool rememberMe);
+        Task<UserLoginResult> Try2FaLogin(LoginWith2FaViewModel model, bool rememberMe);
         Task<UserLoginResult> TryExternalLogin(string providedEmail = "", bool? didAcceptTerms = null);
         Task<UserLoginResult> TryLogin(LoginViewModel model);
         Task<UserLoginResult> TryLoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model);

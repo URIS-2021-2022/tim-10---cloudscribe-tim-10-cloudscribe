@@ -60,12 +60,8 @@ namespace cloudscribe.Core.Models
         /// the siteId of the site whose users and roles are shared when UseRelatedSitesMode is true
         /// </summary>
         private Guid relatedSiteId = Guid.Empty;
-        public Guid RelatedSiteId
-        {
-            get {  return relatedSiteId;
-            }
-            set { relatedSiteId = value; }
-        }
+        public Guid RelatedSiteId { get; set; }
+
 
         public string RelatedSiteAliasId { get; set; }
 

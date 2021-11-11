@@ -82,7 +82,7 @@
 {
     <h4>@sr["Add another service to log in."]</h4>
     <hr />
-    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form">
+    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form" aria-label="Login Links">
         <div id="socialLoginList">
             <p>
                 @foreach (Microsoft.AspNetCore.Authentication.AuthenticationScheme p in Model.OtherLogins)

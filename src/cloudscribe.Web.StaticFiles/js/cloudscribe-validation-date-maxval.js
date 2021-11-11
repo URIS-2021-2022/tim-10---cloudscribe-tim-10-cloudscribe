@@ -7,6 +7,7 @@
         if (StartDate != '') {
             var result = Enddate <= StartDate;
             return result;
+
         }
     }
     return true;

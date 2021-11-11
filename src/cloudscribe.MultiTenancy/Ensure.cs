@@ -203,7 +203,8 @@ namespace cloudscribe.Multitenancy
                     throw new ArgumentNullException(paramName, "String value cannot be null");
                 }
 
-                if (string.Empty.Equals(value))
+                //if (string.Empty.Equals(value))
+                if(String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("String value cannot be empty", paramName);
                 }
