@@ -2029,7 +2029,7 @@
     } else {
       // Handle other cases based on DOM element used as boundaries
       var boundariesNode = void 0;
-      if (boundariesElement === 'scrollParent') {
+      if (boundariesElement == 'scrollParent') {
         boundariesNode = getScrollParent(getParentNode(reference));
         if (boundariesNode.nodeName === 'BODY') {
           boundariesNode = popper.ownerDocument.documentElement;
