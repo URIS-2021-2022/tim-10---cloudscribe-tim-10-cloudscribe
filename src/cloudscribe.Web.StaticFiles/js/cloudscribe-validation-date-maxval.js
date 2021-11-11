@@ -5,7 +5,8 @@
         var StartDate = new Date(otherProp.val());
         var Enddate = new Date(value);
         if (StartDate != '') {
-            return Enddate <= StartDate;
+            var result = Enddate <= StartDate;
+            return result;
 
         }
     }
