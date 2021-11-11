@@ -91,7 +91,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
                             break;
 
-                        case "MSSQL":
                         default:
                             var connectionString = config.GetConnectionString("EntityFrameworkConnectionString");
 

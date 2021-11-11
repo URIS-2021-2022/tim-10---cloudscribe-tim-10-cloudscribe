@@ -373,7 +373,6 @@
                                                     }
 
                                                     if (resizeType == "noresize") {
-                                                        responsiveResize = false;
                                                         maxWidth = null;
                                                         maxHeight = null;
                                                     } else if (resizeType == "responsive") {
