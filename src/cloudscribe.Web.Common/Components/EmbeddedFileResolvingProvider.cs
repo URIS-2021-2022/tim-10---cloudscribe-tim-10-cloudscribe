@@ -196,7 +196,7 @@ namespace cloudscribe.Web.Common.Components
             }
 
             // Non-hierarchal.
-            if (!subpath.Equals(string.Empty))
+            if (!string.IsNullOrEmpty(subpath))
             {
                 return NotFoundDirectoryContents.Singleton;
             }

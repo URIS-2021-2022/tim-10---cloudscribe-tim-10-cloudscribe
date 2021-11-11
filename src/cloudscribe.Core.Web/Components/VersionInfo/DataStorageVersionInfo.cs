@@ -23,7 +23,7 @@ namespace cloudscribe.Core.Web.Components
         }
 
         private IDataPlatformInfo _dbPlatform;
-        private string name = "DataStorageVersionInfo";
+        private string name;
 
         public string Name
         {
