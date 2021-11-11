@@ -787,7 +787,7 @@
     var cropManager = {
         uploadUrl: $("#fmconfig").data("upload-url"),
         URL: window.URL || window.webkitURL,
-        console: window.console || { log: function () { } },
+        console: window.console || { log: function ()  },
         image: $('#image'),
         saveLocalButton: $('#btnSaveLocal'),
         uploadCropButton: $('#btnUploadCrop'),

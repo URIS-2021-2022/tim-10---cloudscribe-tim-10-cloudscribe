@@ -1301,7 +1301,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
         private bool disposedValue = false; // To detect redundant calls
 
-        void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
@@ -1329,7 +1329,7 @@ namespace cloudscribe.Core.Storage.NoDb
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+             GC.SuppressFinalize(this);
         }
 
         #endregion

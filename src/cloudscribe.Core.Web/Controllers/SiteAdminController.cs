@@ -610,6 +610,7 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
 
                 return RedirectToAction("Index");
             }
+          
 
             if (!ModelState.IsValid)
             {
