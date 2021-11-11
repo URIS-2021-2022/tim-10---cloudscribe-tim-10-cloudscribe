@@ -38,7 +38,7 @@ namespace cloudscribe.Core.IdentityServer.NoDb
         private IBasicQueries<ClientClaim> _claimQueries;
         private IHttpContextAccessor _contextAccessor;
 
-        private async Task<List<ClientClaim>> GetAllClientClaims(string siteId, CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<List<ClientClaim>> GetAllClientClaims(CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
             var site = _contextAccessor.HttpContext.GetTenant<SiteContext>();
@@ -52,7 +52,7 @@ namespace cloudscribe.Core.IdentityServer.NoDb
         private async Task<List<ClientClaim>> GetClientClaims(string siteId, string clientId, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var all = await GetAllClientClaims(siteId, cancellationToken).ConfigureAwait(false);
+            var all = await GetAllClientClaims(cancellationToken).ConfigureAwait(false);
 
             return all.
                 Where(x => x.ClientId == clientId).ToList();

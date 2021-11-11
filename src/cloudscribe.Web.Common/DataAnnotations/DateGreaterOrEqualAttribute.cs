@@ -55,7 +55,7 @@ namespace cloudscribe.Web.Common.DataAnnotations
             catch (Exception ex)
             {
                 
-                throw ex;
+                throw new Exception("Error: ", ex);
             }
 
             return validationResult;

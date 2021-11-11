@@ -6,7 +6,7 @@ using System.Text;
 
 namespace cloudscribe.Web.Common.Html
 {
-    public class HtmlHelper
+    public static class HtmlHelper
     {
         public static string ConvertUrlsToAbsolute(
             string absoluteBaseMediaUrl,

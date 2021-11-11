@@ -21,7 +21,7 @@
                             dropZoneDiv: div,
 
                             setupCropper: function () {
-                                var resizeWidth = new Number(this.dropZoneDiv.dataset.resizeWidth);
+                                var resizeWidth = Number(this.dropZoneDiv.dataset.resizeWidth);
                                 var resizeHeight;
                                 var cropAreaWidth = new Number(this.dropZoneDiv.dataset.cropAreaWidth);
                                 var cropAreaHeight = new Number(this.dropZoneDiv.dataset.cropAreaHeight);
