@@ -194,7 +194,8 @@
 		this._load(options)
 			.then($.proxy(function (data) {
 				// load done
-				return this._tree = $.extend(true, [], data);
+				this._tree = $.extend(true, [], data);
+				return this._tree;
 			}, this), $.proxy(function (error) {
 				// load fail
 				this._triggerEvent('loadingFailed', error, _default.options);

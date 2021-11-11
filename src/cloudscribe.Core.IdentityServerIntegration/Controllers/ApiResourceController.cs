@@ -189,7 +189,7 @@ namespace cloudscribe.Core.IdentityServerIntegration.Controllers.Mvc
                 model.NewApi = apiModel;
                 model.NewApi.SiteId = model.SiteId;
 
-                if (exists) ModelState.AddModelError("apinameinuseerror", sr["API Resource name is already in use"]);
+                ModelState.AddModelError("apinameinuseerror", sr["API Resource name is already in use"]);
                 
 
                 return View("EditApiResource", model);

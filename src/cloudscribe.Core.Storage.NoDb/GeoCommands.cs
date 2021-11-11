@@ -55,21 +55,22 @@ namespace cloudscribe.Core.Storage.NoDb
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (geoCountry == null) throw new ArgumentException("geoCountry must not be null");
-            if (geoCountry.Id == Guid.Empty) throw new ArgumentException("geoCountry must have a non-empty id");
+                if (geoCountry == null) throw new ArgumentException("geoCountry must not be null");
+                if (geoCountry.Id == Guid.Empty) throw new ArgumentException("geoCountry must have a non-empty id");
 
-            //await EnsureProjectId().ConfigureAwait(false);
-            var projectId = "default";
+                //await EnsureProjectId().ConfigureAwait(false);
+                var projectId = "default";
 
-            var country = GeoCountry.FromIGeoCountry(geoCountry); // convert from IGeoCountry
+                var country = GeoCountry.FromIGeoCountry(geoCountry); // convert from IGeoCountry
 
             await countryCommands.CreateAsync(
                 projectId,
                 country.Id.ToString(),
                 country,
                 cancellationToken).ConfigureAwait(false);
+            }
 
-        }
+        
 
         public async Task Update(
             IGeoCountry geoCountry,

@@ -393,7 +393,7 @@ namespace cloudscribe.Core.Web.Components
                 );
         }
 
-        public virtual async Task<UserLoginResult> Try2FaLogin(LoginWith2faViewModel model, bool rememberMe)
+        public virtual async Task<UserLoginResult> Try2FaLogin(LoginWith2FaViewModel model, bool rememberMe)
         {
             var template = new LoginResultTemplate();
             IUserContext userContext = null;

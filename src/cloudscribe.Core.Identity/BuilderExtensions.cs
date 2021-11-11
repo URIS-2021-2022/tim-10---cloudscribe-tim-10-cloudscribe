@@ -28,23 +28,11 @@ namespace cloudscribe.Core.Identity
         //    Action<CookieAuthenticationOptions> configureOptions = null, 
         //    string optionsName = "")
      
-
-        //    return app.UseMiddleware<MultiTenantCookieAuthenticationMiddleware>(
-        //        new ConfigureOptions<CookieAuthenticationOptions>(configureOptions ?? (o => { }))
-        //        {
-        //            Name = optionsName
-
-        //        });
-       
-
         //public static IApplicationBuilder UseMultiTenantCookieAuthentication(
         //    this IApplicationBuilder app,
         //    CookieAuthenticationOptions options)
         //{
-        //    if (app == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(app));
-        //    }
+ 
 
         //    if (options == null)
         //    {
