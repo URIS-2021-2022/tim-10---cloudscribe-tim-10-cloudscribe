@@ -20,8 +20,9 @@ CKEDITOR.dialog.add( 'sourcedialog', function( editor ) {
 		minWidth: 100,
 		minHeight: 100,
 
-		onShow: function() {
-			this.setValueOf( 'main', 'data', oldData = editor.getData() );
+		onShow: function () {
+			oldData = editor.getData();
+			this.setValueOf( 'main', 'data', oldData );
 		},
 
 		onOk: ( function() {

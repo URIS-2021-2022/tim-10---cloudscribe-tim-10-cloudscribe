@@ -253,7 +253,6 @@ jQuery.extend( {
 		throw new Error( msg );
 	},
 
-	noop: function() {},
 
 	isFunction: function( obj ) {
 		return jQuery.type( obj ) === "function";
@@ -2032,9 +2031,10 @@ Expr = Sizzle.selectors = {
 
 		"gt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
-			for ( ; ++i < length; ) {
-				matchIndexes.push( i );
+			while (++i < length) {
+				matchIndexes.push(i);
 			}
+
 			return matchIndexes;
 		})
 	}
@@ -2451,7 +2451,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Incrementing an initially-string "0" `i` allows `i` to remain a string only in that
 			// case, which will result in a "00" `matchedCount` that differs from `i` but is also
 			// numerically zero.
-			if ( bySet && i !== matchedCount ) {
+			if ( bySet && i != matchedCount ) {
 				j = 0;
 				while ( (matcher = setMatchers[j++]) ) {
 					matcher( unmatched, setMatched, context, xml );
@@ -6693,7 +6693,7 @@ function Animation( elem, properties, options ) {
 		} ),
 		tick = function() {
 			if ( stopped ) {
-				return false;
+				return -1;
 			}
 			var currentTime = fxNow || createFxNow(),
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
@@ -6715,7 +6715,7 @@ function Animation( elem, properties, options ) {
 				return remaining;
 			} else {
 				deferred.resolveWith( elem, [ animation ] );
-				return false;
+				return -1;
 			}
 		},
 		animation = deferred.promise( {
