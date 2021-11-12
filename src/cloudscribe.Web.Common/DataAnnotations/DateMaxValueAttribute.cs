@@ -65,7 +65,7 @@ namespace cloudscribe.Web.Common.DataAnnotations
             catch (Exception ex)
             {
 
-                throw new Exception ( "Not valid! Error: ", ex);
+                throw new ArgumentNullException(ex.ToString());
             }
 
             return validationResult;
