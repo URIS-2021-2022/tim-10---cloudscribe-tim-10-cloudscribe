@@ -54,7 +54,7 @@ namespace cloudscribe.FileManager.Web.Services
         {
             if (_rootPath != null) { return; }
             _rootPath = await _mediaPathResolver.Resolve().ConfigureAwait(false);
-            if (_rootPath != null) { return; }
+            
         }
 
         private void EnsureSubFolders(string basePath, string[] segments)
