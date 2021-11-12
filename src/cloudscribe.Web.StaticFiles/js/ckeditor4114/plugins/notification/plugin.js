@@ -738,9 +738,13 @@
 
 			// ---------------------------------------- Vertical layout -----------------------------------------
 
-			var leftBase = area.getStyle( 'position' ) == 'fixed' ?
-				contentsRect.left :
-				body.getComputedStyle( 'position' ) != 'static' ? contentsPos.x - bodyPos.x : contentsPos.x;
+			var leftBase;
+			if (area.getStyle('position') == 'fixed') {
+				leftBase = contentsRect.left
+			}
+			else {
+				leftBase = body.getComputedStyle('position') != 'static' ? contentsPos.x - bodyPos.x : contentsPos.x;
+			}
 
 			// Content is narrower than notification
 			if ( contentsRect.width < notificationWidth + notificationMargin ) {

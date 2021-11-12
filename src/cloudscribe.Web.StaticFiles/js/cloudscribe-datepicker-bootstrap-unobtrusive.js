@@ -10,7 +10,7 @@ $(function () {
             var toggleTargetId = $(ele).data('bs-datepicker-toggle-target-id');
             var dviewMode = ($(ele).data('bs-datepicker-viewmode') || 'days');
             var ddayViewHeaderFormat = ($(ele).data('bs-datepicker-dayviewheaderformat') || 'MMMM YYYY');
-            var dstepping = ($(ele).data('bs-datepicker-stepping') || 1);
+            
             var dminDate = ($(ele).data('bs-datepicker-mindate') || false);
             var dmaxDate = ($(ele).data('bs-datepicker-maxdate') || false);
             var duseCurrent = ($(ele).data('bs-datepicker-usecurrent') == false ? false : true);
@@ -22,8 +22,7 @@ $(function () {
             //var dicons
             var duseStrict = ($(ele).data('bs-datepicker-usestrict') || false);
             var dsideBySide = ($(ele).data('bs-datepicker-sidebyside') || false);
-            var ddaysOfWeekDisabled = ($(ele).data('bs-datepicker-daysofweekdisabled') || []);
-            var dcalendarWeeks = ($(ele).data('bs-datepicker-calendarWeeks') || false);
+            
             var dtoolbarPlacement = ($(ele).data('bs-datepicker-toolbarplacement') || 'default');
             var dshowTodayButton = ($(ele).data('bs-datepicker-showtodaybutton') || false);
             var dshowClear = ($(ele).data('bs-datepicker-showclear') || false);
