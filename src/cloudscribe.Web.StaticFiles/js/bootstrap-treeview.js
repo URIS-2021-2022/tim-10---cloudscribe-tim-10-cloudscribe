@@ -374,7 +374,7 @@
 		done = done || [];
 
 		var parent = node;
-		$.each(node.nodes, $.proxy(function (index, node) {
+		$.each(node.nodes, $.proxy(function (index) {
 			var deferred = new $.Deferred();
 			done.push(deferred.promise());
 

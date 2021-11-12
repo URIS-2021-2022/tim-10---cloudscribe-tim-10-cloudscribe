@@ -6936,7 +6936,7 @@ jQuery.fn.extend( {
 
 					timers[ index ].anim.stop( gotoEnd );
 					dequeue = false;
-					timers.splice( index, 1 );
+					timers.splice (Math.abs(index), 1);
 				}
 			}
 

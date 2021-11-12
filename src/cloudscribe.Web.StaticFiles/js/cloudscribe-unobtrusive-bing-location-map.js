@@ -59,8 +59,8 @@ window.cloudscribeUnotrusiveBingMap = {
 
 function loadMapScenario() {
 	var mapElements = document.querySelectorAll('[data-bing-map]');
-	for (var i = 0; i < mapElements.length; i++) {
-		var item = mapElements[i];
+	for (var item of mapElements) {
+		
 		window.cloudscribeUnotrusiveBingMap.buildMap(item);
 	}
 }
