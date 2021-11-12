@@ -213,7 +213,7 @@ namespace Microsoft.Extensions.Configuration // so we don't need another using i
                 {
                     response.Headers[HeaderNames.ContentType] = "application/javascript";
                 }
-                return;
+               
             }
   
         }
