@@ -2162,11 +2162,11 @@
     var styles = getComputedStyle(element);
     var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
     var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-    var result = {
-      width: element.offsetWidth + y,
-      height: element.offsetHeight + x
-    };
-    return result;
+    
+      return {
+          width: element.offsetWidth + y,
+          height: element.offsetHeight + x
+      };
   }
 
   /**

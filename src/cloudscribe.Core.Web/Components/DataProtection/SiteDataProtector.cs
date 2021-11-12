@@ -32,7 +32,7 @@ namespace cloudscribe.Core.DataProtection
 
         public void Protect(ISiteSettings site)
         {
-            if (site == null) { throw new ArgumentNullException("you must pass in an implementation of ISiteSettings"); }
+            if (site == null) { throw new ArgumentNullException("you must pass in an implementation of ISiteSettings", "site"); }
             if (site.IsDataProtected) { return; }
             if (DataProtector == null) { return; }
 

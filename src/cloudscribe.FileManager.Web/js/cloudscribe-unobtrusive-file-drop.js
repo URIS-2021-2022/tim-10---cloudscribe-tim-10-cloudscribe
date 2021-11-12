@@ -24,7 +24,7 @@
                                 var resizeWidth = Number(this.dropZoneDiv.dataset.resizeWidth);
                                 var resizeHeight;
                                 var cropAreaWidth = new Number(this.dropZoneDiv.dataset.cropAreaWidth);
-                                var cropAreaHeight = new Number(this.dropZoneDiv.dataset.cropAreaHeight);
+                                var cropAreaHeight = Number(this.dropZoneDiv.dataset.cropAreaHeight);
                                 var opts = {
                                     viewport: {
                                         width: cropAreaWidth,
