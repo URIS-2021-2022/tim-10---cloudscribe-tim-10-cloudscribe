@@ -54,7 +54,10 @@
                                             var finalWidth = new Number();
                                             var widthRatio = cropWidth / cropHeight; 
                                             var finalHeight = Math.round(finalWidth / widthRatio);
-                                            
+                                            let x = Number("0");
+                                            if (x) {
+                                                alert('hi');
+                                            }
                                             var formData = new FormData();
                                             formData.append("sourceFilePath", that.fullSizeInput.value);
                                             formData.append("x1", x1);
@@ -397,6 +400,7 @@
                     cloudscribeDropAndCrop.buildImageEditor(item);
                     i++;
                 }
+                
 
                 var btnClear = document.getElementById("dz1-clear-image");
                 if (btnClear) {

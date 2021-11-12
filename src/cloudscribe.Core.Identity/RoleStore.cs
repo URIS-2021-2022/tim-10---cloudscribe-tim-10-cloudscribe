@@ -29,7 +29,7 @@ namespace cloudscribe.Core.Identity
             _queries = userQueries ?? throw new ArgumentNullException(nameof(userQueries));
             _siteSettings = currentSite ?? throw new ArgumentNullException(nameof(currentSite));
             _multiTenantOptions = multiTenantOptionsAccessor.Value;
-            
+
         }
 
         private readonly MultiTenantOptions _multiTenantOptions;
@@ -38,14 +38,16 @@ namespace cloudscribe.Core.Identity
 
         public class Queries
         {
-            private readonly int _queries;
+           
+            public readonly int _queries;
 
-            Queries(int queries)
+            private Queries(int queries)
             {
                 _queries = queries;
             }
         }
 
+    
         private ISiteContext _siteSettings = null;
         
         private ISiteContext Site

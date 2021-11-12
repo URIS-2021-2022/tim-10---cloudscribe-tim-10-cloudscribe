@@ -480,12 +480,8 @@ namespace cloudscribe.Core.Web.Components
             {
                 return await _queries.GetCount(CancellationToken);
             }
-            catch  {
-                //When exceptions occur, it is usually a bad idea to simply ignore them.
-                //Instead, it is better to handle them properly,
-                //or at least to log them. This rule only reports on empty catch clauses
-                //that catch generic Exception s..
-            }
+            catch (Exception) { }
+            
             // errors are expected here before the db is initialized
             // so just return 0 if error here
             return 0;
