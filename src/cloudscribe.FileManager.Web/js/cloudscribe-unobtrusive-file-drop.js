@@ -395,7 +395,7 @@
 
                 };
 
-                for (item of dropElements)
+                for (var item of dropElements)
                 {
                    
                     cloudscribeDropAndCrop.buildImageEditor(item);
