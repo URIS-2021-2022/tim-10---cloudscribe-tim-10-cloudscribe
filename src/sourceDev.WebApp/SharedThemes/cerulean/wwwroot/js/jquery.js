@@ -7046,9 +7046,11 @@ function Animation( elem, properties, options ) {
 			delete tick.elem;
 		} ),
 		tick = function() {
-			if ( stopped ) {
-				return false;
+			if (stopped) {
+				return true;
 			}
+			return false;
+
 			var currentTime = fxNow || createFxNow(),
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
 
@@ -7069,10 +7071,12 @@ function Animation( elem, properties, options ) {
 			if ( percent < 1 && length ) {
 				return remaining;
 			}
+			return false;
 
 			// If this was an empty animation, synthesize a final progress notification
 			if ( !length ) {
-				deferred.notifyWith( elem, [ animation, 1, 0 ] );
+				deferred.notifyWith(elem, [animation, 1, 0]);
+				return true;
 			}
 
 			// Resolve the animation and report its conclusion
@@ -9024,7 +9028,7 @@ jQuery.extend( {
 
 				// Support: IE <=8 - 11 only
 				// Anchor's host property isn't correctly set when s.url is relative
-				urlAnchor.href = urlAnchor.href;
+				this.urlAnchor.href = urlAnchor.href;
 				s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
 					urlAnchor.protocol + "//" + urlAnchor.host;
 			} catch ( e ) {

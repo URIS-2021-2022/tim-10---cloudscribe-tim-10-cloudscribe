@@ -2035,7 +2035,7 @@ pre code {
 }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.8125rem + 0);
+  height: calc(2.8125rem + 0rem);
 }
 
 select.form-control:focus::-ms-value {

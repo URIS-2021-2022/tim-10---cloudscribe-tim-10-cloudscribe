@@ -111,11 +111,6 @@ ul.jqtree-tree span.jqtree-border {
     min-height: 30px;
 }
 
-ul.jqtree-tree .jqtree-element {
-    width: 100%; /* todo: why is this in here? */
-    *width: auto; /* ie7 fix; issue 41 */
-    position: relative;
-}
 
 li.jqtree-folder::before ,
 ul.jqtree_common > li::before

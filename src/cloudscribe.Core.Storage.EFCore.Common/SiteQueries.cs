@@ -160,15 +160,16 @@ namespace cloudscribe.Core.Storage.EFCore.Common
                 if (item == null)
                 {
                     var host = await GetSiteHost(hostName, cancellationToken).ConfigureAwait(false);
-                    if (host != null)
+                    if (host != null && host.SiteId != requestingSiteId)
                     {
-                        if (host.SiteId != requestingSiteId) return false;
+                         return false;
                     }
                     return true;
                 }
             }
+          
 
-            
+
             return false;
         }
 
