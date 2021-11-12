@@ -395,10 +395,12 @@
 
                 };
 
-                for (var item of dropElements)
-                {
-                   
+                var i = 0;
+                for (var item in dropElements) {
+                    item = dropElements[i];
+
                     cloudscribeDropAndCrop.buildImageEditor(item);
+                    i++;
                 }
                 
 
