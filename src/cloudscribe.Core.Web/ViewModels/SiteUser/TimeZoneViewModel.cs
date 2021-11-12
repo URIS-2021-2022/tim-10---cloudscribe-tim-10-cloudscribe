@@ -21,7 +21,7 @@ namespace cloudscribe.Core.Web.ViewModels.SiteUser
 
         private IEnumerable<SelectListItem> allTimeZones = null;
         public IEnumerable<SelectListItem> AllTimeZones { get; set; }
-        
-    }
 
+    }
 }
+
