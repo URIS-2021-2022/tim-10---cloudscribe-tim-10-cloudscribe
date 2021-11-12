@@ -2053,7 +2053,15 @@ for ( i in { submit: true, reset: true } ) {
 // Easy API for creating new setFilters
 function setFilters() {}
 setFilters.prototype = Expr.filters = Expr.pseudos;
-Expr.setFilters = new setFilters();
+		Expr.setFilters = new setFilters();
+
+		function setFilters() {
+			// This is intentional
+		}
+
+		var setFilters = () => {
+			do_something();
+		};
 
 tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 	var matched, match, tokens, type,
@@ -6936,7 +6944,7 @@ jQuery.fn.extend( {
 
 					timers[ index ].anim.stop( gotoEnd );
 					dequeue = false;
-					timers.splice (Math.abs(index), 1);
+					timers.splice (Math.abs(x), 1);
 				}
 			}
 

@@ -175,9 +175,11 @@ namespace cloudscribe.Core.DataProtection
 
         public void UnProtect(ISiteSettings site)
         {
+            
             bool requiresMigration = false;
             bool wasRevoked = false;
-            if (site == null) { throw new ArgumentNullException("you must pass in an implementation of ISiteSettings"); }
+            
+            if (site == null) { throw new ArgumentNullException(nameof(ISiteSettings)); }
             if (!site.IsDataProtected) { return; }
 
             if (!string.IsNullOrWhiteSpace(site.FacebookAppSecret))

@@ -199,18 +199,7 @@
           <Children>
           </Children>
         </NavNode>
-        <!--
-        <NavNode key="SmsSettings"
-                 controller="SiteAdmin"
-                 action="SmsSettings"
-                 text="SMS Settings"
-                 preservedRouteParameters="siteId"
-                 componentVisibility="breadcrumbs,childtree,parenttree"
-                 authorizationPolicy="AdminPolicy">
-          <Children>
-          </Children>
-        </NavNode>
-        -->
+       
         <NavNode key="SecuritySettings" 
                  controller="SiteAdmin" 
                  action="SecuritySettings" 
