@@ -140,7 +140,7 @@
 
                                 if (this.dropZoneDiv.dataset.targetResizedImageId) {
                                     if (this.dropZoneDiv.dataset.resizedPlaceholderImage) {
-                                        var img = document.getElementById(this.dropZoneDiv.dataset.targetResizedImageId);
+                                        img = document.getElementById(this.dropZoneDiv.dataset.targetResizedImageId);
                                         img.src = this.dropZoneDiv.dataset.resizedPlaceholderImage;
                                         //console.log('set resized placeholder');
                                     }

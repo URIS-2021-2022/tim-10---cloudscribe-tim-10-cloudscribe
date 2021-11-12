@@ -262,7 +262,7 @@ namespace cloudscribe.Core.Storage.NoDb
             var projectId = siteId.ToString();
 
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var users = allUsers.ToList().AsQueryable();
+            var users = allUsers.AsEnumerable().AsQueryable();
 
             //sortMode: 0 = DisplayName asc, 1 = JoinDate desc, 2 = Last, First
 
