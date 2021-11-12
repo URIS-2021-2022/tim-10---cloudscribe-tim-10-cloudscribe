@@ -12,19 +12,15 @@ namespace cloudscribe.Core.Web.Controllers
     /// </summary>
     public class FolderSiteMapController : SiteMapController
     {
-        private readonly ILogger _log;
+
         public FolderSiteMapController(
             ILogger<SiteMapController> logger,
             IEnumerable<ISiteMapNodeService> nodeProviders = null
             ) : base(logger, nodeProviders)
         {
-             _log = logger;
             
         }
 
-       
-
-        
         [HttpGet]
         [ResponseCache(CacheProfileName = "SiteMapCacheProfile")]
         //[Route("{folder:sitefolder}/api/sitemap")]

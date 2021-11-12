@@ -31,7 +31,7 @@ namespace cloudscribe.Core.Identity
         //public static IApplicationBuilder UseMultiTenantCookieAuthentication(
         //    this IApplicationBuilder app,
         //    CookieAuthenticationOptions options)
-        //{
+
  
 
         //    if (options == null)

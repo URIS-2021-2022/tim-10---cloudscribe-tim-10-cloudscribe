@@ -83,7 +83,7 @@ namespace cloudscribe.Web.Common.DataAnnotations
                 return;
             }
             attributes.Add(key, value);
-            return;
+           
         }
 
         private void CheckForLocalizer(ClientModelValidationContext context)
