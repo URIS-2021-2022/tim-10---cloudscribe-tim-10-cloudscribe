@@ -87,14 +87,12 @@ namespace cloudscribe.Web.Common.DataAnnotations
         }
         
 
-        private static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+        private static void MergeAttribute(IDictionary<string, string> attributes, string key, string value)
         {
             if (attributes.ContainsKey(key))
-            {
-                return false;
-            }
+            
             attributes.Add(key, value);
-            return true;
+           
         }
 
         private void CheckForLocalizer(ClientModelValidationContext context)
