@@ -3722,8 +3722,7 @@
      * Access Popper.js instance with `data.instance`.
      * @prop {onCreate}
      */
-    onCreate: function onCreate() {},
-
+      onCreate: function onCreate() 
     /**
      * Callback called when the popper is updated, this callback is not called
      * on the initialization/creation of the popper, but only on subsequent

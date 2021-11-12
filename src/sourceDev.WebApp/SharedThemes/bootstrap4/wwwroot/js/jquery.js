@@ -2178,7 +2178,7 @@ for ( i in { submit: true, reset: true } ) {
 }
 
 // Easy API for creating new setFilters
-function setFilters() {}
+function setFilters() 
 setFilters.prototype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 

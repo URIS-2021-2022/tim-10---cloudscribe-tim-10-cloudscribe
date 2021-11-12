@@ -15,7 +15,7 @@
 <h2>@ViewData["Title"]</h2>
 @if (Model.UserId != Guid.Empty && !Model.AccountApproved)
 {
-    <form class="form-inline" role="form" asp-controller="UserAdmin" asp-action="ApproveUserAccount" asp-route-returnurl='@ViewData["ReturnUrl"]'>
+    <form class="form-inline" role="form" asp-controller="UserAdmin" asp-action="ApproveUserAccount" asp-route-returnurl='@ViewData["ReturnUrl"]' aria-label="Contact information">
         <input asp-for="UserId" type="hidden" />
         <input asp-for="SiteId" type="hidden" />
         <div class="form-check">

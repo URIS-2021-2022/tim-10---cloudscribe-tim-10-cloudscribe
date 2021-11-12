@@ -35,6 +35,17 @@ namespace cloudscribe.Core.Identity
         private readonly MultiTenantOptions _multiTenantOptions;
         private readonly IUserCommands _commands;
         private IUserQueries _queries;
+
+        public class Queries
+        {
+            private readonly int _queries;
+
+            Queries(int queries)
+            {
+                _queries = queries;
+            }
+        }
+
         private ISiteContext _siteSettings = null;
         
         private ISiteContext Site

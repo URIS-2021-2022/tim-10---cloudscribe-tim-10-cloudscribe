@@ -188,15 +188,15 @@ namespace cloudscribe.Multitenancy
                 That<ArgumentNullException>(value != null, paramName);
             }
 
-            /// <summary>
-            /// Ensures the given string value is not null or empty
-            /// </summary>
-            /// <param name="value">Value to test for null or empty</param>
-            /// <param name="paramName">Name of the parameter in the method</param>
-            /// <exception cref="System.ArgumentException">
-            ///     Thrown if <paramref cref="value"/> is null or empty string
-            /// </exception>
-            public static void NotNullOrEmpty(string value, string paramName = "")
+        /// <summary>
+        /// Ensures the given string value is not null or empty
+        /// </summary>
+        /// <param name="value">Value to test for null or empty</param>
+        /// <param name="paramName">Name of the parameter in the method</param>
+        /// <exception cref="System.ArgumentException">
+        ///     Thrown if <paramref cref="value"/> is null or empty string
+        /// </exception>
+        public static void NotNullOrEmpty(string value, string paramName = "")
             {
                 if (value == null)
                 {
