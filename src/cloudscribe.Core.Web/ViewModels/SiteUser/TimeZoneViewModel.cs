@@ -12,11 +12,14 @@ namespace cloudscribe.Core.Web.ViewModels.SiteUser
 {
     public class TimeZoneViewModel
     {
-       
+        public TimeZoneViewModel()
+        {
+            allTimeZones = new List<SelectListItem>();
+        }
 
         public string TimeZoneId { get; set; }
 
-        
+        private IEnumerable<SelectListItem> allTimeZones = null;
         public IEnumerable<SelectListItem> AllTimeZones { get; set; }
         
     }
