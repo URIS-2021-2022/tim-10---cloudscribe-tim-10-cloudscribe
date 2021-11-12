@@ -20,10 +20,7 @@ namespace cloudscribe.Core.Web.ViewModels.SiteUser
         public string TimeZoneId { get; set; }
 
         private IEnumerable<SelectListItem> allTimeZones;
-        public IEnumerable<SelectListItem> AllTimeZones
-        {
-            get { return allTimeZones; }
-            set { allTimeZones = value; }
-        }
+        public IEnumerable<SelectListItem> AllTimeZones { get; set; }
+        
     }
 }
