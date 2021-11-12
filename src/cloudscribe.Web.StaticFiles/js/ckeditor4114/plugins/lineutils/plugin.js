@@ -173,11 +173,11 @@
 			}
 
 			return function( el, type ) {
-				var alt;
+				var alt = el.getNext();
 
 				// Normalization to avoid duplicates:
 				// CKEDITOR.LINEUTILS_AFTER becomes CKEDITOR.LINEUTILS_BEFORE of el.getNext().
-				if ( is( type, CKEDITOR.LINEUTILS_AFTER ) && isStatic( alt = el.getNext() ) && alt.isVisible() ) {
+				if ( is( type, CKEDITOR.LINEUTILS_AFTER ) && isStatic( alt  ) && alt.isVisible() ) {
 					merge( alt, CKEDITOR.LINEUTILS_BEFORE, this.relations );
 					type ^= CKEDITOR.LINEUTILS_AFTER;
 				}
