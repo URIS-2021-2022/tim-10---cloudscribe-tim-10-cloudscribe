@@ -84,7 +84,7 @@ namespace Microsoft.AspNetCore.Builder
                 }
                 else
                 {
-                    builder.UseStatusCodePagesWithReExecute("/" + ctx.Tenant.SiteFolderName + "/oops/error/{0}");
+                    builder.UseStatusCodePagesWithReExecute("" + ctx.Tenant.SiteFolderName + "/oops/error/{0}");
                 }
 
                 // resolve static files from wwwroot folders within themes and within sitefiles

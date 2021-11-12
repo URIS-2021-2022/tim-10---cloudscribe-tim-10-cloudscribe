@@ -52,7 +52,7 @@
                                             var y2 = new Number(cropInfo.points[3]);
                                             var cropWidth = x2 - x1;
                                             var cropHeight = y2 - y1;
-                                            var finalWidth = new Number(that.dropZoneDiv.dataset.resizeWidth);
+                                            var finalWidth = new Number();
                                             var widthRatio = cropWidth / cropHeight; 
                                             var finalHeight = Math.round(finalWidth / widthRatio);
                                             

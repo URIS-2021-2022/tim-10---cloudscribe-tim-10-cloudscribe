@@ -156,7 +156,7 @@ namespace cloudscribe.Core.Web.Components
 
                     if (template.User != null)
                     {
-                        var identityResult = await UserManager.AddLoginAsync(template.User, template.ExternalLoginInfo);
+                       
                     }
 
                 }

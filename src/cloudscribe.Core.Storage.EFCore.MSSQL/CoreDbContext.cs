@@ -125,7 +125,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.DefaultEmailFromAddress)
                 .HasMaxLength(100);
-                ;
+                
 
                 entity.Property(p => p.DefaultEmailFromAlias)
                 .HasMaxLength(100);
