@@ -5,6 +5,7 @@
 // Last Modified:		    2016-06-06
 // 
 
+
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
@@ -19,9 +20,8 @@ namespace cloudscribe.Core.Web.ViewModels.SiteUser
 
         public string TimeZoneId { get; set; }
 
-        private readonly IEnumerable<SelectListItem> allTimeZones = null;
+        private IEnumerable<SelectListItem> allTimeZones = null;
         public IEnumerable<SelectListItem> AllTimeZones { get; set; }
-
+       
     }
 }
-
