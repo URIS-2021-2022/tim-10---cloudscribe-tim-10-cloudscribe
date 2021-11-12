@@ -34,7 +34,7 @@ namespace cloudscribe.FileManager.Web.Services
                             }
                             else if (p.GetValue() is byte[] b) //leave out byte array props
                             {
-                                continue;
+                                
                             }
                             else
                             {
