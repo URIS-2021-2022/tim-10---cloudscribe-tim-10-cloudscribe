@@ -16,7 +16,17 @@ namespace System.Threading.Tasks
         /// <param name="task"></param>
         public static void Forget(this Task task)
         {
+            task.ContinueWith(
+               t => { WriteLog(t.Exception); },
+               TaskContinuationOptions.OnlyOnFaulted);
 
+        }
+
+        private static void WriteLog(AggregateException exception)
+        {
+            throw new NotImplementedException();
         }
     }
 }
+
+

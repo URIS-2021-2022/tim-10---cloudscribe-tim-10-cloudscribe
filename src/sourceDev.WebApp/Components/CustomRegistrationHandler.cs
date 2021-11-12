@@ -115,12 +115,12 @@ namespace sourceDev.WebApp.Components
             return Task.FromResult(result);
         }
 
-        public Task ProcessUserBeforeCreate(ISiteUser siteUser, HttpContext httpContext)
+        public Task ProcessUserBeforeCreate(ISiteUser user, HttpContext httpContext)
         {
-            if (siteUser != null)
+            if (user != null)
             {
-                siteUser.FirstName = httpContext.Request.Form["FirstName"];
-                siteUser.LastName = httpContext.Request.Form["LastName"];
+                user.FirstName = httpContext.Request.Form["FirstName"];
+                user.LastName = httpContext.Request.Form["LastName"];
                 
                 var dobString = httpContext.Request.Form["DateOfBirth"];
 
@@ -128,7 +128,7 @@ namespace sourceDev.WebApp.Components
                 var dobParsed = DateTime.TryParse(dobString, out dob);
                 if (!dobParsed)
                 {
-                    siteUser.DateOfBirth = dob.Date;
+                    user.DateOfBirth = dob.Date;
                 }
 
                 // we don't need to save the user here it is saved after this method
