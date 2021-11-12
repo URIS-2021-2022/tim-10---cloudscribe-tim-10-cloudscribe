@@ -31,11 +31,11 @@ namespace sourceDev.WebApp.Components
             ILogger<CustomRegistrationHandler> logger
             )
         {
-            this.userManager = userManager;
+            
             log = logger;
         }
 
-        private SiteUserManager<SiteUser> userManager;
+        
         private ILogger log;
 
         public Task<string> GetRegisterViewName(ISiteContext site, HttpContext httpContext)

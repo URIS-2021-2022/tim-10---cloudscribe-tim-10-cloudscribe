@@ -149,7 +149,7 @@ namespace cloudscribe.Web.Common.Razor
         /// <summary>
         /// Not actually used, but needed to get past the validation checks in routes.MapRoute
         /// </summary>
-        private class DefaultHandler : IRouter
+        private sealed class DefaultHandler : IRouter
         {
             public VirtualPathData GetVirtualPath(VirtualPathContext context) => null;
             public Task RouteAsync(RouteContext context) => Task.CompletedTask;

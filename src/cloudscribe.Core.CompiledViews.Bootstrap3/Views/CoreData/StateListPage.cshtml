@@ -13,17 +13,19 @@
         <h2>@ViewData["Title"]</h2>
         <h3>@Model.Country.Name</h3>
         <table class="table table-striped">
+            <caption>State List</caption>
             <tr>
-                <th>
+                <th id="btn1">
+
                     <a class="btn btn-xs btn-default" asp-action="StateEdit" asp-controller="CoreData"
                        asp-route-countryId="@Model.Country.Id"
                        asp-route-crp="@Model.CountryListReturnPageNumber"
                        asp-route-returnPageNumber="@Model.States.PageNumber">@sr["New State"]</a>
                 </th>
-                <th>
+                <th id="Name">
                     @sr["Name"]
                 </th>
-                <th>
+                <th id="code1">
                     @sr["Code"]
                 </th>
             </tr>

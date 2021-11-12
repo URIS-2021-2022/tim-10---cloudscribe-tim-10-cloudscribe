@@ -235,7 +235,7 @@
 		update: function( options ) {
 			var show = true;
 
-			if ( this.editor.fire( 'notificationUpdate', { notification: this, options: options } ) === false ) {
+			if (this.editor.fire('notificationUpdate', { notification: this, options: options }) === false && options.progress && this.type != 'progress' ) {
 				// The idea of cancelable event is to let user create his own way of displaying notification, so if
 				// `notificationUpdate` event will be canceled there will be no interaction with notification area, but on
 				// the other hand the logic should work anyway so object will be updated (including `element` property).
@@ -252,9 +252,9 @@
 			element.removeAttribute( 'role' );
 
 			// Change type to progress if `options.progress` is set.
-			if ( options.progress && this.type != 'progress' ) {
-				type = 'progress';
-			}
+			
+			type = 'progress';
+			
 
 			if ( type ) {
 				element.removeClass( this._getClass() );
@@ -278,20 +278,20 @@
 				messageElement.setHtml( this.message );
 			}
 
-			if ( options.progress !== undefined ) {
+			if (options.progress !== undefined && progressElement) {
 				this.progress = options.progress;
 
-				if ( progressElement ) {
-					progressElement.setStyle( 'width', this._getPercentageProgress() );
-				}
+				
+				progressElement.setStyle( 'width', this._getPercentageProgress() );
+				
 			}
 
-			if ( show && options.important ) {
+			if (show && options.important && !this.isVisible() ) {
 				element.setAttribute( 'role', 'alert' );
 
-				if ( !this.isVisible() ) {
-					this.area.add( this );
-				}
+				
+				this.area.add( this );
+				
 			}
 
 			// Overwrite even if it is undefined.
@@ -738,9 +738,13 @@
 
 			// ---------------------------------------- Vertical layout -----------------------------------------
 
-			var leftBase = area.getStyle( 'position' ) == 'fixed' ?
-				contentsRect.left :
-				body.getComputedStyle( 'position' ) != 'static' ? contentsPos.x - bodyPos.x : contentsPos.x;
+			var leftBase;
+			if (area.getStyle('position') == 'fixed') {
+				leftBase = contentsRect.left
+			}
+			else {
+				leftBase = body.getComputedStyle('position') != 'static' ? contentsPos.x - bodyPos.x : contentsPos.x;
+			}
 
 			// Content is narrower than notification
 			if ( contentsRect.width < notificationWidth + notificationMargin ) {

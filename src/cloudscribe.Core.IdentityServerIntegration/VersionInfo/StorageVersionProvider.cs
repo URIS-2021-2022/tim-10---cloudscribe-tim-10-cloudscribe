@@ -19,12 +19,13 @@ namespace cloudscribe.Core.IdentityServerIntegration
             name = _dbPlatform.GetType().Assembly.GetName().Name;
         }
 
-        private IStorageInfo _dbPlatform;
-        private string name = "DataStorageVersionInfo";
+        private readonly IStorageInfo _dbPlatform;
+        private string name;
 
         public string Name
         {
             get { return name; }
+            set { name = "DataStorageVersionInfo"; }
 
         }
 

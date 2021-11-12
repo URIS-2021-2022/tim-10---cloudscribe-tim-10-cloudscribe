@@ -2024,12 +2024,12 @@
     var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
 
     // Handle viewport case
-    if (boundariesElement === 'viewport') {
+    if (boundariesElement == 'viewport') {
       boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);
     } else {
       // Handle other cases based on DOM element used as boundaries
       var boundariesNode = void 0;
-      if (boundariesElement === 'scrollParent') {
+      if (boundariesElement == 'scrollParent') {
         boundariesNode = getScrollParent(getParentNode(reference));
         if (boundariesNode.nodeName === 'BODY') {
           boundariesNode = popper.ownerDocument.documentElement;
@@ -2162,11 +2162,11 @@
     var styles = getComputedStyle(element);
     var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
     var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-    var result = {
-      width: element.offsetWidth + y,
-      height: element.offsetHeight + x
-    };
-    return result;
+    
+      return {
+          width: element.offsetWidth + y,
+          height: element.offsetHeight + x
+      };
   }
 
   /**

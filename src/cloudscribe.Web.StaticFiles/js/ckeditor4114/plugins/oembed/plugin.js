@@ -275,9 +275,9 @@
                     }
 
                     CKEDITOR.dialog.add('oembed',
-                        function(editor) {
+                        function(editorAdd) {
                             return {
-                                title: editor.lang.oembed.title,
+                                title: editorAdd.lang.oembed.title,
                                 minWidth: CKEDITOR.env.ie && CKEDITOR.env.quirks ? 568 : 550,
                                 minHeight: 155,
                                 onShow: function() {
@@ -314,11 +314,12 @@
                                     }
                                 },
 
-                                onOk: function() {
+                                onOk: function () {
+                                    //This is intentional empty function
                                 },
                                 contents: [
                                     {
-                                        label: editor.lang.common.generalTab,
+                                        label: editorAdd.lang.common.generalTab,
                                         id: 'general',
                                         elements: [
                                             {
@@ -326,7 +327,7 @@
                                                 id: 'oembedHeader',
                                                 html:
                                                     '<div style="white-space:normal;width:500px;padding-bottom:10px">' +
-                                                        editor.lang.oembed.pasteUrl +
+                                                        editorAdd.lang.oembed.pasteUrl +
                                                         '</div>'
                                             }, {
                                                 type: 'text',
@@ -334,7 +335,7 @@
                                                 focus: function() {
                                                     this.getElement().focus();
                                                 },
-                                                label: editor.lang.oembed.embedTitle,
+                                                label: editorAdd.lang.oembed.embedTitle,
                                                 setup: function(widget) {
                                                     if (widget.data.title) {
                                                         this.setValue(widget.data.title);
@@ -346,8 +347,8 @@
                                                 focus: function() {
                                                     this.getElement().focus();
                                                 },
-                                                label: editor.lang.oembed.url,
-                                                title: editor.lang.oembed.pasteUrl,
+                                                label: editorAdd.lang.oembed.url,
+                                                title: editorAdd.lang.oembed.pasteUrl,
                                                 setup: function(widget) {
                                                     if (widget.data.oembed) {
                                                         this.setValue(widget.data.oembed);
@@ -367,12 +368,11 @@
                                                         editorInstance = dialog.getParentEditor();
 
                                                     if (inputCode.length < 1 || inputCode.indexOf('http') < 0) {
-                                                        alert(editor.lang.oembed.invalidUrl);
+                                                        alert(editorAdd.lang.oembed.invalidUrl);
                                                         return false;
                                                     }
 
                                                     if (resizeType == "noresize") {
-                                                        responsiveResize = false;
                                                         maxWidth = null;
                                                         maxHeight = null;
                                                     } else if (resizeType == "responsive") {
@@ -416,7 +416,7 @@
                                                     {
                                                         id: 'resizeType',
                                                         type: 'select',
-                                                        label: editor.lang.oembed.resizeType,
+                                                        label: editorAdd.lang.oembed.resizeType,
                                                         'default': 'noresize',
                                                         setup: function(widget) {
                                                             if (widget.data.resizeType) {
@@ -424,9 +424,9 @@
                                                             }
                                                         },
                                                         items: [
-                                                            [editor.lang.oembed.noresize, 'noresize'],
-                                                            [editor.lang.oembed.responsive, 'responsive'],
-                                                            [editor.lang.oembed.custom, 'custom']
+                                                            [editorAdd.lang.oembed.noresize, 'noresize'],
+                                                            [editorAdd.lang.oembed.responsive, 'responsive'],
+                                                            [editorAdd.lang.oembed.custom, 'custom']
                                                         ],
                                                         onChange: resizeTypeChanged
                                                     }, {
@@ -439,11 +439,11 @@
                                                                 type: 'text',
                                                                 width: '100px',
                                                                 id: 'maxWidth',
-                                                                'default': editor.config.oembed_maxWidth != null
-                                                                    ? editor.config.oembed_maxWidth
+                                                                'default': editorAdd.config.oembed_maxWidth != null
+                                                                    ? editorAdd.config.oembed_maxWidth
                                                                     : '560',
-                                                                label: editor.lang.oembed.maxWidth,
-                                                                title: editor.lang.oembed.maxWidthTitle,
+                                                                label: editorAdd.lang.oembed.maxWidth,
+                                                                title: editorAdd.lang.oembed.maxWidthTitle,
                                                                 setup: function(widget) {
                                                                     if (widget.data.maxWidth) {
                                                                         this.setValue(widget.data.maxWidth);
@@ -453,11 +453,11 @@
                                                                 type: 'text',
                                                                 id: 'maxHeight',
                                                                 width: '120px',
-                                                                'default': editor.config.oembed_maxHeight != null
-                                                                    ? editor.config.oembed_maxHeight
+                                                                'default': editorAdd.config.oembed_maxHeight != null
+                                                                    ? editorAdd.config.oembed_maxHeight
                                                                     : '315',
-                                                                label: editor.lang.oembed.maxHeight,
-                                                                title: editor.lang.oembed.maxHeightTitle,
+                                                                label: editorAdd.lang.oembed.maxHeight,
+                                                                title: editorAdd.lang.oembed.maxHeightTitle,
                                                                 setup: function(widget) {
                                                                     if (widget.data.maxHeight) {
                                                                         this.setValue(widget.data.maxHeight);
@@ -475,11 +475,11 @@
                                                                 type: 'text',
                                                                 id: 'width',
                                                                 width: '100px',
-                                                                'default': editor.config.oembed_maxWidth != null
-                                                                    ? editor.config.oembed_maxWidth
+                                                                'default': editorAdd.config.oembed_maxWidth != null
+                                                                    ? editorAdd.config.oembed_maxWidth
                                                                     : '560',
-                                                                label: editor.lang.oembed.width,
-                                                                title: editor.lang.oembed.widthTitle,
+                                                                label: editorAdd.lang.oembed.width,
+                                                                title: editorAdd.lang.oembed.widthTitle,
                                                                 setup: function(widget) {
                                                                     if (widget.data.maxWidth) {
                                                                         this.setValue(widget.data.maxWidth);
@@ -489,11 +489,11 @@
                                                                 type: 'text',
                                                                 id: 'height',
                                                                 width: '120px',
-                                                                'default': editor.config.oembed_maxHeight != null
-                                                                    ? editor.config.oembed_maxHeight
+                                                                'default': editorAdd.config.oembed_maxHeight != null
+                                                                    ? editorAdd.config.oembed_maxHeight
                                                                     : '315',
-                                                                label: editor.lang.oembed.height,
-                                                                title: editor.lang.oembed.heightTitle,
+                                                                label: editorAdd.lang.oembed.height,
+                                                                title: editorAdd.lang.oembed.heightTitle,
                                                                 setup: function(widget) {
                                                                     if (widget.data.maxHeight) {
                                                                         this.setValue(widget.data.maxHeight);
@@ -511,12 +511,12 @@
                                                         id: 'align',
                                                         type: 'radio',
                                                         items: [
-                                                            [editor.lang.oembed.none, 'none'],
-                                                            [editor.lang.common.alignLeft, 'left'],
-                                                            [editor.lang.common.alignCenter, 'center'],
-                                                            [editor.lang.common.alignRight, 'right']
+                                                            [editorAdd.lang.oembed.none, 'none'],
+                                                            [editorAdd.lang.common.alignLeft, 'left'],
+                                                            [editorAdd.lang.common.alignCenter, 'center'],
+                                                            [editorAdd.lang.common.alignRight, 'right']
                                                         ],
-                                                        label: editor.lang.common.align,
+                                                        label: editorAdd.lang.common.align,
                                                         setup: function(widget) {
                                                             this.setValue(widget.data.align);
                                                         }

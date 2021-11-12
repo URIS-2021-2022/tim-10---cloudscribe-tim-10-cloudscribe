@@ -6069,7 +6069,7 @@ button.close {
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
   border-top-left-radius: calc(0 - 1px);
-  border-top-right-radius: calc(0 - 1px);
+  border-top-right-radius: calc(0px - 1px);
 }
 
 .popover-header:empty {

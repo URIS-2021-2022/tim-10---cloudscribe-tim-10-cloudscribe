@@ -131,7 +131,7 @@ namespace Microsoft.AspNetCore.Hosting // so it will show up in startup without 
 
             if (count == 0)
             {
-                var role = await userQueries.FetchRole(newSite.Id, "Administrators");
+                var role = await userQueries.FetchRole(siteId, "Administrators");
                 
                 if (role != null)
                 {

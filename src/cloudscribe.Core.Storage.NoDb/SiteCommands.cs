@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class SiteCommands : ISiteCommands, ISiteCommandsSingleton
+    public sealed class SiteCommands : ISiteCommands, ISiteCommandsSingleton, IDisposable
     {
         public SiteCommands(
             //IProjectResolver projectResolver,
@@ -25,14 +25,14 @@ namespace cloudscribe.Core.Storage.NoDb
             )
         {
             //this.projectResolver = new DefaultProjectResolver();
-            this.queries = queries;
+            
             this.commands = commands;
             this.hostQueries = hostQueries;
             this.hostCommands = hostCommands;
         }
 
         //private IProjectResolver projectResolver;
-        private IBasicQueries<SiteSettings> queries;
+        
         private IBasicCommands<SiteSettings> commands;
         private IBasicQueries<SiteHost> hostQueries;
         private IBasicCommands<SiteHost> hostCommands;

@@ -25,9 +25,10 @@
     <div class="col-md-10 col-md-push-2">
         <h2>@ViewData["Title"]</h2>
         <a asp-controller="UserAdmin" asp-action="UserEdit" asp-route-siteid="@Model.SiteId" asp-route-userid="@Model.UserId" title="Manage">
-            <img gravatar-email="@Model.Email" gravatar-size="60" />
+            <img alt="Model email" gravatar-email="@Model.Email" gravatar-size="60" />
         </a>
         <table class="table table-striped">
+            <caption>User activity</caption>
             <tr>
                 <th>@sr["Email"]</th>
                 <td>@Model.Email</td>

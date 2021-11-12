@@ -37,14 +37,7 @@ namespace cloudscribe.Core.Models
         /// the siteId of the site whose users can access other tenants when RootUserCanSignInToTenants is true
         /// </summary>
         private Guid rootSiteId = Guid.Empty;
-        public Guid RootSiteId
-        {
-            get
-            {
-                return rootSiteId;
-            }
-            set { rootSiteId = value; }
-        }
+        public Guid RootSiteId { get; set; }
 
 
         private bool useRelatedSitesMode = false;
@@ -67,12 +60,8 @@ namespace cloudscribe.Core.Models
         /// the siteId of the site whose users and roles are shared when UseRelatedSitesMode is true
         /// </summary>
         private Guid relatedSiteId = Guid.Empty;
-        public Guid RelatedSiteId
-        {
-            get {  return relatedSiteId;
-            }
-            set { relatedSiteId = value; }
-        }
+        public Guid RelatedSiteId { get; set; }
+
 
         public string RelatedSiteAliasId { get; set; }
 

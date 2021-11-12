@@ -31,7 +31,7 @@
             .then(function (text) {
                 //console.log(text);
                 var j = JSON.parse(text);
-                for (i = 0; i < j.length; ++i) {
+                for (int i = 0; i < j.length; ++i) {
                     $.toast({
                         title: j[i].message,
                         type: j[i].alertStyle,

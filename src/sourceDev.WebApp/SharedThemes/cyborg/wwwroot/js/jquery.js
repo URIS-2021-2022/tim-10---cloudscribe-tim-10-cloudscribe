@@ -2531,7 +2531,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 					j = 0;
 					if ( !context && elem.ownerDocument !== document ) {
 						setDocument( elem );
-						xml = !documentIsHTML;
+						var xml = !documentIsHTML;
 					}
 					while ( (matcher = elementMatchers[j++]) ) {
 						if ( matcher( elem, context || document, xml) ) {
@@ -2843,7 +2843,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
+}
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 

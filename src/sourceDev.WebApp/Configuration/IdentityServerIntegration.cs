@@ -41,7 +41,7 @@ namespace Microsoft.Extensions.DependencyInjection
                    
                     break;
 
-                case "ef":
+                
                 default:
 
                     switch (efProvider)

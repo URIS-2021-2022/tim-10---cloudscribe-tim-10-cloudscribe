@@ -51,11 +51,13 @@
 		}
 
 		retval.inline = $element.style.cssText || '';
-		if ( !isInsideEditor ) // Reset any external styles that might interfere. (https://dev.ckeditor.com/ticket/2474)
-		$element.style.cssText = 'position: static; overflow: visible';
+		if (!isInsideEditor) {// Reset any external styles that might interfere. (https://dev.ckeditor.com/ticket/2474)
+			$element.style.cssText = 'position: static; overflow: visible';
+		}
 
-		restoreFormStyles( data );
-		return retval;
+			restoreFormStyles(data);
+			return retval;
+		
 	}
 
 	function restoreStyles( element, savedStyles ) {

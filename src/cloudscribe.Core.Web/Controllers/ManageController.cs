@@ -78,8 +78,9 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
 
         protected cloudscribe.DateTimeUtils.ITimeZoneIdResolver TimeZoneIdResolver { get; private set; }
         protected cloudscribe.DateTimeUtils.ITimeZoneHelper     TimeZoneHelper     { get; private set; }
-        
-        protected const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+
+        private const string url = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+        protected const string AuthenicatorUriFormat = url;
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -307,26 +308,7 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
             return await Index();  // Route back to Index Page, taking toast alerts along
         }
 
-        private async Task<IActionResult> RouteToIndexPage(SiteUser user)
-        {
-            var model = new AccountIndexViewModel
-            {
-                HasPassword       = (!string.IsNullOrWhiteSpace(user.PasswordHash)),
-                PhoneNumber       = !string.IsNullOrWhiteSpace(user.PhoneNumber) ? user.PhoneNumber : null,
-                TwoFactor         = user.TwoFactorEnabled,
-                Logins            = await UserManager.GetLoginsAsync(user),
-                BrowserRemembered = await SignInManager.IsTwoFactorClientRememberedAsync(user),
-                TimeZone          = user.TimeZoneId,
-                Email             = user.Email
-            };
-
-            if (string.IsNullOrEmpty(model.TimeZone))
-            {
-                model.TimeZone = await TimeZoneIdResolver.GetSiteTimeZoneId();
-            }
-
-            return View("Index", model);
-        }
+       
 
 
         [Authorize]

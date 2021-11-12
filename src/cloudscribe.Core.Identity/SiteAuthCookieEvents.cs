@@ -59,12 +59,10 @@ namespace cloudscribe.Core.Identity
             }
             else {
                 var tenant = context.HttpContext.GetTenant<SiteContext>();
-                if (tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName))
+                if (tenant != null && !string.IsNullOrWhiteSpace(tenant.SiteFolderName) && context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
                 {
-                    if (context.Request.Path.StartsWithSegments("/" + tenant.SiteFolderName + "/api"))
-                    {             
+
                         isApiCall = true;
-                    }
                 }
             }            
 
@@ -86,7 +84,7 @@ namespace cloudscribe.Core.Identity
             {
                 
                 await SecurityStampValidator.ValidatePrincipalAsync(context);
-                return;
+ 
             }
             else
             {
@@ -107,7 +105,10 @@ namespace cloudscribe.Core.Identity
                 var commands = context.HttpContext.RequestServices.GetRequiredService<IUserCommands>();
                 await commands.DeleteTokensByProvider(siteId, userId, "OpenIdConnect");
             }
-            catch { }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             
 
             await base.SigningOut(context);

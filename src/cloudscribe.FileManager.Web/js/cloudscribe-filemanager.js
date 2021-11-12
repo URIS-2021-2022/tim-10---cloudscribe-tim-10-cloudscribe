@@ -40,7 +40,7 @@
         selectedFileList: [],
         setCropImageFromServer: function () {
             var url = fileManager.selectedFileInput.val();
-            //console.log(url);
+            
             $("#image").attr("src", url);
             $("#cropCurrentDirLabel").html(url.substring(0, url.lastIndexOf("/")));
             $("#cropCurrentDir").val(url.substring(0, url.lastIndexOf("/")));
@@ -97,7 +97,7 @@
 
             var sizeTest;
             if (Number.isInteger(node.size)) {
-                var sizeInBytes = new Number(node.size);
+                var sizeInBytes = Number(node.size);
                 if (sizeInBytes > 1000000) {
                     var sizeMb = sizeInBytes / 1000000;
                     sizeTest = sizeMb + " MB";
@@ -400,94 +400,82 @@
             var message = "Are you sure you want to permanently delete the file " + currentPath + "?";
             $("#deleteFileModalBody").html(message);
             $("#mdlDeleteFile").modal('show');
-            return false;
+            return true;
         },
 
         deleteFile: function () {
             $("#mdlDeleteFile").modal('hide');
             var currentPath = $("#fileToDelete").val();
-            if (currentPath === '') {
-                return false;
+            if (currentPath !== '' && currentPath !== fileManager.rootVirtualPath) {
+                var formData = $('#frmDeleteFile').serializeArray();
+                //alert(JSON.stringify(formData));
+                $.ajax({
+                    method: "POST",
+                    url: fileManager.deleteFileApiUrl,
+                    headers: fileManager.headers,
+                    data: formData
+                }).done(function (data) {
+                    if (data.succeeded) {
+                        fileManager.removeNode(currentPath);
+                        fileManager.clearCurrentFile();
+                    }
+                    else {
+                        fileManager.notify(data.message, 'alert-danger');
+                    }
+                })
+                    .fail(function () {
+                        fileManager.notify('An error occured', 'alert-danger');
+                    });
             }
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
-            }
-            
-            var formData = $('#frmDeleteFile').serializeArray();
-            //alert(JSON.stringify(formData));
-            $.ajax({
-                method: "POST",
-                url: fileManager.deleteFileApiUrl,
-                headers: fileManager.headers,
-                data: formData
-            }).done(function (data) {
-                if (data.succeeded) {
-                    fileManager.removeNode(currentPath);
-                    fileManager.clearCurrentFile();
-                }
-                else {
-                    fileManager.notify(data.message, 'alert-danger');
-                }
-            })
-            .fail(function () {
-                fileManager.notify('An error occured', 'alert-danger');
-            });
-            
+  
             return false; //cancel form submit
         },
         renameFilePrompt: function () {
             var currentPath = $("#fileToRename").val();
-            if (currentPath === '') {
-                return false;
+            if (currentPath !== '') {
+                var message = "Are you sure you want to rename the file " + currentPath + "?";
+                $("#renameFileModalBody").html(message);
+                $("#mdlRenameFile").modal('show');
             }
-            var message = "Are you sure you want to rename the file " + currentPath + "?";
-            $("#renameFileModalBody").html(message);
-            $("#mdlRenameFile").modal('show');
-
+            
             return false;
 
         },
         renameFile: function () {
             $("#mdlRenameFile").modal('hide');
             var currentPath = $("#fileToRename").val();
-            if (currentPath === '') {
-                return false;
-            }
-            if (currentPath === fileManager.rootVirtualPath) {
-                return false;
-            }
-
-            var formData = $('#frmRenameFile').serializeArray();
-            //alert(JSON.stringify(formData));
-            $.ajax({
-                method: "POST",
-                url: fileManager.renameFileApiUrl,
-                headers: fileManager.headers,
-                data: formData
-            }).done(function (data) {
-                if (data.succeeded) {
-                    var tree = $('#tree').treeview(true);
-                    var matchingNodes = tree.findNodes(currentPath, 'id');
-                    if (matchingNodes) {
+            if (currentPath !== '' && currentPath !== fileManager.rootVirtualPath) {
+                var formData = $('#frmRenameFile').serializeArray();
+                //alert(JSON.stringify(formData));
+                $.ajax({
+                    method: "POST",
+                    url: fileManager.renameFileApiUrl,
+                    headers: fileManager.headers,
+                    data: formData
+                }).done(function (data) {
+                    if (data.succeeded && matchingNodes) {
+                        var tree = $('#tree').treeview(true);
+                        var matchingNodes = tree.findNodes(currentPath, 'id');
                         var parents = tree.getParents(matchingNodes);
                         if (parents && parents.length > 0) {
                             fileManager.reloadSubTree(parents[0].id);
                         }
 
+                        fileManager.clearCurrentFile();
+
+                    }
+                    else {
+                        fileManager.notify(data.message, 'alert-danger');
+
                     }
 
-                    fileManager.clearCurrentFile();
-
-                }
-                else {
-                    fileManager.notify(data.message, 'alert-danger');
-
-                }
-
-            })
-            .fail(function () {
-                fileManager.notify('An error occured', 'alert-danger');
-            });
+                })
+                    .fail(function () {
+                        fileManager.notify('An error occured', 'alert-danger');
+                    });
+            }
+            
+            
        
             return false; //cancel form submit
         },
@@ -713,10 +701,8 @@
                     $('#fileList').empty();
                     $('#fileList').append($("<ul class='filelist file-errors'></ul>"));
                     var j = 0;
-                    var errorsOccurred = false;
                     while (j < data.length) {
                         if (data[j].errorMessage) {
-                            errorsOccurred = true;
                             addErrorToList(j, data[j]);
                         }
                         j++;
@@ -799,7 +785,7 @@
     var cropManager = {
         uploadUrl: $("#fmconfig").data("upload-url"),
         URL: window.URL || window.webkitURL,
-        console: window.console || { log: function () { } },
+        console: window.console || { log: function () },
         image: $('#image'),
         saveLocalButton: $('#btnSaveLocal'),
         uploadCropButton: $('#btnUploadCrop'),
@@ -976,7 +962,6 @@
                     var currentWidth = parseInt(cropManager.dataWidth.val());
                     if (currentWidth > maxWidth) {
                         cropManager.outputWidth.val(maxWidth);
-                        var currentHeight = parseInt(cropManager.dataHeight.val());
                         var aspect = cropManager.getCropAspectRatio();
                         var newHeight = parseInt(maxWidth / aspect);
                         cropManager.outputHeight.val(newHeight);

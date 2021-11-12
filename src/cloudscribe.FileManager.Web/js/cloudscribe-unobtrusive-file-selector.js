@@ -36,10 +36,11 @@
 			}   
 		};
 
-		for (var i = 0; i < fileSelectorElements.length; i++) {
-			var item = fileSelectorElements[i];
+		for (var item of fileSelectorElements) {
+			
 			cloudscribeFileSelector.buildFileSelector(item);
 		}
+
 		
 	});
 	

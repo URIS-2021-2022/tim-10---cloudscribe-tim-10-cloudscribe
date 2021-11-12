@@ -54,15 +54,12 @@ namespace cloudscribe.Core.Identity
                 
             }
 
-            if (_userManager.Site.RequireApprovalBeforeLogin)
+            if (_userManager.Site.RequireApprovalBeforeLogin && !isAcccountApproved)
             {
-                if (!isAcccountApproved)
-                {
-                    var reason = $"login not allowed for {template.User.Email} because account not approved yet";
-                    template.RejectReasons.Add(reason);
-                    template.NeedsAccountApproval = true;
-                    template.SignInResult = SignInResult.NotAllowed;
-                }
+                var reason = $"login not allowed for {template.User.Email} because account not approved yet";
+                template.RejectReasons.Add(reason);
+                template.NeedsAccountApproval = true;
+                template.SignInResult = SignInResult.NotAllowed;
             }
 
             if (_userManager.Site.RequireConfirmedPhone && _userManager.Site.SmsIsConfigured())
@@ -87,14 +84,12 @@ namespace cloudscribe.Core.Identity
 
             }
 
-            if (!string.IsNullOrWhiteSpace(_userManager.Site.RegistrationAgreement))
+            if (!string.IsNullOrWhiteSpace(_userManager.Site.RegistrationAgreement) && (template.User.AgreementAcceptedUtc == null || template.User.AgreementAcceptedUtc < _userManager.Site.TermsUpdatedUtc))
             {
                 // need to not block login otherwise how can we make the user agree agree to terms on account
                 // enforced with middleware
-                if (template.User.AgreementAcceptedUtc == null || template.User.AgreementAcceptedUtc < _userManager.Site.TermsUpdatedUtc)
-                {
+
                     template.MustAcceptTerms = true;
-                }
 
             }
 

@@ -17,7 +17,7 @@
  * limitations under the License.
  * ========================================================= */
 
-;(function ($, window, document, undefined) {
+; (function ($, window, document, undef) {
 
 	/*global jQuery, console*/
 
@@ -43,15 +43,15 @@
 		partiallyCheckedIcon: 'glyphicon glyphicon-expand',
 		uncheckedIcon: 'glyphicon glyphicon-unchecked',
 
-		color: undefined,
-		backColor: undefined,
-		borderColor: undefined,
+		color: undef,
+		backColor: undef,
+		borderColor: undef,
 		changedNodeColor: '#39A5DC',
 		onhoverColor: '#F5F5F5',
 		selectedColor: '#FFFFFF',
 		selectedBackColor: '#428bca',
 		searchResultColor: '#D9534F',
-		searchResultBackColor: undefined,
+		searchResultBackColor: undef,
 
 		highlightSelected: true,
 		highlightSearchResults: true,
@@ -70,24 +70,24 @@
 		wrapNodeText: false,
 
 		// Event handlers
-		onLoading: undefined,
-		onLoadingFailed: undefined,
-		onInitialized: undefined,
-		onNodeRendered: undefined,
-		onRendered: undefined,
-		onDestroyed: undefined,
+		onLoading: undef,
+		onLoadingFailed: undef,
+		onInitialized: undef,
+		onNodeRendered: undef,
+		onRendered: undef,
+		onDestroyed: undef,
 
-		onNodeChecked: undefined,
-		onNodeCollapsed: undefined,
-		onNodeDisabled: undefined,
-		onNodeEnabled: undefined,
-		onNodeExpanded: undefined,
-		onNodeSelected: undefined,
-		onNodeUnchecked: undefined,
-		onNodeUnselected: undefined,
+		onNodeChecked: undef,
+		onNodeCollapsed: undef,
+		onNodeDisabled: undef,
+		onNodeEnabled: undef,
+		onNodeExpanded: undef,
+		onNodeSelected: undef,
+		onNodeUnchecked: undef,
+		onNodeUnselected: undef,
 
-		onSearchComplete: undefined,
-		onSearchCleared: undefined
+		onSearchComplete: undef,
+		onSearchCleared: undef
 	};
 
 	_default.options = {
@@ -194,7 +194,8 @@
 		this._load(options)
 			.then($.proxy(function (data) {
 				// load done
-				return this._tree = $.extend(true, [], data);
+				this._tree = $.extend(true, [], data);
+				return this._tree;
 			}, this), $.proxy(function (error) {
 				// load fail
 				this._triggerEvent('loadingFailed', error, _default.options);
@@ -364,7 +365,6 @@
 				this._orderedNodes = this._sortNodes();
 				this._inheritCheckboxChanges();
 				this._triggerEvent('initialized', this._orderedNodes, _default.options);
-				return;
 			}, this));
 	};
 
@@ -412,7 +412,7 @@
 
 			// convert the undefined string if hierarchical checks are enabled
 			if (this._options.hierarchicalCheck && node.state.checked === 'undefined') {
-				node.state.checked = undefined;
+				node.state.checked = undef;
 			}
 
 			// set enabled state; unless set always false
@@ -474,8 +474,8 @@
 
 			var c = Math.max(a.length, b.length);
 			for (var i=0; i<c; i++) {
-				if (a[i] === undefined) return -1;
-				if (b[i] === undefined) return +1;
+				if (a[i] === undef) return -1;
+				if (b[i] === undef) return +1;
 				if (a[i] - b[i] > 0) return +1;
 				if (a[i] - b[i] < 0) return -1;
 			};
@@ -722,7 +722,7 @@
 
 				// Calculate the state
 				state = currentNode.nodes.reduce(function (acc, curr) {
-					return (acc === curr.state.checked) ? acc : undefined;
+					return (acc === curr.state.checked) ? acc : undef;
 				}, currentNode.nodes[0].state.checked);
 
 				// Set the state
@@ -780,10 +780,10 @@
 			// Optionally trigger event
 			this._triggerEvent('nodeChecked', node, options);
 		}
-		else if (state === undefined && this._options.hierarchicalCheck) {
+		else if (state === undef && this._options.hierarchicalCheck) {
 
 			// Set node state to partially checked
-			node.state.checked = undefined;
+			node.state.checked = undef;
 
 			// Set element
 			if (node.$el) {
@@ -989,7 +989,7 @@
 
 	// Add checkable icon
 	Tree.prototype._addCheckbox = function (node) {
-		if (this._options.showCheckbox && (node.hideCheckbox === undefined || node.hideCheckbox === false)) {
+		if (this._options.showCheckbox && (node.hideCheckbox === undef || node.hideCheckbox === false)) {
 			node.$el
 				.append(this._template.icon.check.clone());
 		}
@@ -1128,7 +1128,7 @@
 		// Node level style overrides
 		$.each(this._orderedNodes, $.proxy(function (index, node) {
 			if (node.color || node.backColor) {
-				var innerStyle = '';
+				innerStyle = '';
 				if (node.color) {
 					innerStyle += 'color:' + node.color + ';';
 				}
@@ -1644,7 +1644,7 @@
 		options = $.extend({}, _default.options, options);
 
 		var nodes = $.grep(this._orderedNodes, function (node) {
-			return node.state.checked || node.state.checked === undefined;
+			return node.state.checked || node.state.checked === undef;
 		});
 		$.each(nodes, $.proxy(function (index, node) {
 			this._setChecked(node, false, options);
@@ -1880,11 +1880,11 @@
 			return this._getNodeValue(_obj, _attr);
 		}
 		else {
-			if (obj.hasOwnProperty(attr) && obj[attr] !== undefined) {
+			if (obj.hasOwnProperty(attr) && obj[attr] !== undef) {
 				return obj[attr].toString();
 			}
 			else {
-				return undefined;
+				return undef;
 			}
 		}
 	};

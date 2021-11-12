@@ -92,7 +92,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Ldap.Windo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.MigrationHelper.mojoPortal", "src\cloudscribe.MigrationHelper.mojoPortal\cloudscribe.MigrationHelper.mojoPortal.csproj", "{EF483C72-2BFC-46C6-A47C-640AF2F1DA22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.MultiTenancy", "src\cloudscribe.MultiTenancy\cloudscribe.MultiTenancy.csproj", "{54D8F418-BD2B-4F63-804A-E862ED622541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.MultiTenancy", "src\cloudscribe.MultiTenancy\cloudscribe.MultiTenancy.csproj", "{54D8F418-BD2B-4F63-804A-E862ED622541}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

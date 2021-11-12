@@ -91,7 +91,10 @@
 					// Any further traversal makes no sense if there's no start point. Abort.
 					// Note: In IE8 elementFromPoint may return zombie nodes of undefined nodeType,
 					// so rejecting those as well.
-					if ( !( elfp = doc.$.elementFromPoint( x, y ) ) || !elfp.nodeType ) {
+
+					var elfp = doc.$.elementFromPoint(x, y)
+
+					if ( !elfp || !elfp.nodeType ) {
 						return;
 					}
 
@@ -170,11 +173,11 @@
 			}
 
 			return function( el, type ) {
-				var alt;
+				var alt = el.getNext();
 
 				// Normalization to avoid duplicates:
 				// CKEDITOR.LINEUTILS_AFTER becomes CKEDITOR.LINEUTILS_BEFORE of el.getNext().
-				if ( is( type, CKEDITOR.LINEUTILS_AFTER ) && isStatic( alt = el.getNext() ) && alt.isVisible() ) {
+				if ( is( type, CKEDITOR.LINEUTILS_AFTER ) && isStatic( alt  ) && alt.isVisible() ) {
 					merge( alt, CKEDITOR.LINEUTILS_BEFORE, this.relations );
 					type ^= CKEDITOR.LINEUTILS_AFTER;
 				}

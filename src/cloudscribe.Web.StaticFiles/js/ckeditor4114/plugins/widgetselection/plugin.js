@@ -212,7 +212,6 @@
 		isWholeContentSelected: function( editable ) {
 
 			var range = editable.editor.getSelection().getRanges()[ 0 ];
-			if ( range ) {
 
 				if ( range && range.collapsed ) {
 					return false;
@@ -225,7 +224,7 @@
 						rangeClone.startOffset === 0 && rangeClone.endOffset === editable.getChildCount() &&
 						rangeClone.startContainer.equals( editable ) && rangeClone.endContainer.equals( editable ) );
 				}
-			}
+			
 			return false;
 		},
 

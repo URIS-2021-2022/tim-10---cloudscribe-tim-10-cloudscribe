@@ -253,7 +253,6 @@ jQuery.extend( {
 		throw new Error( msg );
 	},
 
-	noop: function() {},
 
 	isFunction: function( obj ) {
 		return jQuery.type( obj ) === "function";
@@ -2024,7 +2023,7 @@ Expr = Sizzle.selectors = {
 
 		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
-			for ( ; --i >= 0; ) {
+			while (--i >= 0) {
 				matchIndexes.push( i );
 			}
 			return matchIndexes;
@@ -2032,9 +2031,10 @@ Expr = Sizzle.selectors = {
 
 		"gt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
-			for ( ; ++i < length; ) {
-				matchIndexes.push( i );
+			while (++i < length) {
+				matchIndexes.push(i);
 			}
+
 			return matchIndexes;
 		})
 	}
@@ -2413,7 +2413,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 					j = 0;
 					if ( !context && elem.ownerDocument !== document ) {
 						setDocument( elem );
-						xml = !documentIsHTML;
+						  var xml = !documentIsHTML;
 					}
 					while ( (matcher = elementMatchers[j++]) ) {
 						if ( matcher( elem, context || document, xml) ) {
@@ -2451,7 +2451,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Incrementing an initially-string "0" `i` allows `i` to remain a string only in that
 			// case, which will result in a "00" `matchedCount` that differs from `i` but is also
 			// numerically zero.
-			if ( bySet && i !== matchedCount ) {
+			if ( bySet && i != matchedCount ) {
 				j = 0;
 				while ( (matcher = setMatchers[j++]) ) {
 					matcher( unmatched, setMatched, context, xml );
@@ -2822,7 +2822,7 @@ var rootjQuery,
 	// A simple way to check for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
-	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
+	rquickExpr = /^(?:\s*(<.+>)[^>]*|#([\w-]*))$/,
 
 	init = jQuery.fn.init = function( selector, context, root ) {
 		var match, elem;
@@ -6693,7 +6693,7 @@ function Animation( elem, properties, options ) {
 		} ),
 		tick = function() {
 			if ( stopped ) {
-				return false;
+				return -1;
 			}
 			var currentTime = fxNow || createFxNow(),
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
@@ -6715,7 +6715,7 @@ function Animation( elem, properties, options ) {
 				return remaining;
 			} else {
 				deferred.resolveWith( elem, [ animation ] );
-				return false;
+				return -1;
 			}
 		},
 		animation = deferred.promise( {
@@ -8511,7 +8511,7 @@ jQuery.extend( {
 
 				// Support: IE8-11+
 				// Anchor's host property isn't correctly set when s.url is relative
-				urlAnchor.href = urlAnchor.href;
+				this.urlAnchor.href = urlAnchor.href;
 				s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
 					urlAnchor.protocol + "//" + urlAnchor.host;
 			} catch ( e ) {

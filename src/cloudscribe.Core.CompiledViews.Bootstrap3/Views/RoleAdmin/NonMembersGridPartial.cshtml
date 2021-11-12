@@ -9,7 +9,7 @@
         data-ajax="true" 
         data-ajax-method="GET" 
         data-ajax-mode="replace" 
-        data-ajax-update="#nonmembersgridcontainer">
+        data-ajax-update="#nonmembersgridcontainer" aria-label="nonmembercontainer">
          <input asp-for="Role.SiteId" type="hidden" />
         <input name="roleId" type="hidden" value="@Model.Role.Id" />
         <input name="ajaxGrid" type="hidden" value="true" />
@@ -25,7 +25,7 @@
     <tr>
         <th>
         </th>
-        <th>
+        <th scope="col" id="email">
             @sr["Email"]
         </th>
         <th>
@@ -58,7 +58,7 @@
                     <input name="UserId" type="hidden" value="@item.Id" />
                 </form>
             </td>
-            <td>
+            <td headers="email">
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
                 <td>

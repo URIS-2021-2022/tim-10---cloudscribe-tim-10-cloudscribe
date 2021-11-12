@@ -14,11 +14,10 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class GeoCommands : IGeoCommands, IGeoCommandsSingleton
+    public class GeoCommands : IGeoCommands, IGeoCommandsSingleton, IDisposable
     {
         public GeoCommands(
             //IProjectResolver projectResolver,
-            IBasicQueries<GeoCountry> countryQueries,
             IBasicCommands<GeoCountry> countryCommands,
             IBasicQueries<GeoZone> stateQueries,
             IBasicCommands<GeoZone> stateCommands
@@ -26,7 +25,6 @@ namespace cloudscribe.Core.Storage.NoDb
             )
         {
             //this.projectResolver = new DefaultProjectResolver();
-            this.countryQueries = countryQueries;
             this.countryCommands = countryCommands;
             this.stateQueries = stateQueries;
             this.stateCommands = stateCommands;
@@ -34,7 +32,6 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         //private IProjectResolver projectResolver;
-        private IBasicQueries<GeoCountry> countryQueries;
         private IBasicCommands<GeoCountry> countryCommands;
         private IBasicQueries<GeoZone> stateQueries;
         private IBasicCommands<GeoZone> stateCommands;
@@ -58,21 +55,22 @@ namespace cloudscribe.Core.Storage.NoDb
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (geoCountry == null) throw new ArgumentException("geoCountry must not be null");
-            if (geoCountry.Id == Guid.Empty) throw new ArgumentException("geoCountry must have a non-empty id");
+                if (geoCountry == null) throw new ArgumentException("geoCountry must not be null");
+                if (geoCountry.Id == Guid.Empty) throw new ArgumentException("geoCountry must have a non-empty id");
 
-            //await EnsureProjectId().ConfigureAwait(false);
-            var projectId = "default";
+                //await EnsureProjectId().ConfigureAwait(false);
+                var projectId = "default";
 
-            var country = GeoCountry.FromIGeoCountry(geoCountry); // convert from IGeoCountry
+                var country = GeoCountry.FromIGeoCountry(geoCountry); // convert from IGeoCountry
 
             await countryCommands.CreateAsync(
                 projectId,
                 country.Id.ToString(),
                 country,
                 cancellationToken).ConfigureAwait(false);
+            }
 
-        }
+        
 
         public async Task Update(
             IGeoCountry geoCountry,
@@ -98,20 +96,20 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task DeleteCountry(
-            Guid countryId,
+            Guid id,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (countryId == Guid.Empty) throw new ArgumentException("countryid must be a non-empty id");
+            if (id == Guid.Empty) throw new ArgumentException("countryid must be a non-empty id");
 
             //await EnsureProjectId().ConfigureAwait(false);
             var projectId = "default";
 
             await countryCommands.DeleteAsync(
                 projectId,
-                countryId.ToString(),
+                id.ToString(),
                 cancellationToken).ConfigureAwait(false);
         }
 
@@ -218,7 +216,7 @@ namespace cloudscribe.Core.Storage.NoDb
 
         private bool disposedValue = false; // To detect redundant calls
 
-        void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
@@ -231,6 +229,8 @@ namespace cloudscribe.Core.Storage.NoDb
                 // TODO: set large fields to null.
 
                 disposedValue = true;
+
+               
             }
         }
 
@@ -246,7 +246,7 @@ namespace cloudscribe.Core.Storage.NoDb
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+             GC.SuppressFinalize(this);
         }
 
         #endregion

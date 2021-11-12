@@ -26,9 +26,10 @@
     </div>
 </form>
 <table class="table table-striped">
+    <caption>Email/Login</caption>
     <tr>
         <th>
-           
+
         </th>
         <th></th>
         <th>
@@ -48,7 +49,7 @@
     {
         <tr>
             <td>
-                <a class="btn btn-xs btn-default"  href="#" onclick="userSelected(this)"
+                <a class="btn btn-xs btn-default" href="#" onclick="userSelected(this)"
                    data-user-email="@item.Email"
                    data-user-display-name="@item.DisplayName"
                    data-user-first-name="@item.FirstName"
@@ -56,7 +57,7 @@
                    data-user-id="@item.Id">@sr["Select"]</a>
             </td>
             <td>
-                <img gravatar-email="@item.Email" gravatar-size="30" />
+                <img gravatar-email="@item.Email" gravatar-size="30" alt="EmailImage" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email) /

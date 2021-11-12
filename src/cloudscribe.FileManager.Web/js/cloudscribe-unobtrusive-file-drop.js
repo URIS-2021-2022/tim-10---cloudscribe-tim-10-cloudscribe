@@ -21,10 +21,10 @@
                             dropZoneDiv: div,
 
                             setupCropper: function () {
-                                var resizeWidth = new Number(this.dropZoneDiv.dataset.resizeWidth);
-                                var resizeHeight = new Number(this.dropZoneDiv.dataset.resizeHeight);
+                                var resizeWidth = Number(this.dropZoneDiv.dataset.resizeWidth);
+                                var resizeHeight;
                                 var cropAreaWidth = new Number(this.dropZoneDiv.dataset.cropAreaWidth);
-                                var cropAreaHeight = new Number(this.dropZoneDiv.dataset.cropAreaHeight);
+                                var cropAreaHeight = Number(this.dropZoneDiv.dataset.cropAreaHeight);
                                 var opts = {
                                     viewport: {
                                         width: cropAreaWidth,
@@ -42,7 +42,6 @@
                                     var that = this;
                                     btnSave.classList.remove("collapse");
                                     btnSave.onclick = function () {
-                                        //console.log('save button clicked');
                                         if (that.cropper) {
                                             var cropInfo = that.cropper.get();
                                             //console.log(cropInfo);
@@ -144,7 +143,7 @@
 
                                 if (this.dropZoneDiv.dataset.targetResizedImageId) {
                                     if (this.dropZoneDiv.dataset.resizedPlaceholderImage) {
-                                        var img = document.getElementById(this.dropZoneDiv.dataset.targetResizedImageId);
+                                        img = document.getElementById(this.dropZoneDiv.dataset.targetResizedImageId);
                                         img.src = this.dropZoneDiv.dataset.resizedPlaceholderImage;
                                         //console.log('set resized placeholder');
                                     }
@@ -398,12 +397,10 @@
                 var i = 0;
                 for (var item in dropElements) {
                     item = dropElements[i];
-
                     cloudscribeDropAndCrop.buildImageEditor(item);
                     i++;
                 }
                 
-
 
                 var btnClear = document.getElementById("dz1-clear-image");
                 if (btnClear) {

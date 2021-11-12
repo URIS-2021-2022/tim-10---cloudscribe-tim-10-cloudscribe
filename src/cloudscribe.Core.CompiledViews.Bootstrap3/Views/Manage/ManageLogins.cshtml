@@ -51,15 +51,16 @@
 {
     <h4>@sr["Registered Logins"]</h4>
     <table class="table">
+        <caption>Login Provider</caption>
         <tbody>
             @foreach (var account in Model.CurrentLogins)
             {
                 <tr>
-                    <td>@account.LoginProvider</td>
+                    <th scope="col">@account.LoginProvider</th>
                     <td>
                         @if (Model.ShowRemoveButton)
                         {
-                            <form asp-controller="Manage" asp-action="RemoveLogin" method="post" class="form-horizontal" role="form">
+                            <form aria-label="Login providers" asp-controller="Manage" asp-action="RemoveLogin" method="post" class="form-horizontal" role="form">
                                 <div>
                                     <input namer="LoginProvider" type="hidden" value="@account.LoginProvider" />
                                     <input name="ProviderKey" type="hidden" value="@account.ProviderKey" />
@@ -81,7 +82,7 @@
 {
     <h4>@sr["Add another service to log in."]</h4>
     <hr />
-    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form">
+    <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form" aria-label="Login Links">
         <div id="socialLoginList">
             <p>
                 @foreach (Microsoft.AspNetCore.Authentication.AuthenticationScheme p in Model.OtherLogins)

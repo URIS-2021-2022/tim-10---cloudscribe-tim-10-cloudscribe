@@ -24,14 +24,14 @@ namespace cloudscribe.Core.IdentityServer.NoDb
 
         private IBasicCommands<ApiResource> _commands;
 
-        public async Task CreateApiResource(string siteId, ApiResource resource, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task CreateApiResource(string siteId, ApiResource apiResource, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await _commands.CreateAsync(siteId, resource.Name, resource, cancellationToken).ConfigureAwait(false);
+            await _commands.CreateAsync(siteId, apiResource.Name, apiResource, cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task UpdateApiResource(string siteId, ApiResource resource, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task UpdateApiResource(string siteId, ApiResource apiResource, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await _commands.UpdateAsync(siteId, resource.Name, resource, cancellationToken).ConfigureAwait(false);
+            await _commands.UpdateAsync(siteId, apiResource.Name, apiResource, cancellationToken).ConfigureAwait(false);
         }
 
         public async Task DeleteApiResource(string siteId, string name, CancellationToken cancellationToken = default(CancellationToken))

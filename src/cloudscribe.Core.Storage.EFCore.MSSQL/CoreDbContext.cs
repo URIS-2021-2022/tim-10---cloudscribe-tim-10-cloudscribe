@@ -85,11 +85,11 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.LdapDomain)
                 .HasMaxLength(255);
-                ;
+                
 
                 entity.Property(p => p.LdapRootDN)
                 .HasMaxLength(255);
-                ;
+               
 
                 entity.Property(p => p.LdapUserDNFormat)
                 .HasMaxLength(100);
@@ -97,7 +97,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.LdapUserDNKey)
                 .HasMaxLength(10);
-                ;
+                
                 
                 entity.Property(p => p.UseEmailForLogin)
                 .IsRequired()
@@ -129,7 +129,7 @@ namespace cloudscribe.Core.Storage.EFCore.MSSQL
 
                 entity.Property(p => p.DefaultEmailFromAlias)
                 .HasMaxLength(100);
-                ;
+                
 
                 entity.Property(p => p.RecaptchaPrivateKey)
                 .HasMaxLength(255);

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.NoDb
 {
-    public class UserQueries : IUserQueries, IUserQueriesSingleton
+    public class UserQueries : IUserQueries, IUserQueriesSingleton, IDisposable
     {
         public UserQueries(
             //IProjectResolver projectResolver,
@@ -43,7 +43,6 @@ namespace cloudscribe.Core.Storage.NoDb
             this.loginPathResolver = loginPathResolver;
             this.loginQueries = loginQueries;
             this.tokenQueries = tokenQueries;
-            this.tokenPathResolver = tokenPathResolver;
             this.multiTenantOptions = multiTenantOptionsAccessor.Value;
         }
 
@@ -56,7 +55,6 @@ namespace cloudscribe.Core.Storage.NoDb
         private IBasicQueries<UserToken> tokenQueries;
         private IBasicQueries<UserLocation> locationQueries;
         private IStoragePathResolver<UserLogin> loginPathResolver;
-        private IStoragePathResolver<UserToken> tokenPathResolver;
         private MultiTenantOptions multiTenantOptions;
 
         //protected string projectId;
@@ -264,7 +262,7 @@ namespace cloudscribe.Core.Storage.NoDb
             var projectId = siteId.ToString();
 
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
-            var users = allUsers.ToList().AsQueryable();
+            var users = allUsers.AsEnumerable().AsQueryable();
 
             //sortMode: 0 = DisplayName asc, 1 = JoinDate desc, 2 = Last, First
 
@@ -643,19 +641,19 @@ namespace cloudscribe.Core.Storage.NoDb
         }
 
         public async Task<int> CountFutureLockoutEndDate(
-            Guid siteId,
+            Guid siteGuid,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
             //await EnsureProjectId().ConfigureAwait(false);
-            var projectId = siteId.ToString();
+            var projectId = siteGuid.ToString();
 
             var allUsers = await userQueries.GetAllAsync(projectId, cancellationToken).ConfigureAwait(false);
 
             return allUsers.Where(
-                x => x.SiteId == siteId
+                x => x.SiteId == siteGuid
                 && x.LockoutEndDateUtc.HasValue
                 && x.LockoutEndDateUtc.Value > DateTime.UtcNow
                 )
@@ -1279,7 +1277,7 @@ namespace cloudscribe.Core.Storage.NoDb
                         select x
                         ;
 
-            return query.ToList().Count();
+            return query.ToList().Count;
 
         }
 
@@ -1852,7 +1850,7 @@ namespace cloudscribe.Core.Storage.NoDb
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+             GC.SuppressFinalize(this);
         }
 
         #endregion

@@ -20,7 +20,6 @@ namespace cloudscribe.Core.Identity
 {
     public sealed class UserStore<TUser> :
         //UserStoreBase<TUser, TKey, TUserClaim, TUserLogin, TUserToken>,
-        IUserStore<TUser>,
         IUserSecurityStampStore<TUser>,
         IUserPasswordStore<TUser>,
         IUserEmailStore<TUser>,
@@ -259,7 +258,7 @@ namespace cloudscribe.Core.Identity
             return Task.FromResult(0);
         }
 
-        public Task SetNormalizedUserNameAsync(TUser user, string normalizedUserName, CancellationToken cancellationToken)
+        public Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -275,7 +274,7 @@ namespace cloudscribe.Core.Identity
                 user.SiteId = SiteSettings.Id;
             }
             
-            user.NormalizedUserName = normalizedUserName;
+            user.NormalizedUserName = normalizedName;
             //cancellationToken.ThrowIfCancellationRequested();
             //bool result = await repo.Save(user);
 
@@ -342,7 +341,7 @@ namespace cloudscribe.Core.Identity
         /// <param name="stamp">The security stamp to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken cancellationToken = default(CancellationToken))
+        public Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -362,7 +361,7 @@ namespace cloudscribe.Core.Identity
         /// <param name="user">The user whose security stamp should be set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the security stamp for the specified <paramref name="user"/>.</returns>
-        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -501,7 +500,7 @@ namespace cloudscribe.Core.Identity
 
         }
 
-        public async Task<TUser> FindByEmailAsync(string email, CancellationToken cancellationToken)
+        public async Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -510,12 +509,12 @@ namespace cloudscribe.Core.Identity
             Guid siteGuid = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
-            ISiteUser siteUser = await _queries.Fetch(siteGuid, email, cancellationToken);
+            ISiteUser siteUser = await _queries.Fetch(siteGuid, normalizedEmail, cancellationToken);
 
             // jk second chance - this may be a visitor from another tenant
             if (siteUser == null && _multiTenantOptions.RootUserCanSignInToTenants)
             {
-                siteUser = await _queries.Fetch(_multiTenantOptions.RootSiteId, email, cancellationToken);
+                siteUser = await _queries.Fetch(_multiTenantOptions.RootSiteId, normalizedEmail, cancellationToken);
             }
 
             return (TUser)siteUser;
@@ -656,7 +655,7 @@ namespace cloudscribe.Core.Identity
             DateTimeOffset? d;
             if (user.LockoutEndDateUtc != null)
             {
-                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return null; }
+                if(user.LockoutEndDateUtc.Value == DateTime.MinValue) { return Task.FromResult<System.DateTimeOffset?>(null); }
 
                 d = new DateTimeOffset(user.LockoutEndDateUtc.Value);
                 return Task.FromResult(d);
@@ -941,7 +940,7 @@ namespace cloudscribe.Core.Identity
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
             var userClaims = await _queries.GetClaimsByUser(siteGuid, user.Id, cancellationToken);
-            foreach (UserClaim uc in userClaims)
+            foreach (IUserClaim uc in userClaims)
             {
                 Claim c = new Claim(uc.ClaimType, uc.ClaimValue);
                 claims.Add(c);
@@ -1060,7 +1059,7 @@ namespace cloudscribe.Core.Identity
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
             var userLogins = await _queries.GetLoginsByUser(siteGuid, user.Id, cancellationToken);
-            foreach (UserLogin ul in userLogins)
+            foreach (UserLogin ul in userLogins.OfType<UserLogin>())
             {
                 var l = new UserLoginInfo(ul.LoginProvider, ul.ProviderKey, ul.ProviderDisplayName);
                 logins.Add(l);
@@ -1352,7 +1351,7 @@ namespace cloudscribe.Core.Identity
 
         #region IUserRoleStore
 
-        public async Task AddToRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public async Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1366,7 +1365,7 @@ namespace cloudscribe.Core.Identity
             var siteGuid = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteGuid = _multiTenantOptions.RelatedSiteId; }
 
-            var siteRole = await _queries.FetchRole(siteGuid, role, cancellationToken);
+            var siteRole = await _queries.FetchRole(siteGuid, roleName, cancellationToken);
             if (siteRole != null)
             {
                 await _commands.AddUserToRole(siteRole.SiteId, siteRole.Id, user.Id, cancellationToken);
@@ -1395,7 +1394,7 @@ namespace cloudscribe.Core.Identity
             return roles;
         }
 
-        public async Task<bool> IsInRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public  Task<bool> IsInRoleAsync(TUser user, string role, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1407,6 +1406,11 @@ namespace cloudscribe.Core.Identity
                 throw new ArgumentNullException("user");
             }
 
+            return IsInRoleInternalAsync(user, role, cancellationToken);
+        }
+
+        public async Task<bool> IsInRoleInternalAsync(TUser user, string role, CancellationToken cancellationToken)
+        {
             var result = false;
             var roles = await _queries.GetUserRoles(SiteSettings.Id, user.Id, cancellationToken);
 
@@ -1436,7 +1440,7 @@ namespace cloudscribe.Core.Identity
             return (IList<TUser>)users; 
         }
 
-        public async Task RemoveFromRoleAsync(TUser user, string role, CancellationToken cancellationToken)
+        public async Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
@@ -1449,7 +1453,7 @@ namespace cloudscribe.Core.Identity
             var siteId = SiteSettings.Id;
             if (_multiTenantOptions.UseRelatedSitesMode) { siteId = _multiTenantOptions.RelatedSiteId; }
 
-            var siteRole = await _queries.FetchRole(siteId, role, cancellationToken);
+            var siteRole = await _queries.FetchRole(siteId, roleName, cancellationToken);
             
             if (siteRole != null)
             {  

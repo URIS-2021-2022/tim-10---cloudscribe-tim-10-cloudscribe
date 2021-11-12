@@ -36,7 +36,7 @@ namespace cloudscribe.Web.Common.TagHelpers
 
             if (FormItem.Required 
                 || !string.IsNullOrEmpty(FormItem.RegexValidationExpression)
-                | !string.IsNullOrWhiteSpace(FormItem.MaxLengthErrorMessage)
+                || !string.IsNullOrWhiteSpace(FormItem.MaxLengthErrorMessage)
                 )
             {
                 output.Attributes.Add("data-val", "true");

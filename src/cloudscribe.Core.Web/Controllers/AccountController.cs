@@ -331,10 +331,10 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
 
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
+                throw new ArgumentNullException($"Unable to load two-factor authentication user.");
             }
 
-            var model = new LoginWith2faViewModel { RememberMe = rememberMe };
+            var model = new LoginWith2FaViewModel { RememberMe = rememberMe };
             ViewData["ReturnUrl"] = returnUrl;
 
             return View(model);
@@ -343,7 +343,7 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public virtual async Task<IActionResult> LoginWith2fa(LoginWith2faViewModel model, bool rememberMe, string returnUrl = null)
+        public virtual async Task<IActionResult> LoginWith2fa(LoginWith2FaViewModel model, bool rememberMe, string returnUrl = null)
         {
             ViewData["Title"] = StringLocalizer["Two-factor authentication"];
 
@@ -1153,12 +1153,7 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
         [AllowAnonymous]
         public virtual IActionResult ForgotPasswordConfirmation()
         {
-            if (AccountService.IsSignedIn(User))
-            {
-                return this.RedirectToSiteRoot(CurrentSite);
-            }
-
-            return View();
+            return ForgotPassword();
         }
 
 
@@ -1334,15 +1329,15 @@ namespace cloudscribe.Core.Web.Controllers.Mvc
 
         protected void AddErrors(IdentityResult result)
         {
-            foreach (var error in result.Errors)
+            foreach (var error in result.Errors.Select(error => error.Description))
             {
-                if(error.Description == "Invalid token.")
+                if(error == "Invalid token.")
                 {
                     ModelState.AddModelError(string.Empty, StringLocalizer["The password reset token is invalid. Password reset tokens have a short lifespan for security reasons. You will need to use the forgot password link on the login page to get a new reset token sent to your email address."]);
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, error);
                 }
                 
             }

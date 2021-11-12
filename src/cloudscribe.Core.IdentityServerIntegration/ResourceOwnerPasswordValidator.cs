@@ -27,30 +27,29 @@ namespace cloudscribe.Core.IdentityServerIntegration
         public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             var user = await _userManager.FindByNameAsync(context.UserName);
-            if (user != null)
+            if (user != null && await _signInManager.CanSignInAsync(user))
             {
-                if (await _signInManager.CanSignInAsync(user))
+                if (_userManager.SupportsUserLockout &&
+                           await _userManager.IsLockedOutAsync(user))
                 {
-                    if (_userManager.SupportsUserLockout &&
-                        await _userManager.IsLockedOutAsync(user))
-                    {
-                        context.Result = new GrantValidationResult(IdentityServer4.Models.TokenRequestErrors.InvalidGrant);
-                    }
-                    else if (await _userManager.CheckPasswordAsync(user, context.Password))
-                    {
-                        if (_userManager.SupportsUserLockout)
-                        {
-                            await _userManager.ResetAccessFailedCountAsync(user);
-                        }
-
-                        var sub = await _userManager.GetUserIdAsync(user);
-                        context.Result = new GrantValidationResult(sub, AuthenticationMethods.Password);
-                    }
-                    else if (_userManager.SupportsUserLockout)
-                    {
-                        await _userManager.AccessFailedAsync(user);
-                    }
+                    context.Result = new GrantValidationResult(IdentityServer4.Models.TokenRequestErrors.InvalidGrant);
                 }
+                else if (await _userManager.CheckPasswordAsync(user, context.Password))
+                {
+                    if (_userManager.SupportsUserLockout)
+                    {
+                        await _userManager.ResetAccessFailedCountAsync(user);
+                    }
+
+                    var sub = await _userManager.GetUserIdAsync(user);
+                    context.Result = new GrantValidationResult(sub, AuthenticationMethods.Password);
+                }
+                else if (_userManager.SupportsUserLockout)
+                {
+                    await _userManager.AccessFailedAsync(user);
+                }
+
+
             }
         }
     }

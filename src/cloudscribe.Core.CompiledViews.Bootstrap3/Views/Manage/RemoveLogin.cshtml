@@ -14,14 +14,14 @@
     <table>
         <caption>Description</caption>
         <tr>
-            <th class="table"></th>
+            <th scope="col" class="table"></th>
         </tr>
         <tbody>
             @foreach (var account in Model)
             {
                 <tr>
-                    <th>@account.LoginProvider</th>
-                    <th>
+                    <th scope="col">@account.LoginProvider</th>
+                    <th scope="col">
                         @if (ViewBag.ShowRemoveButton)
                         {
                             <form asp-controller="Manage" asp-action="RemoveLogin" asp-route-returnurl='@ViewData["ReturnUrl"]' method="post" class="form-horizontal" role="form">

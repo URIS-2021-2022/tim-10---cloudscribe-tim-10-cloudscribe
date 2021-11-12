@@ -63,6 +63,12 @@ namespace cloudscribe.Core.Web.Components
             await _commands.Add(geoCountry, CancellationToken.None);
         }
 
+        public async Task Add(IGeoZone geoZone)
+        {
+            if (geoZone.Id == Guid.Empty) geoZone.Id = Guid.NewGuid();
+            await _commands.Add(geoZone, CancellationToken.None);
+        }
+
         public async Task Update(IGeoCountry geoCountry)
         {
             await _commands.Update(geoCountry, CancellationToken.None);
@@ -105,11 +111,7 @@ namespace cloudscribe.Core.Web.Components
             return _queries.FetchGeoZone(guid, CancellationToken);
         }
 
-        public async Task Add(IGeoZone geoZone)
-        {
-            if (geoZone.Id == Guid.Empty) geoZone.Id = Guid.NewGuid();
-            await _commands.Add(geoZone, CancellationToken.None);
-        }
+        
 
         public async Task Update(IGeoZone geoZone)
         {

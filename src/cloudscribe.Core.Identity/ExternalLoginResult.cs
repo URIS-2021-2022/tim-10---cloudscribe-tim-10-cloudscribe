@@ -6,7 +6,6 @@
 //// Last Modified:			2017-05-22
 //// 
 
-//using cloudscribe.Core.Models;
 //using Microsoft.AspNetCore.Identity;
 //using System.Collections.Generic;
 

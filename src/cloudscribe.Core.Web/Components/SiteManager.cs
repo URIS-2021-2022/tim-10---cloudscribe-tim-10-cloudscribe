@@ -49,7 +49,7 @@ namespace cloudscribe.Core.Web.Components
             _setupOptions = setupOptionsAccessor.Value;
             _context = contextAccessor?.HttpContext;
             _dataProtector = dataProtector;
-            _log = logger;
+            
 
             //resolver = siteResolver;
             _currentSite = currentSite;
@@ -61,7 +61,7 @@ namespace cloudscribe.Core.Web.Components
 
         private readonly HttpContext _context;
         private CancellationToken CancellationToken => _context?.RequestAborted ?? CancellationToken.None;
-        private ILogger _log;
+      
         private SiteDataProtector _dataProtector;
         private CacheHelper _cacheHelper;
         private MultiTenantOptions _multiTenantOptions;

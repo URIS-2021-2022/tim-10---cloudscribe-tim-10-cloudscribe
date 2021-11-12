@@ -4,9 +4,10 @@
     if (otherProp.val() !== '') {
         var StartDate = new Date(otherProp.val());
         var Enddate = new Date(value);
-        if (StartDate !== '') {
-            var result = Enddate <= StartDate;
-            return result;
+        if (StartDate != '') {
+            return Enddate <= StartDate;
+            
+
         }
     }
     return true;

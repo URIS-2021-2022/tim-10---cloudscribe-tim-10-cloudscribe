@@ -55,8 +55,9 @@ namespace cloudscribe.Core.Identity
 
             // base class takes care of all the default stuff like roles name id etc
             var principal = await base.CreateAsync(user);
-            
-            if (principal.Identity is ClaimsIdentity)
+            var principalIdentity = principal.Identity as ClaimsIdentity;
+
+            if (principalIdentity != null)
             {
                 var identity = (ClaimsIdentity)principal.Identity;
 
@@ -112,13 +113,10 @@ namespace cloudscribe.Core.Identity
                     }
                 }                
 
-                if (principal.IsInRole("Administrators"))
+                if ((principal.IsInRole("Administrators")) && (site != null && site.IsServerAdminSite))
                 {
-                    if (site != null && site.IsServerAdminSite)
-                    {
                         Claim serverAdminRoleClaim = new Claim(Options.ClaimsIdentity.RoleClaimType, "ServerAdmins");
-                        identity.AddClaim(serverAdminRoleClaim);
-                    }
+                        identity.AddClaim(serverAdminRoleClaim);                    
                 }
 
                 //var jwt = await _oidcHybridFlowHelper.GetCurrentJwt(principal);

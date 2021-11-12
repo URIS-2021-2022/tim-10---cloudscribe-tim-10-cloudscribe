@@ -6,7 +6,11 @@ namespace cloudscribe.Core.Models
     {
         public UserContext(ISiteUser user)
         {
-            if (user == null) throw new ArgumentNullException("you must pass in an implementation of ISiteUser");
+            if (user == null)
+            {
+                string message = "you must pass in an implementation of ISiteUser";
+                throw new ArgumentNullException(message);
+            }
             this.user = user;
         }
 

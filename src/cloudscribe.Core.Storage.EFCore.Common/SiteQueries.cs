@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace cloudscribe.Core.Storage.EFCore.Common
 {
-    public class SiteQueries : ISiteQueries, ISiteQueriesSingleton
+    public class SiteQueries :  ISiteQueriesSingleton
     {
         public SiteQueries(ICoreDbContextFactory coreDbContextFactory)
         {
@@ -215,7 +215,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
         }
 
         public async Task<int> CountOtherSites(
-            Guid currentSiteId,
+            Guid currentSiteGuid,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -223,7 +223,7 @@ namespace cloudscribe.Core.Storage.EFCore.Common
             using (var _db = _contextFactory.CreateContext())
             {
                 return await _db.Sites.CountAsync<SiteSettings>(
-                x => x.Id != currentSiteId
+                x => x.Id != currentSiteGuid
                 , cancellationToken);
             }
             

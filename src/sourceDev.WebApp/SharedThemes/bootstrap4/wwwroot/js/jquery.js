@@ -273,7 +273,8 @@ jQuery.extend( {
 		throw new Error( msg );
 	},
 
-	noop: function() {},
+	noop: function () { //Intentional empty function 
+	},
 
 	isFunction: function( obj ) {
 		return jQuery.type( obj ) === "function";
@@ -690,7 +691,7 @@ var i,
 
 	// CSS string/identifier serialization
 	// https://drafts.csswg.org/cssom/#common-serializing-idioms
-	rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g,
+	rcssescape = /([\0-\x7f]|^-?\d)|^-$|[^\0-\x7f-\uFFFF\w-]/g,
 	fcssescape = function( ch, asCodePoint ) {
 		if ( asCodePoint ) {
 
@@ -1467,14 +1468,22 @@ setDocument = Sizzle.setDocument = function( node ) {
 			bp = [ b ];
 
 		// Parentless nodes are either documents or disconnected
-		if ( !aup || !bup ) {
-			return a === document ? -1 :
-				b === document ? 1 :
-				aup ? -1 :
-				bup ? 1 :
-				sortInput ?
-				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
+		if (!aup || !bup) {
+
+			if (a === document) {
+				return -1;
+			} else if (b === document) {
+				retrun 1;
+			} else if (aup) {
+				return -1;
+			} else if (bup) {
+				return 1;
+			} else if (sortInput) {
+				return (indexOf(sortInput, a) - indexOf(sortInput, b)) :
 				0;
+            }
+			
+
 
 		// If the nodes are siblings, we can do a quick check
 		} else if ( aup === bup ) {
@@ -1775,10 +1784,14 @@ Expr = Sizzle.selectors = {
 					return true;
 				}
 
+				const equals = operator === "=" ? result === check
+				const notEquals = operator === "!=" ? result !== check
+
+
 				result += "";
 
-				return operator === "=" ? result === check :
-					operator === "!=" ? result !== check :
+				return equals :
+					notEquals :
 					operator === "^=" ? check && result.indexOf( check ) === 0 :
 					operator === "*=" ? check && result.indexOf( check ) > -1 :
 					operator === "$=" ? check && result.slice( -check.length ) === check :
@@ -2136,8 +2149,10 @@ Expr = Sizzle.selectors = {
 
 		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
-			for ( ; --i >= 0; ) {
-				matchIndexes.push( i );
+		    while(--i>=0)
+			{
+				matchIndexes.push(i);
+				i++;
 			}
 			return matchIndexes;
 		}),
@@ -2569,7 +2584,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Incrementing an initially-string "0" `i` allows `i` to remain a string only in that
 			// case, which will result in a "00" `matchedCount` that differs from `i` but is also
 			// numerically zero.
-			if ( bySet && i !== matchedCount ) {
+			if ( bySet && i != matchedCount ) {
 				j = 0;
 				while ( (matcher = setMatchers[j++]) ) {
 					matcher( unmatched, setMatched, context, xml );
@@ -9024,7 +9039,7 @@ jQuery.extend( {
 
 				// Support: IE <=8 - 11 only
 				// Anchor's host property isn't correctly set when s.url is relative
-				urlAnchor.href = urlAnchor.href;
+				this.urlAnchor.href = urlAnchor.href;
 				s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
 					urlAnchor.protocol + "//" + urlAnchor.host;
 			} catch ( e ) {
